@@ -23,7 +23,7 @@ Validated at build by `scripts/validate-data.mjs` (Ajv + extra checks). Errors f
 | `audience` | `all` \| `family` | family hidden by default |
 | `status` | `confirmed` \| `tbd` | tbd → italic grey title + "Timing being confirmed" |
 | `needsConfirmation` | bool | shows the badge |
-| `icon` | string | kumkum, mehendi, pooja, rakhi, carnival, mayra, ring, music, nikasi, meet, garland, phere, reception, meal, tea, info |
+| `icon` | string | kumkum, mehendi, pooja, rakhi, carnival, mayra, ring, music, nikasi, travel, meet, garland, phere, reception, meal, tea, info |
 | `hiDraft` | bool | Hindi awaiting proofreading |
 
 Days are derived from the distinct `date` values; adding an event on a new date adds a day ribbon column and route automatically.

@@ -26,7 +26,7 @@ Update `lastUpdated` in `meta.json` (e.g. `"2026-11-25T18:00:00+05:30"`) wheneve
 ## Change a photo
 The site uses six photos: the welcome screen, one for each of the four days, and the Info page. Your original pictures live in the `images` folder.
 1. Put the new picture (a JPG or PNG, any size) into the `images` folder.
-2. Open `images/photos.config.json`. Find the photo you want to replace (for example `splash-pergola` is the welcome screen, `info-stairs` is the Info page). Change the file name after `"source":` to your new picture's file name, exactly as it is spelled, including spaces.
+2. Open `images/photos.config.json`. Find the photo you want to replace (for example `splash-pergola` is the welcome screen, `info-garden` is the Info page). Change the file name after `"source":` to your new picture's file name, exactly as it is spelled, including spaces.
 3. Optional: `"focal"` says which part of the picture stays visible when it is cropped, as two percentages (left-to-right, top-to-bottom). `"50% 30%"` keeps the upper middle (good for faces); `"50% 50%"` is the centre. `"alt"` is the short English/Hindi description read aloud to people who cannot see the picture.
 4. Run `npm run photos` (a developer can do this, or ask for help). It shrinks the pictures for fast loading and updates the site files.
 5. Save/commit and push. The site updates by itself in a minute or two.
