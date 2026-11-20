@@ -8,7 +8,7 @@ import { EventCard } from '../components/EventCard';
 import { EventSheet } from '../components/EventSheet';
 import { MealStrip } from '../components/MealStrip';
 import { NowNext } from '../components/NowNext';
-import { DayHero } from '../components/DayHero';
+import { DayHero, OutfitStrip } from '../components/DayHero';
 import { Icon } from '../components/Icons';
 import { NotFound } from './NotFound';
 import { store } from '../lib/storage';
@@ -67,6 +67,7 @@ export function DayPage() {
   return (
     <div onTouchStart={onStart} onTouchEnd={onEnd} key={day.slug} style={{ animation: 'var(--animate-rise)' }}>
       <DayHero date={day.date} dayIndex={idx} events={main} />
+      <OutfitStrip events={main} />
       <NowNext />
       <Announcement />
 

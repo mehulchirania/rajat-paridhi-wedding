@@ -20,6 +20,8 @@ Rule of thumb: if an element has both a border **and** a background **and** a sh
 
 - Welcome page is the `/welcome` route; adds a live countdown (days/hours/mins/secs, tabular Fraunces, champagne labels, hairline dividers) to 1 Dec 00:00 IST, and a "Continue as …" button for returning guests.
 
+- Day hero: the Nikasi chip is replaced by a status chip (Today, with a live dot / Tomorrow / In N days / Completed, IST) and a time-span line (first–last visible event, side-aware). A "What to wear" strip under the hero lists each distinct dress code in order with the time it's first needed (horizontal scroll).
+
 ## Principles
 1. **Photo-first.** Splash and each day open with a real photo (see `images/photos.config.json`).
 2. **One accent per screen.** Oxblood is the brand; groom-blue/bride-pink appear only as small side markers (dot, thin rule, text colour), never fills larger than a pill.

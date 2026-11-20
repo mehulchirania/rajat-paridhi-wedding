@@ -70,8 +70,6 @@
   "dayhero.meta.other": "{n} events · {where}",
   "dayhero.none": "Nothing scheduled in this view",
   "dayhero.venueTba": "Venue TBA",
-  "dayhero.nikasiDH": "Nikasi in {d}d {h}h",
-  "dayhero.nikasiHM": "Nikasi in {h}h {m}m",
   "wdf.0": "Sunday",
   "wdf.1": "Monday",
   "wdf.2": "Tuesday",
@@ -173,5 +171,11 @@
   "countdown.secs": "Secs",
   "splash.continue": "Continue as {side}",
   "splash.change": "or choose another side",
-  "splash.continueBoth": "Continue to the itinerary"
+  "splash.continueBoth": "Continue to the itinerary",
+  "dayhero.today": "Today",
+  "dayhero.tomorrow": "Tomorrow",
+  "dayhero.inDays": "In {n} days",
+  "dayhero.done": "Completed",
+  "dayhero.outfits": "What to wear",
+  "dayhero.from": "from {t}"
 }

@@ -70,8 +70,6 @@
   "dayhero.meta.other": "{n} कार्यक्रम · {where}",
   "dayhero.none": "इस दृश्य में कोई कार्यक्रम नहीं",
   "dayhero.venueTba": "स्थान तय नहीं",
-  "dayhero.nikasiDH": "निकासी में {d} दिन {h} घंटे",
-  "dayhero.nikasiHM": "निकासी में {h} घंटे {m} मिनट",
   "wdf.0": "रविवार",
   "wdf.1": "सोमवार",
   "wdf.2": "मंगलवार",
@@ -173,5 +171,11 @@
   "countdown.secs": "सेकंड",
   "splash.continue": "{side} के रूप में आगे बढ़ें",
   "splash.change": "या दूसरा पक्ष चुनें",
-  "splash.continueBoth": "कार्यक्रम देखें"
+  "splash.continueBoth": "कार्यक्रम देखें",
+  "dayhero.today": "आज",
+  "dayhero.tomorrow": "कल",
+  "dayhero.inDays": "{n} दिन में",
+  "dayhero.done": "संपन्न",
+  "dayhero.outfits": "क्या पहनें",
+  "dayhero.from": "{t} से"
 }
