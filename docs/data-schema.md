@@ -45,3 +45,27 @@ Venue: `{id, kind:"venue", name{en,hi}, phones:[…], active}` → tap-to-call b
 
 ## photos.config.json (in `/images`) and photos.generated.json
 `images/photos.config.json`: `photos[]` of `{slug, source, focal, alt{en,hi}}` (`source` = file in `/images`, `focal` = CSS object-position), `days` (date -> slug), `splash` (slug), `info` (slug). `npm run photos` writes `public/images/photos/<slug>-{640,1280}.webp` and `src/data/photos.generated.json` (paths, focal, alt, aspect, 16px blur placeholder). Never edit the generated JSON by hand.
+
+## Published content (storage and API)
+The admin portal publishes one dataset `{events, contacts, meta}` (same shapes as above) that overrides the built-in JSON. Validation: `shared/validate.ts` mirrors `events.schema.json` + `scripts/validate-data.mjs`; `npm run test:admin` fails if the bundled data stops passing it. If you add a field to the schema, update all three.
+
+Upstash Redis keys (never deleted, so history is free):
+| Key | Value |
+|---|---|
+| `site:current` | `{rev, at, content}` — what guests get; `content:null` means "use built-in data" |
+| `site:content:<n>` | immutable snapshot of revision n |
+| `site:meta:<n>` | `{rev, at, note, kind: save\|reset\|restore}` (History tab shows the last 30) |
+| `site:lock:<n>` | publish lock for revision n (30 s TTL) — two simultaneous publishers can't both claim n |
+| `site:fails:<ip>` | failed-login counter (15 min TTL; ≥10 = locked out) |
+
+Endpoints (all JSON, `Cache-Control: no-store` except the public one):
+| Route | Auth | |
+|---|---|---|
+| `GET /api/content` | none | `{rev, at, content}`; CDN-cached 10 s; `{rev:0}` if storage isn't configured |
+| `POST /api/admin/login` | — | `{username, password}` → `{token, expiresAt}` (24 h HMAC token; username case-insensitive) |
+| `GET /api/admin/content` | Bearer | `{rev, at, content, history[]}` |
+| `PUT /api/admin/content` | Bearer | `{baseRev, content, note?}` → 422 + `issues[]` if invalid, 409 if `baseRev` is stale; stamps `meta.lastUpdated` |
+| `DELETE /api/admin/content` | Bearer | `{baseRev}` → publishes "use built-in data" |
+| `POST /api/admin/restore` | Bearer | `{rev}` → re-publishes that snapshot as a new revision |
+
+Env vars: `ADMIN_USER`, `ADMIN_PASS` (required), `ADMIN_SECRET` (optional), `KV_REST_API_URL`/`KV_REST_API_TOKEN` or `UPSTASH_REDIS_REST_URL`/`UPSTASH_REDIS_REST_TOKEN`.

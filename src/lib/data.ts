@@ -4,12 +4,32 @@ import metaRaw from '../data/meta.json';
 import type { Contact, EventItem, GuestSide, Meta, Side } from '../types';
 import { dateToSlug, toInstant } from './time';
 
-export const events = eventsRaw as unknown as EventItem[];
-export const contacts = contactsRaw as unknown as Contact[];
-export const meta = metaRaw as unknown as Meta;
-
 export interface Day { date: string; slug: string }
-export const days: Day[] = [...new Set(events.map((e) => e.date))].sort().map((date) => ({ date, slug: dateToSlug(date) }));
+export interface Content { events: EventItem[]; contacts: Contact[]; meta: Meta }
+
+/** Built-in data (the JSON files in the repo). Used until/unless the admin portal has published an override. */
+export const builtIn: Content = {
+  events: eventsRaw as unknown as EventItem[],
+  contacts: contactsRaw as unknown as Contact[],
+  meta: metaRaw as unknown as Meta,
+};
+
+// Live bindings: importers always see the current values after setContent(). The UI re-mounts on change (see ContentGate).
+export let events: EventItem[] = builtIn.events;
+export let contacts: Contact[] = builtIn.contacts;
+export let meta: Meta = builtIn.meta;
+export let days: Day[] = [];
+export let nikasi: EventItem | undefined;
+
+/** Swap the active dataset. `null` restores the built-in data. Callers must have validated `c` first. */
+export function setContent(c: Content | null) {
+  const src = c ?? builtIn;
+  events = src.events; contacts = src.contacts; meta = src.meta;
+  days = [...new Set(events.map((e) => e.date))].sort().map((date) => ({ date, slug: dateToSlug(date) }));
+  nikasi = events.find((e) => e.id === 'nikasi-groom-2dec');
+}
+setContent(null);
+
 export const dayBySlug = (slug?: string) => days.find((d) => d.slug === slug);
 
 /** Time a guest of `view` sees for this event. In "both" mode the canonical time is used. */
@@ -50,4 +70,3 @@ export function sortEvents(list: EventItem[], view: GuestSide): EventItem[] {
 }
 
 export const eventById = (id?: string | null) => (id ? events.find((e) => e.id === id) : undefined);
-export const nikasi = events.find((e) => e.id === 'nikasi-groom-2dec');

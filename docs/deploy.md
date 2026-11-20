@@ -5,9 +5,10 @@ Live: https://rajat-paridhi-wedding.vercel.app · Repo: github.com/mehulchirania
 ## Vercel (recommended)
 1. Push this folder to a Git repo. Import in Vercel (framework: Vite; build `npm run build`; output `dist`).
 2. Environment variable: `SITE_URL=https://<your-domain>` (needed for WhatsApp preview image).
+   **Admin portal (optional but recommended):** connect an Upstash Redis store and set `ADMIN_USER` / `ADMIN_PASS`, then redeploy — step-by-step in [admin.md](admin.md#one-time-setup-vercel-dashboard--about-5-minutes). Needs Vercel (the `api/` functions); Cloudflare Pages would need the functions ported.
 3. `vercel.json` already rewrites unknown paths to `index.html` (so `/day/1-dec` works on refresh).
 
-## Cloudflare Pages
+## Cloudflare Pages (guest site only — no `/admin`)
 Build `npm run build`, output `dist`, env `SITE_URL`. `public/_redirects` provides the SPA fallback.
 
 ## After deploying
@@ -21,4 +22,4 @@ Build `npm run build`, output `dist`, env `SITE_URL`. `public/_redirects` provid
 The PWA auto-updates: guests get new content on their next online visit (may need one reload). The app shell is precached; photos in `/images/photos` are runtime-cached (CacheFirst) the first time each is viewed, so they work offline only after being seen once. If a replaced photo still shows the old picture on a device, give it a new slug in `images/photos.config.json` so it gets a new file name.
 
 ## Analytics
-Vercel Web Analytics (`@vercel/analytics`) is mounted once in `src/App.tsx` (`<Analytics />`, outside the splash/routes switch so the splash is counted). Enable it in Vercel → Project → Analytics; it only reports on Vercel deployments. `/_vercel/*` is excluded from the SPA rewrite in `vercel.json` and from the service worker's `navigateFallback` (`vite.config.ts`) so the beacon requests reach Vercel. No cookies; no personal data collected.
+Vercel Web Analytics (`@vercel/analytics`) is mounted once in `src/App.tsx` (`<Analytics />`, outside the splash/routes switch so the splash is counted). Enable it in Vercel → Project → Analytics; it only reports on Vercel deployments. `/api/*` and `/_vercel/*` are excluded from the SPA rewrite in `vercel.json` and from the service worker's `navigateFallback` (`vite.config.ts`), so the API and the beacon requests reach Vercel. No cookies; no personal data collected.
