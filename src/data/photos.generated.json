@@ -1,0 +1,78 @@
+{
+  "photos": {
+    "splash-pergola": {
+      "src640": "/images/photos/splash-pergola-640.webp",
+      "src1280": "/images/photos/splash-pergola-1280.webp",
+      "focal": "50% 45%",
+      "alt": {
+        "en": "Rajat and Paridhi under a green pergola",
+        "hi": "हरियाली भरे रास्ते पर रजत और परिधि"
+      },
+      "aspect": 0.667,
+      "blur": "data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAACwAwCdASoQABgAPu1iqU2ppaOiMAgBMB2JQBYdg8d5ojLiq0QMAAD+7rFfxixR153WdlZjOp5+83Df20nEbz13vhRJZShpYQyPmHYd41blOW+hIFIfmTOYQ2B3wTYTpFwVT1Tk5p+8Lu16OYFRQpWJMsHjbg7kxmTSe+tEVAAAAA=="
+    },
+    "day-29nov-lake": {
+      "src640": "/images/photos/day-29nov-lake-640.webp",
+      "src1280": "/images/photos/day-29nov-lake-1280.webp",
+      "focal": "50% 55%",
+      "alt": {
+        "en": "Rajat lifting Paridhi by a lake",
+        "hi": "झील किनारे रजत और परिधि"
+      },
+      "aspect": 0.75,
+      "blur": "data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAAAwBACdASoQABUAPu1iqU2ppaOiMAgBMB2JQBOmUABM34TChFQwfyMapgAA/rxYYwXvHwc4xNBQdh6R7QkkDZ9LwacR6yscJQbPd5fnV/2/pIApDTMrj2ZpRLl8He/+S4M8+SzB7RNkyrtio0H9wCmB10vswwY6pBksSP2GcayqbsgBxFbcbtcAAAA="
+    },
+    "day-30nov-lehenga": {
+      "src640": "/images/photos/day-30nov-lehenga-640.webp",
+      "src1280": "/images/photos/day-30nov-lehenga-1280.webp",
+      "focal": "50% 40%",
+      "alt": {
+        "en": "Paridhi in a green lehenga",
+        "hi": "हरे लहंगे में परिधि"
+      },
+      "aspect": 0.667,
+      "blur": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAAAwBACdASoQABgAPu1iqU2ppaOiMAgBMB2JZAC06B9SvB4qgs1ots/puoAA/QDLr9Yqp3sfWmPsIDauKYgzgGM6R8VTDLdDYQBQs//NU/CwLyNTv905V8e+XwIiHThDHUB64GZOEFjDSdt0CROE/4xekylNhYvwb3oF6RNKPBOYBUfUfZJkCq4Xfyg1gtqK9b+bGRf9WspsPR9IAAA="
+    },
+    "day-1dec-ring": {
+      "src640": "/images/photos/day-1dec-ring-640.webp",
+      "src1280": "/images/photos/day-1dec-ring-1280.webp",
+      "focal": "50% 45%",
+      "alt": {
+        "en": "Close-up of the engagement ring",
+        "hi": "सगाई की अंगूठी"
+      },
+      "aspect": 0.667,
+      "blur": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAABwBACdASoQABgAPu1iqU2ppaQiMAgBMB2JZgC/OYw6wP1rH1/gcTofVtuiAAD+9DGMaAR6WNiAwdGKRkz5BO4XopIAnP7SNWV4JWtSPm0SxIOQrTfyqtRUn9iYZBkGHtOQ6cZ//R4nKa7llz9q9d/ehD4b6JcfrsGoMrndY71YJ8bN6h3BC/gufaNlxIemQAA="
+    },
+    "day-2dec-traditional": {
+      "src640": "/images/photos/day-2dec-traditional-640.webp",
+      "src1280": "/images/photos/day-2dec-traditional-1280.webp",
+      "focal": "50% 40%",
+      "alt": {
+        "en": "Rajat and Paridhi walking in traditional outfits",
+        "hi": "पारंपरिक परिधान में रजत और परिधि"
+      },
+      "aspect": 0.666,
+      "blur": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAAAQBACdASoQABgAPu1iqU2ppaOiMAgBMB2JQBdgMYTVCz7OzxN8KG7wYAD+2G1aVr28PJ/OSMCIAeONa4vItamocrslcnEFAv5JcQQdw0WDUbm4Yy/k3BfhSmlol6gG0Ifj0Zb7QgBNKe9+dtidI/ADnFlc5Z/WmX6QS+rbf2CtOboUjeRoV/QP7Z46Sma4fTLXPtHOwwwkLeFz2Z83OhqZAAA="
+    },
+    "info-stairs": {
+      "src640": "/images/photos/info-stairs-640.webp",
+      "src1280": "/images/photos/info-stairs-1280.webp",
+      "focal": "50% 40%",
+      "alt": {
+        "en": "Rajat and Paridhi by a wooden staircase",
+        "hi": "सीढ़ियों के पास रजत और परिधि"
+      },
+      "aspect": 1.334,
+      "blur": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAADwAQCdASoQAAwAA4BaJYgCdAD0FAp0JkAA/uoHACjsF4+muSfm9AhP6ldC5BU3NGUa4uhjuru2WWTuWmB6lMGXXIhtNo4+DbtaVg2NAdt3hIz6Fd4CBg7aJYZ6AAAA"
+    }
+  },
+  "days": {
+    "2026-11-29": "day-29nov-lake",
+    "2026-11-30": "day-30nov-lehenga",
+    "2026-12-01": "day-1dec-ring",
+    "2026-12-02": "day-2dec-traditional"
+  },
+  "splash": "splash-pergola",
+  "info": "info-stairs"
+}

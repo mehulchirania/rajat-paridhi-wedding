@@ -11,11 +11,14 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host",
     "assets": "node scripts/make-assets.mjs",
-    "qr": "node scripts/make-qr.mjs"
+    "qr": "node scripts/make-qr.mjs",
+    "photos": "node scripts/optimize-photos.mjs"
   },
   "dependencies": {
     "@fontsource/cormorant-garamond": "^5.3.0",
     "@fontsource/dm-sans": "^5.3.0",
+    "@fontsource/hanken-grotesk": "^5.3.0",
+    "@fontsource/instrument-serif": "^5.3.0",
     "@fontsource/noto-sans-devanagari": "^5.3.0",
     "@fontsource/tiro-devanagari-hindi": "^5.3.0",
     "react": "^19.3.1",
