@@ -11,6 +11,13 @@ Rule of thumb: if an element has both a border **and** a background **and** a sh
 - Cormorant at small sizes looks frail on cheap Android screens.
 - Gallery page with placeholders (removed in v2).
 
+## v2.1 changes
+- Display font switched from Instrument Serif (too condensed) to Fraunces — wider, softer, still editorial. Times sized down to 1.45rem; agenda gutter 74px, thread at x=79px.
+- Header wordmark is a button that replays the welcome; always names (bride-first on Bride's side, both languages).
+- Every agenda row with a `mapLink` shows an "Open in Maps" pill under its details.
+- Side-specific meals (e.g. groom-side lunch at home) render as agenda rows; only common hotel meals go in the meal strip.
+- Day photos: 29 Nov lake, 30 Nov stairs (traditional), 1 Dec fountain walk, 2 Dec traditional walk; Info = garden.
+
 ## Principles
 1. **Photo-first.** Splash and each day open with a real photo (see `images/photos.config.json`).
 2. **One accent per screen.** Oxblood is the brand; groom-blue/bride-pink appear only as small side markers (dot, thin rule, text colour), never fills larger than a pill.
@@ -32,7 +39,7 @@ Defined in `src/index.css` `@theme`. Key ones:
 | wa | #1F7A4D | WhatsApp actions only |
 
 Type
-- Display: **Instrument Serif** 400 (+ italic) — names, day titles, event titles, times. Hindi display falls to Tiro Devanagari Hindi.
+- Display: **Fraunces (variable, optical sizing)** 400 (+ italic) — names, day titles, event titles, times. Hindi display falls to Tiro Devanagari Hindi.
 - Body/UI: **Hanken Grotesk** 400/500/600. Hindi falls to Noto Sans Devanagari.
 - Scale (rem at 17px root): eyebrow 0.78 uppercase tracking .14em weight 600 · meta 0.9 · body 1 · event title 1.6 · day title 2.6 · splash names 3.4–3.8.
 - Times use `font-variant-numeric: tabular-nums lining-nums`.
@@ -44,11 +51,11 @@ Radii: cards/sheets 20px (`--radius-card`), pills full. Shadows: only on the flo
 ### Splash
 Full-bleed `splash` photo (object-position = focal), dark gradient scrim bottom 60%.
 Top: `॥ जय श्री कृष्ण ॥` (Tiro, champagne, 1.3rem) centred, English transliteration small beneath in italic.
-Bottom block on scrim (white text): eyebrow "29 Nov – 2 Dec 2026 · Indore"; names in Instrument Serif ~3.6rem — "Rajat" / italic "&" in champagne / "Paridhi" (stacked); "परिणय समारोह" line; then side picker: three equal pill buttons in a row on a frosted pane (`backdrop-blur`, bg white/12, 1px white/25 border): "Groom's side" (small blue dot), "Bride's side" (pink dot), "Both". Hint text below. Lang toggle top-right as a small frosted pill.
+Bottom block on scrim (white text): eyebrow "29 Nov – 2 Dec 2026 · Indore"; names in Fraunces (variable, optical sizing) ~3.6rem — "Rajat" / italic "&" in champagne / "Paridhi" (stacked); "परिणय समारोह" line; then side picker: three equal pill buttons in a row on a frosted pane (`backdrop-blur`, bg white/12, 1px white/25 border): "Groom's side" (small blue dot), "Bride's side" (pink dot), "Both". Hint text below. Lang toggle top-right as a small frosted pill.
 Photo fades in (blur placeholder → image), names rise. No knot SVG.
 
 ### App shell
-- **Compact sticky header (56px, ivory/90 + blur, bottom hairline):** left = brand wordmark in Instrument Serif 1.35rem, side-aware ("Paridhi & Rajat" on bride side, "Rajat & Paridhi" otherwise; Hindi: परिणय समारोह). Right = **side pill** (coloured dot + "Bride's side ▾") that opens a small sheet with the 3 options + "Show family-only events" switch + "Larger text" switch; then **lang pill** "EN | हिं" (text-only segmented, oxblood underline on active).
+- **Compact sticky header (56px, ivory/90 + blur, bottom hairline):** left = brand wordmark in Fraunces (variable, optical sizing) 1.35rem, side-aware ("Paridhi & Rajat" on bride side, "Rajat & Paridhi" otherwise; Hindi: परिणय समारोह). Right = **side pill** (coloured dot + "Bride's side ▾") that opens a small sheet with the 3 options + "Show family-only events" switch + "Larger text" switch; then **lang pill** "EN | हिं" (text-only segmented, oxblood underline on active).
 - **Day ribbon** (sticky under header on day routes): 4 equal columns, each = weekday eyebrow + big serif numeral + month; active day = oxblood numeral with a 2px oxblood underline; inactive = ink-2. No boxes.
 - **Floating dock** replaces bottom nav + FAB: centred pill, 64px tall, ivory bg, shadow, 3 items: Itinerary (cal icon), Info (pin icon), WhatsApp (green circle chat icon, label "Help"). Respect safe-area. Page bottom padding ≥ 120px so nothing is hidden behind it.
 - Remove: paisley body background, Gallery route/nav/data, A+ header button (moved into side sheet).
@@ -58,8 +65,8 @@ Photo fades in (blur placeholder → image), names rise. No knot SVG.
 2. **Now / Next** (only on event days, IST): single oxblood card, two columns ("Now" | "Up next · in 20 min"), title serif, time + place; trailing "Need help?" text button (white underline). Replaces the old two-slab card.
 3. **Announcement:** one-line champagne-ink text with a thin left rule, dismiss ×. No yellow box.
 4. **Agenda** (the core): `ol` with a 2px vertical thread in the left gutter (gradient groom→champagne→bride, 40% opacity). Each row = grid `[64px | 1fr]`:
-   - Left: time in Instrument Serif 1.7rem tabular ("10:00"), meridiem eyebrow under it ("AM"/"सुबह"); "TBA" in ink-2 if no time; small side dot (10px, groom/bride/gradient) sitting on the thread.
-   - Right: eyebrow line "Groom's side · Indore" (side word coloured with side-ink; city in ink-2); title Instrument Serif 1.6rem; meta "Water Lily Hotel · MIST-1 · Pooja Room, 1st Floor" (ink-2); dress code = 16px swatch + "Dress: Indo-western"; notes (ink-2, 0.9rem); status line(s): "● Timing being confirmed" (amber-ink, amber dot) and in Both mode "Groom 7:00 PM · Bride 6:30 PM" with coloured names.
+   - Left: time in Fraunces (variable, optical sizing) 1.7rem tabular ("10:00"), meridiem eyebrow under it ("AM"/"सुबह"); "TBA" in ink-2 if no time; small side dot (10px, groom/bride/gradient) sitting on the thread.
+   - Right: eyebrow line "Groom's side · Indore" (side word coloured with side-ink; city in ink-2); title Fraunces (variable, optical sizing) 1.6rem; meta "Water Lily Hotel · MIST-1 · Pooja Room, 1st Floor" (ink-2); dress code = 16px swatch + "Dress: Indo-western"; notes (ink-2, 0.9rem); status line(s): "● Timing being confirmed" (amber-ink, amber dot) and in Both mode "Groom 7:00 PM · Bride 6:30 PM" with coloured names.
    - Row is a full-width button; separators are hairlines; tbd rows: title in ink-2 italic.
 5. **Meals**: one sand-surface row, three columns (Breakfast 8:00 · Lunch 1:00 · Hi-Tea 4:30), eyebrow "Meals · Shed Area"; tea/coffee line beneath in ink-2. Each column tappable (opens sheet).
 6. **Empty state**: centred serif line "Nothing on the Bride's side today" + body + text buttons. No dashed box.

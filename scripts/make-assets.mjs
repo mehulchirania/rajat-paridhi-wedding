@@ -15,8 +15,8 @@ fs.writeFileSync(pub('favicon.svg'), mono);
 // Chrome render (fonts from node_modules so Devanagari + serif display are correct)
 const f = (pkg, file) => `file://${root}/node_modules/@fontsource/${pkg}/files/${file}`;
 const fonts = `
-@font-face{font-family:CG;src:url(${f('instrument-serif', 'instrument-serif-latin-400-normal.woff2')})}
-@font-face{font-family:CG;font-style:italic;src:url(${f('instrument-serif', 'instrument-serif-latin-400-italic.woff2')})}
+@font-face{font-family:CG;font-weight:100 900;src:url(file://${root}/node_modules/@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2)}
+@font-face{font-family:CG;font-weight:100 900;font-style:italic;src:url(file://${root}/node_modules/@fontsource-variable/fraunces/files/fraunces-latin-opsz-italic.woff2)}
 @font-face{font-family:TD;src:url(${f('tiro-devanagari-hindi', 'tiro-devanagari-hindi-devanagari-400-normal.woff2')})}`;
 const tmp = fs.mkdtempSync('/tmp/wedassets-');
 const shot = (html, out, w, h) => {
@@ -29,8 +29,8 @@ const gen = JSON.parse(fs.readFileSync(path.join(root, 'src/data/photos.generate
 const splashSlug = gen.splash;
 const splashFocal = gen.photos[splashSlug]?.focal ?? '50% 45%';
 const splashImg = `file://${root}/public/images/photos/${splashSlug}-1280.webp`;
-const ogFonts = `@font-face{font-family:IS;src:url(${f('instrument-serif', 'instrument-serif-latin-400-normal.woff2')})}
-@font-face{font-family:IS;font-style:italic;src:url(${f('instrument-serif', 'instrument-serif-latin-400-italic.woff2')})}`;
+const ogFonts = `@font-face{font-family:IS;font-weight:100 900;src:url(file://${root}/node_modules/@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2)}
+@font-face{font-family:IS;font-weight:100 900;font-style:italic;src:url(file://${root}/node_modules/@fontsource-variable/fraunces/files/fraunces-latin-opsz-italic.woff2)}`;
 shot(`<style>${fonts}${ogFonts}
 body{margin:0;width:1200px;height:630px;position:relative;overflow:hidden;background:#1E1416;color:#fff;font-family:IS,TD,serif}
 .bg{position:absolute;top:0;bottom:0;right:0;left:300px;background:url(${splashImg}) ${splashFocal}/cover no-repeat}

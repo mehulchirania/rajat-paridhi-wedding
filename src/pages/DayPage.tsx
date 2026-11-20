@@ -1,3 +1,4 @@
+import type { EventItem } from '../types';
 import { useRef, type TouchEvent } from 'react';
 import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useApp } from '../lib/app';
@@ -26,6 +27,9 @@ function Announcement() {
   );
 }
 
+/** Common hotel meals go in the compact strip; side-specific meals (e.g. lunch at home) are normal agenda rows. */
+const isStripMeal = (e: EventItem) => e.type === 'meal' && e.side === 'common';
+
 export function DayPage() {
   const { slug } = useParams();
   const day = dayBySlug(slug);
@@ -41,10 +45,10 @@ export function DayPage() {
   const dayEvents = events.filter((e) => e.date === day.date);
   const filter = { view: side, showFamily };
   const shown = visibleEvents(dayEvents, filter);
-  const main = sortEvents(shown.filter((e) => e.type !== 'meal'), side);
-  const meals = shown.filter((e) => e.type === 'meal');
+  const main = sortEvents(shown.filter((e) => !isStripMeal(e)), side);
+  const meals = shown.filter(isStripMeal);
   const hiddenFamily = dayEvents.filter((e) => sideVisible(e.side, side) && e.audience === 'family' && !showFamily).length;
-  const otherSideCount = side === 'both' ? 0 : dayEvents.filter((e) => e.type !== 'meal' && !sideVisible(e.side, side) && (showFamily || e.audience !== 'family')).length;
+  const otherSideCount = side === 'both' ? 0 : dayEvents.filter((e) => !isStripMeal(e) && !sideVisible(e.side, side) && (showFamily || e.audience !== 'family')).length;
 
   const openEvent = (id: string) => nav(`?e=${id}${keep().replace('?', '&')}`, { state: { sheet: true } });
   const closeSheet = () => { if ((loc.state as { sheet?: boolean } | null)?.sheet) nav(-1); else nav(`${loc.pathname}${keep()}`, { replace: true }); };
@@ -74,7 +78,7 @@ export function DayPage() {
 
       {main.length > 0 ? (
         <div className="relative mt-2">
-          <span aria-hidden="true" className="grad-thread absolute left-[69px] top-[1.9rem] bottom-0 z-0 w-[2px] opacity-40" style={{ maskImage: 'linear-gradient(to bottom,#000 80%,transparent)', WebkitMaskImage: 'linear-gradient(to bottom,#000 80%,transparent)' }} />
+          <span aria-hidden="true" className="grad-thread absolute left-[79px] top-[1.9rem] bottom-0 z-0 w-[2px] opacity-40" style={{ maskImage: 'linear-gradient(to bottom,#000 80%,transparent)', WebkitMaskImage: 'linear-gradient(to bottom,#000 80%,transparent)' }} />
           <ol aria-label={t('nav.itinerary')} className="relative">{main.map((e) => <EventCard key={e.id} ev={e} view={side} onOpen={openEvent} />)}</ol>
         </div>
       ) : (

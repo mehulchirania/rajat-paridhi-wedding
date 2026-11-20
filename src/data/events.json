@@ -1,44 +1,13 @@
 [
   {
-    "type": "ritual",
-    "city": "Pune",
-    "venueName": null,
-    "audience": "all",
-    "status": "tbd",
-    "needsConfirmation": false,
-    "side": "groom",
-    "date": "2026-11-29",
-    "notes": {
-      "en": "Venue and timing will be shared soon.",
-      "hi": "स्थान और समय जल्द बताया जाएगा।"
-    },
-    "hiDraft": true,
-    "id": "kumkum-29nov",
-    "title": {
-      "en": "Kumkum",
-      "hi": "कुंकुम"
-    },
-    "time": "09:00",
-    "dressCode": {
-      "en": "Lehariya",
-      "hi": "लहरिया",
-      "swatch": "lehariya"
-    },
-    "icon": "kumkum"
-  },
-  {
     "type": "celebration",
     "city": "Pune",
-    "venueName": null,
+    "venueName": "Rajat's home, Pune",
     "audience": "all",
-    "status": "tbd",
+    "status": "confirmed",
     "needsConfirmation": false,
     "side": "groom",
     "date": "2026-11-29",
-    "notes": {
-      "en": "Venue and timing will be shared soon.",
-      "hi": "स्थान और समय जल्द बताया जाएगा।"
-    },
     "hiDraft": true,
     "id": "mehendi-groom-29nov",
     "title": {
@@ -52,7 +21,59 @@
       "hi": "परपल",
       "swatch": "purple"
     },
-    "icon": "mehendi"
+    "icon": "mehendi",
+    "mapLink": "https://maps.app.goo.gl/6ozDdD9SCCbVJKxZ6"
+  },
+  {
+    "id": "lunch-groom-30nov",
+    "type": "meal",
+    "side": "groom",
+    "city": "Pune",
+    "venueName": "Rajat's home, Pune",
+    "title": {
+      "en": "Lunch at home",
+      "hi": "घर पर दोपहर का भोजन"
+    },
+    "time": "13:00",
+    "date": "2026-11-30",
+    "notes": {
+      "en": "Afternoon lunch before the Baraat leaves for Indore. Exact time being confirmed.",
+      "hi": "इंदौर रवाना होने से पहले दोपहर का भोजन। सटीक समय तय हो रहा है।"
+    },
+    "mapLink": "https://maps.app.goo.gl/6ozDdD9SCCbVJKxZ6",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": true,
+    "icon": "meal",
+    "hiDraft": true
+  },
+  {
+    "id": "baraat-travel-30nov",
+    "type": "ritual",
+    "side": "groom",
+    "city": "Pune",
+    "venueName": "Rajat's home, Pune",
+    "title": {
+      "en": "Baraat departs for Indore",
+      "hi": "बारात इंदौर के लिए रवाना"
+    },
+    "time": "16:00",
+    "date": "2026-11-30",
+    "durationMin": 60,
+    "notes": {
+      "en": "Baraat travels from Pune to Indore. Travel details will come from the groom-side contact.",
+      "hi": "बारात पुणे से इंदौर जाएगी। यात्रा की जानकारी वर पक्ष के संपर्क से मिलेगी।"
+    },
+    "transport": {
+      "en": "Leaving from Rajat's home in Pune at 4 PM.",
+      "hi": "शाम 4 बजे रजत के पुणे स्थित घर से प्रस्थान।"
+    },
+    "mapLink": "https://maps.app.goo.gl/6ozDdD9SCCbVJKxZ6",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": false,
+    "icon": "travel",
+    "hiDraft": true
   },
   {
     "type": "ritual",
@@ -101,23 +122,6 @@
     "notes": {
       "en": "Separate venue — not at the hotel.",
       "hi": "अलग स्थान — होटल में नहीं।"
-    },
-    "hiDraft": true
-  },
-  {
-    "type": "ritual",
-    "city": "TBD",
-    "venueName": null,
-    "audience": "all",
-    "status": "tbd",
-    "needsConfirmation": false,
-    "id": "groom-30nov-tbd",
-    "side": "groom",
-    "date": "2026-11-30",
-    "icon": "info",
-    "title": {
-      "en": "Groom-side programme, details coming soon",
-      "hi": "वर पक्ष का कार्यक्रम, जानकारी जल्द"
     },
     "hiDraft": true
   },

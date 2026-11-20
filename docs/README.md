@@ -34,7 +34,7 @@ docs/                      you are here (design.md = visual spec)
 
 ## UI structure (v2 "Ivory & Oxblood")
 Full visual spec: [design.md](design.md). In short:
-- **Fonts:** Instrument Serif (display), Hanken Grotesk (body), Noto Sans Devanagari (Hindi body), Tiro Devanagari Hindi (Hindi display).
+- **Fonts:** Fraunces (variable, optical sizing) (display), Hanken Grotesk (body), Noto Sans Devanagari (Hindi body), Tiro Devanagari Hindi (Hindi display).
 - **Compact header** with brand wordmark, a **side pill** and an EN/हिं switch. The side pill opens a **side sheet** with the three side options plus the *Show family-only events* and *Larger text* switches.
 - **Day ribbon** (4 days) under the header, a photo **day hero**, a list-style agenda, and a **floating dock** with Itinerary, Info and Help (WhatsApp).
 - **Event sheet** (tap any event): when / where / dress / notes / getting there, Add to calendar, Maps, Share and WhatsApp buttons.

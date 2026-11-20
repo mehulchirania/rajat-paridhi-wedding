@@ -1,14 +1,67 @@
 {
   "_help": "Maps your original photos (in this /images folder) to the slugs the site uses. Run `npm run photos` after changing. focal = CSS object-position for cropping.",
   "photos": [
-    { "slug": "splash-pergola",   "source": "WhatsApp Image 2026-11-20 at 23.30.49 (1).jpeg", "focal": "50% 45%", "alt": { "en": "Rajat and Paridhi under a green pergola", "hi": "हरियाली भरे रास्ते पर रजत और परिधि" } },
-    { "slug": "day-29nov-lake",   "source": "WhatsApp Image 2026-11-20 at 23.30.50.jpeg",     "focal": "50% 55%", "alt": { "en": "Rajat lifting Paridhi by a lake", "hi": "झील किनारे रजत और परिधि" } },
-    { "slug": "day-30nov-lehenga","source": "WhatsApp Image 2026-11-20 at 23.30.52 (1).jpeg", "focal": "50% 40%", "alt": { "en": "Paridhi in a green lehenga", "hi": "हरे लहंगे में परिधि" } },
-    { "slug": "day-1dec-ring",    "source": "WhatsApp Image 2026-11-20 at 23.30.51 (2).jpeg", "focal": "45% 72%", "alt": { "en": "Close-up of the engagement ring", "hi": "सगाई की अंगूठी" } },
-    { "slug": "day-2dec-traditional", "source": "WhatsApp Image 2026-11-20 at 23.30.52 (3).jpeg", "focal": "50% 40%", "alt": { "en": "Rajat and Paridhi walking in traditional outfits", "hi": "पारंपरिक परिधान में रजत और परिधि" } },
-    { "slug": "info-stairs",      "source": "WhatsApp Image 2026-11-20 at 23.30.54.jpeg",     "focal": "50% 40%", "alt": { "en": "Rajat and Paridhi by a wooden staircase", "hi": "सीढ़ियों के पास रजत और परिधि" } }
+    {
+      "slug": "splash-pergola",
+      "source": "WhatsApp Image 2026-11-20 at 23.30.49 (1).jpeg",
+      "focal": "50% 45%",
+      "alt": {
+        "en": "Rajat and Paridhi under a green pergola",
+        "hi": "हरियाली भरे रास्ते पर रजत और परिधि"
+      }
+    },
+    {
+      "slug": "day-29nov-lake",
+      "source": "WhatsApp Image 2026-11-20 at 23.30.50.jpeg",
+      "focal": "50% 55%",
+      "alt": {
+        "en": "Rajat lifting Paridhi by a lake",
+        "hi": "झील किनारे रजत और परिधि"
+      }
+    },
+    {
+      "slug": "day-2dec-traditional",
+      "source": "WhatsApp Image 2026-11-20 at 23.30.52 (3).jpeg",
+      "focal": "50% 40%",
+      "alt": {
+        "en": "Rajat and Paridhi walking in traditional outfits",
+        "hi": "पारंपरिक परिधान में रजत और परिधि"
+      }
+    },
+    {
+      "slug": "day-30nov-stairs",
+      "source": "WhatsApp Image 2026-11-20 at 23.30.54.jpeg",
+      "focal": "50% 35%",
+      "alt": {
+        "en": "Rajat and Paridhi in traditional outfits by a staircase",
+        "hi": "पारंपरिक परिधान में सीढ़ियों के पास रजत और परिधि"
+      }
+    },
+    {
+      "slug": "day-1dec-fountain",
+      "source": "WhatsApp Image 2026-11-20 at 23.30.49.jpeg",
+      "focal": "50% 42%",
+      "alt": {
+        "en": "Rajat and Paridhi walking hand in hand with flowers",
+        "hi": "फूलों के साथ हाथ थामे रजत और परिधि"
+      }
+    },
+    {
+      "slug": "info-garden",
+      "source": "WhatsApp Image 2026-11-20 at 23.30.51.jpeg",
+      "focal": "50% 45%",
+      "alt": {
+        "en": "Rajat and Paridhi sitting together in a garden",
+        "hi": "बगीचे में साथ बैठे रजत और परिधि"
+      }
+    }
   ],
-  "days": { "2026-11-29": "day-29nov-lake", "2026-11-30": "day-30nov-lehenga", "2026-12-01": "day-1dec-ring", "2026-12-02": "day-2dec-traditional" },
+  "days": {
+    "2026-11-29": "day-29nov-lake",
+    "2026-11-30": "day-30nov-stairs",
+    "2026-12-01": "day-1dec-fountain",
+    "2026-12-02": "day-2dec-traditional"
+  },
   "splash": "splash-pergola",
-  "info": "info-stairs"
+  "info": "info-garden"
 }

@@ -28,7 +28,7 @@ export function Shell() {
   const brand = side === 'bride' ? t('brand.brideFirst') : side === 'groom' ? t('brand.groomFirst') : t('brand.neutral');
   const first = (n: string) => n.split(' ')[0];
   const g = first(l(meta.couple.groom.name)), b = first(l(meta.couple.bride.name));
-  const wordmark = lang === 'hi' ? t('app.eventTitle') : side === 'bride' ? `${b} & ${g}` : `${g} & ${b}`;
+  const wordmark = side === 'bride' ? `${b} & ${g}` : `${g} & ${b}`;
   const title = lang === 'hi' ? t('app.eventTitle') : brand;
   useEffect(() => { document.title = `${title} — ${lang === 'hi' ? brand : t('app.eventTitle')}`; }, [title, brand, lang, t]);
   const updated = new Intl.DateTimeFormat(lang === 'hi' ? 'hi-IN' : 'en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' }).format(new Date(meta.lastUpdated));
@@ -40,7 +40,7 @@ export function Shell() {
       {!online && <p role="status" className="bg-amber-soft px-4 py-2 text-center text-[0.9rem] font-semibold text-amber-ink">{t('offline.note')}</p>}
       <div className="sticky top-0 z-30 border-b border-line bg-ivory/90 backdrop-blur-md">
         <header className="flex h-14 items-center justify-between gap-2 px-4">
-          <Link to={`/${keep()}`} className="font-display min-w-0 truncate text-[1.35rem] leading-none text-oxblood">{wordmark}</Link>
+          <button type="button" onClick={() => setSplash(true)} aria-label={`${wordmark} — ${t('footer.replay')}`} className="tap -ml-1 min-w-0 truncate px-1 text-left font-display text-[1.15rem] leading-none text-oxblood">{wordmark}</button>
           <div className="flex shrink-0 items-center gap-1.5"><SidePill /><LangToggle /></div>
         </header>
         {onDay && <div className="px-2"><DayChips /></div>}
