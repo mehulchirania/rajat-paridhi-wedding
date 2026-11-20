@@ -13,7 +13,6 @@ interface Ctx {
   side: GuestSide; setSide: (s: GuestSide) => void; hasSide: boolean;
   showFamily: boolean; setShowFamily: (v: boolean) => void;
   bigText: boolean; setBigText: (v: boolean) => void;
-  splash: boolean; setSplash: (v: boolean) => void;
   t: (key: string, vars?: Vars) => string;
   l: (x?: L10n | { en: string; hi?: string } | null) => string;
   time: (t: string) => string;
@@ -38,7 +37,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [sideRaw, setSideS] = useState<GuestSide | null>(() => { const s = store.get('side'); return isSide(s) ? s : null; });
   const [showFamily, setFam] = useState(() => store.get('showFamily') === '1');
   const [bigText, setBig] = useState(() => store.get('bigText') === '1');
-  const [splash, setSplash] = useState(() => !isSide(store.get('side')));
 
   useEffect(() => { document.documentElement.lang = lang; }, [lang]);
   useEffect(() => { document.documentElement.classList.toggle('big-text', bigText); }, [bigText]);
@@ -61,10 +59,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
         : `${dayNum(date)} ${t(`mo.${monthIdx(date)}`)}`;
     return {
       lang, setLang, side: sideRaw ?? 'both', setSide, hasSide: !!sideRaw,
-      showFamily, setShowFamily, bigText, setBigText, splash, setSplash,
+      showFamily, setShowFamily, bigText, setBigText,
       t, l, time: (x) => formatTime(x, lang), dateLabel,
     };
-  }, [lang, sideRaw, showFamily, bigText, splash, setLang, setSide, setShowFamily, setBigText]);
+  }, [lang, sideRaw, showFamily, bigText, setLang, setSide, setShowFamily, setBigText]);
 
   return <AppCtx.Provider value={value}>{children}</AppCtx.Provider>;
 }

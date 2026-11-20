@@ -101,7 +101,7 @@
   "nownext.help": "मदद चाहिए?",
   "time.min": "{n} मिनट",
   "time.hr": "{n} घंटे",
-  "countdown.title": "निकासी में शेष समय",
+  "countdown.title": "मुख्य समारोह में शेष",
   "countdown.d": "दिन",
   "countdown.h": "घंटे",
   "countdown.m": "मिनट",
@@ -166,5 +166,12 @@
   "guest.bride": "वधू पक्ष का अतिथि",
   "guest.both": "विवाह का अतिथि",
   "side.both.short": "दोनों",
-  "header.dates": "29 नवंबर – 2 दिसंबर 2026"
+  "header.dates": "29 नवंबर – 2 दिसंबर 2026",
+  "countdown.days": "दिन",
+  "countdown.hours": "घंटे",
+  "countdown.mins": "मिनट",
+  "countdown.secs": "सेकंड",
+  "splash.continue": "{side} के रूप में आगे बढ़ें",
+  "splash.change": "या दूसरा पक्ष चुनें",
+  "splash.continueBoth": "कार्यक्रम देखें"
 }

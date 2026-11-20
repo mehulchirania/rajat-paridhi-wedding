@@ -101,7 +101,7 @@
   "nownext.help": "Need help?",
   "time.min": "{n} min",
   "time.hr": "{n} hr",
-  "countdown.title": "Countdown to Nikasi",
+  "countdown.title": "Main celebrations begin in",
   "countdown.d": "days",
   "countdown.h": "hours",
   "countdown.m": "min",
@@ -166,5 +166,12 @@
   "guest.bride": "a guest from the Bride’s side",
   "guest.both": "a wedding guest",
   "side.both.short": "Both",
-  "header.dates": "29 Nov – 2 Dec 2026"
+  "header.dates": "29 Nov – 2 Dec 2026",
+  "countdown.days": "Days",
+  "countdown.hours": "Hours",
+  "countdown.mins": "Mins",
+  "countdown.secs": "Secs",
+  "splash.continue": "Continue as {side}",
+  "splash.change": "or choose another side",
+  "splash.continueBoth": "Continue to the itinerary"
 }

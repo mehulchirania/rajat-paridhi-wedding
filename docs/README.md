@@ -41,6 +41,9 @@ Full visual spec: [design.md](design.md). In short:
 - **Info page:** hotel photo hero, address, in-room, parking, tea & coffee, family contacts, on-site help desk, other venues, families, display settings.
 
 ## Behaviour summary
+- **Welcome page is a real route: `/welcome`.** First-time visitors are sent there, then returned to the page they opened. Tapping the names in the header, or "Replay welcome", opens it; browser Back returns to where you were. Returning guests see "Continue as <side>" plus the side picker.
+- **Countdown** on the welcome page to the main celebrations (1 Dec 2026, 00:00 IST); it disappears at that moment. Test with `/welcome?now=2026-11-30T23:59`.
+- **Updates:** the service worker checks for a new deploy on load, whenever the app returns to the foreground, and hourly, then reloads to the new version.
 - **Splash → side picker** (Groom / Bride / Both), stored in localStorage; returning guests skip it ("Replay welcome" on the Info page).
 - **Side views:** Groom = groom + common events; Bride = bride + common; Both = everything, with side badges.
 - **Time resolution:** guest side's `timeBySide` override, else `time`. In Both mode the canonical `time` shows plus a "Timing differs by side" badge listing both.

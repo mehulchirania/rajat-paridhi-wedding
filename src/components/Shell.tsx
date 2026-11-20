@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
+import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useApp } from '../lib/app';
 import { meta } from '../lib/data';
 import { keep } from '../lib/nav';
@@ -21,7 +21,8 @@ function useOnline() {
 const dockItem = 'tap flex w-[84px] flex-col items-center justify-center gap-0.5 rounded-full text-[0.78rem] font-semibold leading-none transition-colors duration-200';
 
 export function Shell() {
-  const { t, l, lang, side, setSplash } = useApp();
+  const { t, l, lang, side} = useApp();
+  const goWelcome = useNavigate();
   const loc = useLocation();
   const online = useOnline();
   const onDay = loc.pathname.startsWith('/day/');
@@ -40,7 +41,7 @@ export function Shell() {
       {!online && <p role="status" className="bg-amber-soft px-4 py-2 text-center text-[0.9rem] font-semibold text-amber-ink">{t('offline.note')}</p>}
       <div className="sticky top-0 z-30 border-b border-line bg-ivory/90 backdrop-blur-md">
         <header className="flex h-14 items-center justify-between gap-2 px-4">
-          <button type="button" onClick={() => setSplash(true)} aria-label={`${wordmark} — ${t('footer.replay')}`} className="tap -ml-1 min-w-0 truncate px-1 text-left font-display text-[1.15rem] leading-none text-oxblood">{wordmark}</button>
+          <button type="button" onClick={() => goWelcome(`/welcome${keep()}`, { state: { from: loc.pathname + loc.search } })} aria-label={`${wordmark} — ${t('footer.replay')}`} className="tap -ml-1 min-w-0 truncate px-1 text-left font-display text-[1.15rem] leading-none text-oxblood">{wordmark}</button>
           <div className="flex shrink-0 items-center gap-1.5"><SidePill /><LangToggle /></div>
         </header>
         {onDay && <div className="px-2"><DayChips /></div>}
@@ -48,7 +49,7 @@ export function Shell() {
       <main className="px-4 pt-4"><Outlet /></main>
       <footer className={`px-4 pb-[calc(8rem+env(safe-area-inset-bottom))] pt-10 text-center text-[0.82rem] text-ink-2 ${infoActive ? 'sr-only' : ''}`}>
         <p>{t('footer.updated', { date: updated })}</p>
-        <button type="button" onClick={() => setSplash(true)} className="tap mt-1 underline decoration-line underline-offset-4">{t('footer.replay')}</button>
+        <button type="button" onClick={() => goWelcome(`/welcome${keep()}`, { state: { from: loc.pathname + loc.search } })} className="tap mt-1 underline decoration-line underline-offset-4">{t('footer.replay')}</button>
         <span className="sr-only">{g}</span>
       </footer>
       <nav aria-label={t('shell.dockLabel')}

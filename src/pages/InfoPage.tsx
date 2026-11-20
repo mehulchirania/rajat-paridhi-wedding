@@ -1,5 +1,6 @@
+import { keep } from '../lib/nav';
 import type { ReactNode } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useApp } from '../lib/app';
 import { events, meta } from '../lib/data';
 import { contactsForView, openWa, prettyPhone, telHref, venueContacts } from '../lib/contacts';
@@ -20,7 +21,8 @@ const sideDot = (s: 'groom' | 'bride') => (s === 'groom' ? 'bg-groom' : 'bg-brid
 const sideInk = (s: 'groom' | 'bride') => (s === 'groom' ? 'text-groom-ink' : 'text-bride-ink');
 
 export function InfoPage() {
-  const { t, l, lang, side, dateLabel, bigText, setBigText, setSplash } = useApp();
+  const { t, l, lang, side, dateLabel, bigText, setBigText} = useApp();
+  const goWelcome = useNavigate();
   const wa = useWa();
   const loc = useLocation();
   const fam = contactsForView(side);
@@ -124,7 +126,7 @@ export function InfoPage() {
               <span aria-hidden="true" className={`absolute top-1 h-6 w-6 rounded-full bg-white shadow transition-transform ${bigText ? 'translate-x-7' : 'translate-x-1'}`} />
             </button>
           </div>
-          <button type="button" onClick={() => setSplash(true)} className="tap mt-2 inline-flex items-center font-semibold text-oxblood underline underline-offset-4">{t('footer.replay')}</button>
+          <button type="button" onClick={() => goWelcome(`/welcome${keep()}`, { state: { from: loc.pathname + loc.search } })} className="tap mt-2 inline-flex items-center font-semibold text-oxblood underline underline-offset-4">{t('footer.replay')}</button>
         </Section>
 
         <p className="border-t border-line pt-5 text-center text-[0.85rem] text-ink-2">{t('footer.updated', { date: updated })}</p>

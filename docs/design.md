@@ -18,6 +18,8 @@ Rule of thumb: if an element has both a border **and** a background **and** a sh
 - Side-specific meals (e.g. groom-side lunch at home) render as agenda rows; only common hotel meals go in the meal strip.
 - Day photos: 29 Nov lake, 30 Nov stairs (traditional), 1 Dec fountain walk, 2 Dec traditional walk; Info = garden.
 
+- Welcome page is the `/welcome` route; adds a live countdown (days/hours/mins/secs, tabular Fraunces, champagne labels, hairline dividers) to 1 Dec 00:00 IST, and a "Continue as …" button for returning guests.
+
 ## Principles
 1. **Photo-first.** Splash and each day open with a real photo (see `images/photos.config.json`).
 2. **One accent per screen.** Oxblood is the brand; groom-blue/bride-pink appear only as small side markers (dot, thin rule, text colour), never fills larger than a pill.
