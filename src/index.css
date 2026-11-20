@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #F7EFE3;
+  --color-paper: #FFFBF4;
+  --color-maroon: #6B1A2F;
+  --color-maroon-deep: #4A1020;
+  --color-gold: #C9A24B;
+  --color-gold-dark: #7A5B14;
+  --color-groom: #2B5FA8;
+  --color-groom-soft: #E3ECF8;
+  --color-groom-ink: #1F4A86;
+  --color-bride: #B83265;
+  --color-bride-soft: #F9E1EA;
+  --color-bride-ink: #8F2150;
+  --color-ink: #2B1A1F;
+  --color-muted: #6A5A55;
+  --color-amber-soft: #FCEFC7;
+  --color-amber-ink: #6B4A00;
+  --font-display: 'Cormorant Garamond', 'Tiro Devanagari Hindi', Georgia, serif;
+  --font-body: 'DM Sans', 'Noto Sans Devanagari', system-ui, sans-serif;
+  --animate-rise: rise .45s ease-out both;
+}
+
+html { font-size: 17px; -webkit-text-size-adjust: 100%; }
+html.big-text { font-size: 20.5px; }
+body {
+  margin: 0; background-color: var(--color-cream); color: var(--color-ink);
+  font-family: var(--font-body); line-height: 1.5;
+  background-image: url('/images/pattern-paisley.svg'); background-size: 220px;
+}
+html[lang='hi'] body { line-height: 1.65; }
+h1, h2, h3, p, .font-display { font-variant-numeric: lining-nums; font-feature-settings: "lnum"; }
+h1, h2, h3, .font-display { font-family: var(--font-display); }
+:focus-visible { outline: 3px solid var(--color-maroon); outline-offset: 2px; border-radius: 6px; }
+button { font: inherit; cursor: pointer; }
+.tap { min-height: 44px; min-width: 44px; }
+
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes sheet-up { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes pop { from { transform: scale(.6); opacity: 0; } to { transform: none; opacity: 1; } }
+
+.knot-strand { stroke-dasharray: 420; stroke-dashoffset: 420; animation: draw 1.8s ease-out .2s forwards; }
+.knot-strand.b { animation-delay: .5s; }
+.knot-dot { animation: pop .5s ease-out 1.8s both; transform-origin: center; transform-box: fill-box; }
+
+.grad-common { background: linear-gradient(90deg, var(--color-groom-soft), var(--color-bride-soft)); }
+.grad-thread { background: linear-gradient(180deg, var(--color-groom), var(--color-gold) 50%, var(--color-bride)); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-delay: 0s !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+  .knot-strand { stroke-dashoffset: 0; }
+}

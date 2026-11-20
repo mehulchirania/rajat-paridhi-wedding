@@ -1,0 +1,33 @@
+{
+  "lastUpdated": "2026-11-20T23:30:00+05:30",
+  "announcements": [
+    {
+      "id": "welcome",
+      "active": true,
+      "text": {
+        "en": "Welcome! Items marked “Timing being confirmed” may change — this page always shows the latest.",
+        "hi": "स्वागत है! “समय की पुष्टि होनी बाकी है” वाले कार्यक्रमों में बदलाव हो सकता है — यह पेज हमेशा ताज़ा जानकारी दिखाता है।"
+      }
+    }
+  ],
+  "couple": {
+    "groom": { "name": { "en": "Rajat Rajore", "hi": "रजत राजोरे" }, "parents": { "en": "S/o Shri Anup Rajore & Smt. Sapna Rajore", "hi": "सुपुत्र श्री अनूप राजोरे व श्रीमती सपना राजोरे" } },
+    "bride": { "name": { "en": "Paridhi Garg", "hi": "परिधि गर्ग" }, "parents": { "en": "D/o Shri Ajay Garg & Smt. Sunita Garg", "hi": "सुपुत्री श्री अजय गर्ग व श्रीमती सुनीता गर्ग" } }
+  },
+  "hotel": {
+    "name": "Water Lily Hotel",
+    "address": { "en": "Water Lily Hotel, Nipania Bypass, Indore", "hi": "वॉटर लिली होटल, निपानिया बायपास, इंदौर" },
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore",
+    "parking": { "en": "Parking details will be shared soon.", "hi": "पार्किंग की जानकारी जल्द साझा की जाएगी।" },
+    "inRoom": { "en": "Reception: dial 9. Housekeeping: dial 9. From your room phone only.", "hi": "रिसेप्शन: 9 डायल करें। हाउसकीपिंग: 9 डायल करें। केवल कमरे के फ़ोन से।" }
+  },
+  "teaCoffee": { "en": "Tea / Coffee counter: Shed Area, Ground Floor", "hi": "चाय / कॉफी काउंटर: शेड एरिया, भू-तल" },
+  "gallery": [
+    { "src": "/images/gallery/gallery-01-REPLACE.svg", "alt": { "en": "Photo placeholder 1", "hi": "फ़ोटो प्लेसहोल्डर 1" } },
+    { "src": "/images/gallery/gallery-02-REPLACE.svg", "alt": { "en": "Photo placeholder 2", "hi": "फ़ोटो प्लेसहोल्डर 2" } },
+    { "src": "/images/gallery/gallery-03-REPLACE.svg", "alt": { "en": "Photo placeholder 3", "hi": "फ़ोटो प्लेसहोल्डर 3" } },
+    { "src": "/images/gallery/gallery-04-REPLACE.svg", "alt": { "en": "Photo placeholder 4", "hi": "फ़ोटो प्लेसहोल्डर 4" } },
+    { "src": "/images/gallery/gallery-05-REPLACE.svg", "alt": { "en": "Photo placeholder 5", "hi": "फ़ोटो प्लेसहोल्डर 5" } },
+    { "src": "/images/gallery/gallery-06-REPLACE.svg", "alt": { "en": "Photo placeholder 6", "hi": "फ़ोटो प्लेसहोल्डर 6" } }
+  ]
+}

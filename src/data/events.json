@@ -1,0 +1,705 @@
+[
+  {
+    "type": "ritual",
+    "city": "Pune",
+    "venueName": null,
+    "audience": "all",
+    "status": "tbd",
+    "needsConfirmation": false,
+    "side": "groom",
+    "date": "2026-11-29",
+    "notes": {
+      "en": "Venue and timing will be shared soon.",
+      "hi": "स्थान और समय जल्द बताया जाएगा।"
+    },
+    "hiDraft": true,
+    "id": "kumkum-29nov",
+    "title": {
+      "en": "Kumkum",
+      "hi": "कुंकुम"
+    },
+    "time": "09:00",
+    "dressCode": {
+      "en": "Lehariya",
+      "hi": "लहरिया",
+      "swatch": "lehariya"
+    },
+    "icon": "kumkum"
+  },
+  {
+    "type": "celebration",
+    "city": "Pune",
+    "venueName": null,
+    "audience": "all",
+    "status": "tbd",
+    "needsConfirmation": false,
+    "side": "groom",
+    "date": "2026-11-29",
+    "notes": {
+      "en": "Venue and timing will be shared soon.",
+      "hi": "स्थान और समय जल्द बताया जाएगा।"
+    },
+    "hiDraft": true,
+    "id": "mehendi-groom-29nov",
+    "title": {
+      "en": "Mehendi",
+      "hi": "मेहंदी"
+    },
+    "time": "12:00",
+    "openEnded": true,
+    "dressCode": {
+      "en": "Purple",
+      "hi": "परपल",
+      "swatch": "purple"
+    },
+    "icon": "mehendi"
+  },
+  {
+    "type": "ritual",
+    "city": "Indore",
+    "venueName": "Residence",
+    "audience": "family",
+    "status": "confirmed",
+    "needsConfirmation": true,
+    "id": "mata-pujan-bride-30nov",
+    "side": "bride",
+    "date": "2026-11-30",
+    "title": {
+      "en": "Mata Pujan",
+      "hi": "माता पूजन"
+    },
+    "time": "09:00",
+    "icon": "pooja",
+    "notes": {
+      "en": "Family ritual at the residence.",
+      "hi": "निवास पर पारिवारिक रस्म।"
+    },
+    "hiDraft": true
+  },
+  {
+    "type": "celebration",
+    "city": "Indore",
+    "venueName": "Mangal Farm House",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": false,
+    "id": "mehendi-bride-30nov",
+    "side": "bride",
+    "date": "2026-11-30",
+    "title": {
+      "en": "Mehendi",
+      "hi": "मेहंदी"
+    },
+    "time": "12:00",
+    "openEnded": true,
+    "icon": "mehendi",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Mangal+Farm+House+Indore",
+    "transport": {
+      "en": "Held away from Water Lily Hotel. Transport details will be shared by the family contact.",
+      "hi": "यह आयोजन वॉटर लिली होटल से अलग स्थान पर है। वाहन की जानकारी परिवार के संपर्क से मिलेगी।"
+    },
+    "notes": {
+      "en": "Separate venue — not at the hotel.",
+      "hi": "अलग स्थान — होटल में नहीं।"
+    },
+    "hiDraft": true
+  },
+  {
+    "type": "ritual",
+    "city": "TBD",
+    "venueName": null,
+    "audience": "all",
+    "status": "tbd",
+    "needsConfirmation": false,
+    "id": "groom-30nov-tbd",
+    "side": "groom",
+    "date": "2026-11-30",
+    "icon": "info",
+    "title": {
+      "en": "Groom-side programme, details coming soon",
+      "hi": "वर पक्ष का कार्यक्रम, जानकारी जल्द"
+    },
+    "hiDraft": true
+  },
+  {
+    "type": "ritual",
+    "city": "Indore",
+    "venueName": "Water Lily Hotel",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": false,
+    "date": "2026-12-01",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore",
+    "id": "telban-bride-1dec",
+    "side": "bride",
+    "title": {
+      "en": "Tel-Ban & Sankri Rakhi",
+      "hi": "तेल-बान व सांकरी राखी"
+    },
+    "time": "10:00",
+    "room": {
+      "en": "MIST-2 · Pooja Room, 2nd Floor",
+      "hi": "मिस्ट-2 · पूजा कक्ष, दूसरी मंज़िल"
+    },
+    "icon": "rakhi",
+    "hiDraft": true
+  },
+  {
+    "type": "ritual",
+    "city": "Indore",
+    "venueName": "Water Lily Hotel",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": false,
+    "date": "2026-12-01",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore",
+    "id": "ganesh-tel-haldi-groom-1dec",
+    "side": "groom",
+    "title": {
+      "en": "Ganesh Pujan, Mata Pujan & Tel-Haldi",
+      "hi": "गणेश पूजन, माता पूजन, तेल हल्दी"
+    },
+    "time": "10:00",
+    "room": {
+      "en": "MIST-1 · Pooja Room, 1st Floor",
+      "hi": "मिस्ट-1 · पूजा कक्ष, पहली मंज़िल"
+    },
+    "dressCode": {
+      "en": "Your choice",
+      "hi": "अपनी पसंद का",
+      "swatch": "any"
+    },
+    "icon": "pooja",
+    "notes": {
+      "en": "Also called Tel-Ban & Sankri Rakhi on the Bride's side.",
+      "hi": "वधू पक्ष में इसे तेल-बान व सांकरी राखी कहा जाता है।"
+    },
+    "hiDraft": true
+  },
+  {
+    "type": "ritual",
+    "city": "Indore",
+    "venueName": "Water Lily Hotel",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": false,
+    "date": "2026-12-01",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore",
+    "id": "parojan-bride-1dec",
+    "side": "bride",
+    "title": {
+      "en": "Parojan",
+      "hi": "पारोजन"
+    },
+    "time": "11:00",
+    "room": {
+      "en": "MIST-2 · Pooja Room, 2nd Floor",
+      "hi": "मिस्ट-2 · पूजा कक्ष, दूसरी मंज़िल"
+    },
+    "icon": "pooja",
+    "hiDraft": true
+  },
+  {
+    "type": "celebration",
+    "city": "Indore",
+    "venueName": "Water Lily Hotel",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": false,
+    "date": "2026-12-01",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore",
+    "id": "haldi-carnival-1dec",
+    "side": "common",
+    "title": {
+      "en": "Haldi / Carnival",
+      "hi": "हल्दी / कार्निवल"
+    },
+    "time": "12:30",
+    "timeBySide": {
+      "groom": "12:00"
+    },
+    "area": {
+      "en": "Lawn",
+      "hi": "लॉन"
+    },
+    "dressCode": {
+      "en": "Any pastel colour",
+      "hi": "कोई भी पेस्टल कलर",
+      "swatch": "pastel"
+    },
+    "icon": "carnival",
+    "hiDraft": true
+  },
+  {
+    "type": "ritual",
+    "city": "Indore",
+    "venueName": "Water Lily Hotel",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": false,
+    "date": "2026-12-01",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore",
+    "id": "chak-bhat-bride-1dec",
+    "side": "bride",
+    "title": {
+      "en": "Mayra & Chak Bhat",
+      "hi": "मायरा व चाक भात"
+    },
+    "time": "15:30",
+    "area": {
+      "en": "Splash Hall",
+      "hi": "स्प्लैश हॉल"
+    },
+    "room": {
+      "en": "Ground Floor",
+      "hi": "भू-तल"
+    },
+    "dressCode": {
+      "en": "Your choice",
+      "hi": "अपनी पसंद का",
+      "swatch": "any"
+    },
+    "icon": "mayra",
+    "hiDraft": true
+  },
+  {
+    "type": "ritual",
+    "city": "Indore",
+    "venueName": "Water Lily Hotel",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": false,
+    "date": "2026-12-01",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore",
+    "id": "chak-bhat-groom-1dec",
+    "side": "groom",
+    "title": {
+      "en": "Mayra & Chak Bhat",
+      "hi": "मायरा व चाक भात"
+    },
+    "time": "15:00",
+    "area": {
+      "en": "Lawn — beside the Carnival stage",
+      "hi": "लॉन — कार्निवल स्टेज के पास"
+    },
+    "dressCode": {
+      "en": "Your choice",
+      "hi": "अपनी पसंद का",
+      "swatch": "any"
+    },
+    "icon": "mayra",
+    "hiDraft": true
+  },
+  {
+    "type": "celebration",
+    "city": "Indore",
+    "venueName": "Water Lily Hotel",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": true,
+    "date": "2026-12-01",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore",
+    "id": "sagai-tilak-goad-1dec",
+    "side": "common",
+    "title": {
+      "en": "Sagai / Tilak / Goad",
+      "hi": "सगाई / गोद"
+    },
+    "time": "18:30",
+    "timeBySide": {
+      "groom": "19:00"
+    },
+    "area": {
+      "en": "Lawn Stage",
+      "hi": "लॉन स्टेज"
+    },
+    "dressCode": {
+      "en": "Indo-western",
+      "hi": "इंडो वेस्टर्न",
+      "swatch": "indo-western"
+    },
+    "icon": "ring"
+  },
+  {
+    "type": "celebration",
+    "city": "Indore",
+    "venueName": "Water Lily Hotel",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": true,
+    "date": "2026-12-01",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore",
+    "id": "sangeet-dj-1dec",
+    "side": "common",
+    "title": {
+      "en": "Sangeet & DJ",
+      "hi": "संगीत व डी.जे."
+    },
+    "time": "20:00",
+    "timeBySide": {
+      "groom": "19:00"
+    },
+    "area": {
+      "en": "Lawn Stage",
+      "hi": "लॉन स्टेज"
+    },
+    "dressCode": {
+      "en": "Indo-western",
+      "hi": "इंडो वेस्टर्न",
+      "swatch": "indo-western"
+    },
+    "icon": "music",
+    "notes": {
+      "en": "On the Groom's schedule this is part of the 19:00 evening block.",
+      "hi": "वर पक्ष के कार्यक्रम में यह 19:00 के सायंकालीन कार्यक्रम का हिस्सा है।"
+    },
+    "hiDraft": true
+  },
+  {
+    "type": "ritual",
+    "city": "Indore",
+    "venueName": "Water Lily Hotel",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": false,
+    "date": "2026-12-02",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore",
+    "id": "nikasi-groom-2dec",
+    "side": "groom",
+    "title": {
+      "en": "Nikasi",
+      "hi": "निकासी"
+    },
+    "time": "09:00",
+    "area": {
+      "en": "Front of hotel, road side, near Eat & Drive restaurant",
+      "hi": "होटल के सामने, रोड साइड, ईट एंड ड्राइव रेस्टोरेंट के पास"
+    },
+    "dressCode": {
+      "en": "Traditional",
+      "hi": "ट्रेडिशनल",
+      "swatch": "traditional"
+    },
+    "icon": "nikasi",
+    "hiDraft": true
+  },
+  {
+    "type": "ritual",
+    "city": "Indore",
+    "venueName": "Eat & Drive Restaurant",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": false,
+    "id": "samela-2dec",
+    "side": "common",
+    "date": "2026-12-02",
+    "title": {
+      "en": "Samela",
+      "hi": "सामेला"
+    },
+    "time": "10:00",
+    "icon": "meet",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Eat+%26+Drive+Restaurant+Nipania+Indore",
+    "notes": {
+      "en": "Follows Nikasi — the two families meet.",
+      "hi": "निकासी के बाद — दोनों परिवारों का मिलन।"
+    },
+    "hiDraft": true
+  },
+  {
+    "type": "celebration",
+    "city": "Indore",
+    "venueName": "Water Lily Hotel",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": false,
+    "date": "2026-12-02",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore",
+    "id": "baarat-swagat-varmala-2dec",
+    "side": "common",
+    "title": {
+      "en": "Baarat Swagat & Varmala",
+      "hi": "बारात स्वागत व वरमाला"
+    },
+    "time": "11:00",
+    "area": {
+      "en": "Lawn",
+      "hi": "लॉन"
+    },
+    "icon": "garland",
+    "hiDraft": true
+  },
+  {
+    "type": "ritual",
+    "city": "Indore",
+    "venueName": "Water Lily Hotel",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": false,
+    "date": "2026-12-02",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore",
+    "id": "phere-2dec",
+    "side": "common",
+    "title": {
+      "en": "Mangal Phere",
+      "hi": "मंगल फेरे"
+    },
+    "time": "12:15",
+    "timeBySide": {
+      "groom": "12:00"
+    },
+    "area": {
+      "en": "First Floor Terrace, Poolside",
+      "hi": "प्रथम तल टैरेस, पूल साइड"
+    },
+    "dressCode": {
+      "en": "Traditional",
+      "hi": "ट्रेडिशनल",
+      "swatch": "traditional"
+    },
+    "icon": "phere",
+    "hiDraft": true
+  },
+  {
+    "type": "celebration",
+    "city": "Indore",
+    "venueName": "Water Lily Hotel",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": true,
+    "date": "2026-12-02",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore",
+    "id": "reception-2dec",
+    "side": "common",
+    "title": {
+      "en": "Reception",
+      "hi": "रिसेप्शन"
+    },
+    "time": "20:00",
+    "timeBySide": {
+      "groom": "19:00"
+    },
+    "area": {
+      "en": "Lawn",
+      "hi": "लॉन"
+    },
+    "dressCode": {
+      "en": "Your choice",
+      "hi": "अपनी पसंद का",
+      "swatch": "any"
+    },
+    "icon": "reception"
+  },
+  {
+    "type": "meal",
+    "city": "Indore",
+    "venueName": "Water Lily Hotel",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": false,
+    "id": "meal-breakfast-30nov",
+    "side": "common",
+    "date": "2026-11-30",
+    "title": {
+      "en": "Breakfast",
+      "hi": "नाश्ता"
+    },
+    "time": "08:00",
+    "durationMin": 60,
+    "area": {
+      "en": "Shed Area",
+      "hi": "शेड एरिया"
+    },
+    "icon": "meal",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore"
+  },
+  {
+    "type": "meal",
+    "city": "Indore",
+    "venueName": "Water Lily Hotel",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": true,
+    "id": "meal-lunch-30nov",
+    "side": "common",
+    "date": "2026-11-30",
+    "title": {
+      "en": "Lunch",
+      "hi": "दोपहर का भोजन"
+    },
+    "time": "13:00",
+    "durationMin": 60,
+    "area": {
+      "en": "Shed Area",
+      "hi": "शेड एरिया"
+    },
+    "icon": "meal",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore",
+    "notes": {
+      "en": "Mehendi is at Mangal Farm House today — lunch location being confirmed.",
+      "hi": "आज मेहंदी मंगल फार्म हाउस में है — भोजन का स्थान तय हो रहा है।"
+    },
+    "hiDraft": true
+  },
+  {
+    "type": "meal",
+    "city": "Indore",
+    "venueName": "Water Lily Hotel",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": false,
+    "id": "meal-hitea-30nov",
+    "side": "common",
+    "date": "2026-11-30",
+    "title": {
+      "en": "Hi Tea",
+      "hi": "हाई टी"
+    },
+    "time": "16:30",
+    "durationMin": 60,
+    "area": {
+      "en": "Shed Area",
+      "hi": "शेड एरिया"
+    },
+    "icon": "tea",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore"
+  },
+  {
+    "type": "meal",
+    "city": "Indore",
+    "venueName": "Water Lily Hotel",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": false,
+    "id": "meal-breakfast-1dec",
+    "side": "common",
+    "date": "2026-12-01",
+    "title": {
+      "en": "Breakfast",
+      "hi": "नाश्ता"
+    },
+    "time": "08:00",
+    "durationMin": 60,
+    "area": {
+      "en": "Shed Area",
+      "hi": "शेड एरिया"
+    },
+    "icon": "meal",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore"
+  },
+  {
+    "type": "meal",
+    "city": "Indore",
+    "venueName": "Water Lily Hotel",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": false,
+    "id": "meal-lunch-1dec",
+    "side": "common",
+    "date": "2026-12-01",
+    "title": {
+      "en": "Lunch",
+      "hi": "दोपहर का भोजन"
+    },
+    "time": "13:00",
+    "durationMin": 60,
+    "area": {
+      "en": "Shed Area",
+      "hi": "शेड एरिया"
+    },
+    "icon": "meal",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore"
+  },
+  {
+    "type": "meal",
+    "city": "Indore",
+    "venueName": "Water Lily Hotel",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": false,
+    "id": "meal-hitea-1dec",
+    "side": "common",
+    "date": "2026-12-01",
+    "title": {
+      "en": "Hi Tea",
+      "hi": "हाई टी"
+    },
+    "time": "16:30",
+    "durationMin": 60,
+    "area": {
+      "en": "Shed Area",
+      "hi": "शेड एरिया"
+    },
+    "icon": "tea",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore"
+  },
+  {
+    "type": "meal",
+    "city": "Indore",
+    "venueName": "Water Lily Hotel",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": false,
+    "id": "meal-breakfast-2dec",
+    "side": "common",
+    "date": "2026-12-02",
+    "title": {
+      "en": "Breakfast",
+      "hi": "नाश्ता"
+    },
+    "time": "08:00",
+    "durationMin": 60,
+    "area": {
+      "en": "Shed Area",
+      "hi": "शेड एरिया"
+    },
+    "icon": "meal",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore"
+  },
+  {
+    "type": "meal",
+    "city": "Indore",
+    "venueName": "Water Lily Hotel",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": false,
+    "id": "meal-lunch-2dec",
+    "side": "common",
+    "date": "2026-12-02",
+    "title": {
+      "en": "Lunch",
+      "hi": "दोपहर का भोजन"
+    },
+    "time": "13:00",
+    "durationMin": 60,
+    "area": {
+      "en": "Shed Area",
+      "hi": "शेड एरिया"
+    },
+    "icon": "meal",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore"
+  },
+  {
+    "type": "meal",
+    "city": "Indore",
+    "venueName": "Water Lily Hotel",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": false,
+    "id": "meal-hitea-2dec",
+    "side": "common",
+    "date": "2026-12-02",
+    "title": {
+      "en": "Hi Tea",
+      "hi": "हाई टी"
+    },
+    "time": "16:30",
+    "durationMin": 60,
+    "area": {
+      "en": "Shed Area",
+      "hi": "शेड एरिया"
+    },
+    "icon": "tea",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore"
+  }
+]

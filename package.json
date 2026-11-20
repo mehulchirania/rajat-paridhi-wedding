@@ -1,0 +1,40 @@
+{
+  "name": "rajat-paridhi-wedding",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate-data.mjs",
+    "predev": "node scripts/validate-data.mjs",
+    "dev": "vite --host",
+    "prebuild": "node scripts/validate-data.mjs",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host",
+    "assets": "node scripts/make-assets.mjs",
+    "qr": "node scripts/make-qr.mjs"
+  },
+  "dependencies": {
+    "@fontsource/cormorant-garamond": "^5.3.0",
+    "@fontsource/dm-sans": "^5.3.0",
+    "@fontsource/noto-sans-devanagari": "^5.3.0",
+    "@fontsource/tiro-devanagari-hindi": "^5.3.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router-dom": "^7.18.6"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
+    "puppeteer-core": "^25.18.1",
+    "qrcode": "^1.5.4",
+    "sharp": "^0.35.5",
+    "tailwindcss": "^4.3.5",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8",
+    "vite-plugin-pwa": "^2.0.0"
+  }
+}
