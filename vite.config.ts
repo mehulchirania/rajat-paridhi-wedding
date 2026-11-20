@@ -44,6 +44,7 @@ export default defineConfig(({ mode }) => {
             },
           ],
           navigateFallback: '/index.html',
+          navigateFallbackDenylist: [/^\/_vercel\//],
           cleanupOutdatedCaches: true,
         },
       }),
