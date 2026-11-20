@@ -1,4 +1,4 @@
-// Generates icons, OG image, favicon, paisley patterns and gallery placeholders.
+// Generates icons, favicon and the OG image.
 // Dev-only helper (needs Google Chrome for OG/icon rendering). Outputs are committed in /public.
 // Re-run:  npm run assets
 import fs from 'node:fs';
@@ -8,27 +8,15 @@ import sharp from 'sharp';
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const pub = (p) => path.join(root, 'public', p);
-fs.mkdirSync(pub('images/gallery'), { recursive: true });
 
-const paisley = (stroke, op) => `<svg xmlns="http://www.w3.org/2000/svg" width="220" height="220" viewBox="0 0 220 220" fill="none" stroke="${stroke}" stroke-opacity="${op}" stroke-width="1.5">
-<g id="p"><path d="M55 20c18 8 24 30 8 46-10 10-26 8-28-4-1-10 8-16 16-16-6-10-4-20 4-26z"/><circle cx="52" cy="52" r="3"/><path d="M45 30c6 4 9 12 5 19"/></g>
-<use href="#p" transform="translate(110 110) rotate(180 55 55)"/>
-<circle cx="165" cy="45" r="2.500"/><circle cx="45" cy="165" r="2.500"/><circle cx="110" cy="110" r="4"/></svg>`;
-fs.writeFileSync(pub('images/pattern-paisley.svg'), paisley('#6B1A2F', 0.07));
-fs.writeFileSync(pub('images/pattern-paisley-light.svg'), paisley('#C9A24B', 0.22));
-
-const palette = ['#E9D5C0', '#F2C9D4', '#CFE0F5', '#DCE8D0', '#E6D6F0', '#F6E3B4'];
-for (let i = 1; i <= 6; i++) {
-  fs.writeFileSync(pub(`images/gallery/gallery-0${i}-REPLACE.svg`), `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="500" viewBox="0 0 400 500"><rect width="400" height="500" fill="${palette[i - 1]}"/><circle cx="200" cy="210" r="60" fill="none" stroke="#6B1A2F" stroke-opacity=".35" stroke-width="3"/><text x="200" y="330" text-anchor="middle" font-family="Georgia,serif" font-size="22" fill="#6B1A2F">Photo ${i} — replace</text></svg>`);
-}
-fs.writeFileSync(pub('images/monogram-pr-REPLACE.svg'), `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><circle cx="100" cy="100" r="92" fill="#6B1A2F" stroke="#C9A24B" stroke-width="4"/><text x="100" y="122" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="78" fill="#C9A24B">pr</text></svg>`);
-fs.writeFileSync(pub('favicon.svg'), fs.readFileSync(pub('images/monogram-pr-REPLACE.svg')));
+const mono = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#5E1426"/><text x="32" y="43" text-anchor="middle" font-family="'Instrument Serif',Georgia,serif" font-size="34" fill="#FBF7F1">R<tspan fill="#B8955A" font-style="italic">&amp;</tspan>P</text></svg>`;
+fs.writeFileSync(pub('favicon.svg'), mono);
 
 // Chrome render (fonts from node_modules so Devanagari + serif display are correct)
 const f = (pkg, file) => `file://${root}/node_modules/@fontsource/${pkg}/files/${file}`;
 const fonts = `
-@font-face{font-family:CG;font-weight:700;src:url(${f('cormorant-garamond', 'cormorant-garamond-latin-700-normal.woff2')})}
-@font-face{font-family:CG;font-weight:600;font-style:italic;src:url(${f('cormorant-garamond', 'cormorant-garamond-latin-600-italic.woff2')})}
+@font-face{font-family:CG;src:url(${f('instrument-serif', 'instrument-serif-latin-400-normal.woff2')})}
+@font-face{font-family:CG;font-style:italic;src:url(${f('instrument-serif', 'instrument-serif-latin-400-italic.woff2')})}
 @font-face{font-family:TD;src:url(${f('tiro-devanagari-hindi', 'tiro-devanagari-hindi-devanagari-400-normal.woff2')})}`;
 const tmp = fs.mkdtempSync('/tmp/wedassets-');
 const shot = (html, out, w, h) => {
@@ -36,14 +24,31 @@ const shot = (html, out, w, h) => {
   fs.writeFileSync(file, html);
   execFileSync('google-chrome', ['--headless=new', '--no-sandbox', '--disable-gpu', '--hide-scrollbars', '--virtual-time-budget=4000', `--window-size=${w},${h}`, `--screenshot=${out}`, `file://${file}`], { stdio: 'ignore' });
 };
-shot(`<style>${fonts}body{margin:0;width:1200px;height:630px;background:#6B1A2F;color:#F7EFE3;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:CG,TD,serif;border:14px solid #C9A24B;box-sizing:border-box}
-.h{font-family:TD;font-size:46px;color:#C9A24B}.n{font-size:118px;font-weight:700;line-height:1}.s{font-size:44px;font-style:italic;font-weight:600;margin-top:10px}.d{font-family:sans-serif;font-size:30px;margin-top:26px;letter-spacing:1px}
-.k{width:230px;height:140px;margin-bottom:6px}</style>
-<svg class="k" viewBox="0 0 200 120" fill="none" stroke-linecap="round"><path d="M12 100C55 100 80 22 122 40C152 53 140 92 104 80" stroke="#6FA0E8" stroke-width="6"/><path d="M188 100C145 100 120 22 78 40C48 53 60 92 96 80" stroke="#F08FB4" stroke-width="6"/><circle cx="100" cy="62" r="9" fill="#C9A24B"/></svg>
-<div class="h">॥ जय श्री कृष्ण ॥</div><div class="n">Rajat &amp; Paridhi</div><div class="s">परिणय समारोह</div><div class="d">29 NOV – 2 DEC 2026 · WATER LILY HOTEL, INDORE</div>`, pub('og.png'), 1200, 630);
+// OG image: splash photo full-bleed + scrim + title block (see docs/design.md)
+const gen = JSON.parse(fs.readFileSync(path.join(root, 'src/data/photos.generated.json'), 'utf8'));
+const splashSlug = gen.splash;
+const splashFocal = gen.photos[splashSlug]?.focal ?? '50% 45%';
+const splashImg = `file://${root}/public/images/photos/${splashSlug}-1280.webp`;
+const ogFonts = `@font-face{font-family:IS;src:url(${f('instrument-serif', 'instrument-serif-latin-400-normal.woff2')})}
+@font-face{font-family:IS;font-style:italic;src:url(${f('instrument-serif', 'instrument-serif-latin-400-italic.woff2')})}`;
+shot(`<style>${fonts}${ogFonts}
+body{margin:0;width:1200px;height:630px;position:relative;overflow:hidden;background:#1E1416;color:#fff;font-family:IS,TD,serif}
+.bg{position:absolute;top:0;bottom:0;right:0;left:300px;background:url(${splashImg}) ${splashFocal}/cover no-repeat}
+.sc{position:absolute;inset:0;background:linear-gradient(90deg,#1E1416 0,#1E1416 330px,rgba(30,20,22,.7) 460px,rgba(30,20,22,.25) 600px,rgba(30,20,22,0) 760px),linear-gradient(0deg,rgba(30,20,22,.6),transparent 40%)}
+.t{position:absolute;left:72px;bottom:64px;display:flex;flex-direction:column;align-items:flex-start}
+.h{font-family:TD;font-size:34px;color:#D9B77A;letter-spacing:1px}
+.n{font-size:118px;line-height:1;margin-top:14px}.n i{color:#D9B77A;padding:0 6px}
+.s{font-family:TD;font-size:40px;margin-top:6px;color:#F7EFE3}
+.r{width:64px;height:2px;background:#D9B77A;margin:26px 0 20px}
+.d{font-family:'Hanken Grotesk',sans-serif;font-size:21px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.88)}
+@font-face{font-family:'Hanken Grotesk';font-weight:600;src:url(${f('hanken-grotesk', 'hanken-grotesk-latin-600-normal.woff2')})}
+.d{font-weight:600;line-height:1.6}</style>
+<div class="bg"></div><div class="sc"></div>
+<div class="t"><div class="h">॥ जय श्री कृष्ण ॥</div><div class="n">Rajat <i>&amp;</i><br>Paridhi</div><div class="s">परिणय समारोह</div><div class="r"></div><div class="d">29 Nov – 2 Dec 2026<br>Water Lily Hotel, Indore</div></div>`, path.join(tmp, 'og.png'), 1200, 630);
+await sharp(path.join(tmp, 'og.png')).jpeg({ quality: 82, mozjpeg: true }).toFile(pub('og.jpg'));
 
-const icon = (pad) => `<style>${fonts}body{margin:0;width:512px;height:512px;background:#6B1A2F;display:flex;align-items:center;justify-content:center}
-.r{width:${512 - pad * 2}px;height:${512 - pad * 2}px;border-radius:50%;border:8px solid #C9A24B;display:flex;align-items:center;justify-content:center;box-sizing:border-box;font:italic 600 ${Math.round((512 - pad * 2) * 0.55)}px CG,serif;color:#C9A24B;padding-bottom:${Math.round((512 - pad * 2) * 0.06)}px}</style><div class="r">pr</div>`;
+const icon = (pad) => `<style>${fonts}body{margin:0;width:512px;height:512px;background:#5E1426;display:flex;align-items:center;justify-content:center}
+.r{font:${Math.round((512 - pad * 2) * 0.5)}px CG,serif;color:#FBF7F1;letter-spacing:-.02em}.r i{color:#B8955A;margin:0 .04em}</style><div class="r">R<i>&amp;</i>P</div>`;
 shot(icon(28), path.join(tmp, 'i512.png'), 512, 512);
 shot(icon(100), pub('icon-maskable-512.png'), 512, 512);
 fs.copyFileSync(path.join(tmp, 'i512.png'), pub('icon-512.png'));

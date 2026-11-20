@@ -17,7 +17,7 @@ export default defineConfig(({ mode }) => {
       },
       VitePWA({
         registerType: 'autoUpdate',
-        includeAssets: ['images/**/*', 'og.png'],
+        includeAssets: [],
         manifest: {
           name: 'Rajat & Paridhi — Parinay Samaroh',
           short_name: 'R & P Wedding',
@@ -35,6 +35,14 @@ export default defineConfig(({ mode }) => {
         },
         workbox: {
           globPatterns: ['**/*.{js,css,html,svg,png,woff2,webmanifest}'],
+          globIgnores: ['images/photos/**', 'og.*', '**/*.woff'],
+          runtimeCaching: [
+            {
+              urlPattern: /\/images\/photos\//,
+              handler: 'CacheFirst',
+              options: { cacheName: 'photos', expiration: { maxEntries: 30, maxAgeSeconds: 60 * 60 * 24 * 60 } },
+            },
+          ],
           navigateFallback: '/index.html',
           cleanupOutdatedCaches: true,
         },

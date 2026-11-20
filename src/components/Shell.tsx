@@ -4,9 +4,9 @@ import { useApp } from '../lib/app';
 import { meta } from '../lib/data';
 import { keep } from '../lib/nav';
 import { DayChips } from './DayChips';
-import { HelpFab } from './HelpFab';
+import { HelpButton } from './HelpFab';
 import { Icon } from './Icons';
-import { LangToggle, SideToggle, SizeToggle } from './Toggles';
+import { LangToggle, SidePill } from './Toggles';
 
 function useOnline() {
   const [on, setOn] = useState(() => (typeof navigator === 'undefined' ? true : navigator.onLine));
@@ -18,44 +18,49 @@ function useOnline() {
   return on;
 }
 
+const dockItem = 'tap flex w-[84px] flex-col items-center justify-center gap-0.5 rounded-full text-[0.78rem] font-semibold leading-none transition-colors duration-200';
+
 export function Shell() {
   const { t, l, lang, side, setSplash } = useApp();
   const loc = useLocation();
   const online = useOnline();
   const onDay = loc.pathname.startsWith('/day/');
   const brand = side === 'bride' ? t('brand.brideFirst') : side === 'groom' ? t('brand.groomFirst') : t('brand.neutral');
+  const first = (n: string) => n.split(' ')[0];
+  const g = first(l(meta.couple.groom.name)), b = first(l(meta.couple.bride.name));
+  const wordmark = lang === 'hi' ? t('app.eventTitle') : side === 'bride' ? `${b} & ${g}` : `${g} & ${b}`;
   const title = lang === 'hi' ? t('app.eventTitle') : brand;
   useEffect(() => { document.title = `${title} — ${lang === 'hi' ? brand : t('app.eventTitle')}`; }, [title, brand, lang, t]);
   const updated = new Intl.DateTimeFormat(lang === 'hi' ? 'hi-IN' : 'en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' }).format(new Date(meta.lastUpdated));
-  const navCls = ({ isActive }: { isActive: boolean }) => `tap flex flex-1 flex-col items-center justify-center gap-0.5 py-1 text-[0.82rem] font-bold ${isActive ? 'text-maroon' : 'text-muted'}`;
+  const itinActive = onDay;
+  const infoActive = loc.pathname.startsWith('/info');
 
   return (
-    <div className="mx-auto min-h-dvh max-w-xl pb-40">
+    <div className="mx-auto min-h-dvh max-w-xl">
       {!online && <p role="status" className="bg-amber-soft px-4 py-2 text-center text-[0.9rem] font-semibold text-amber-ink">{t('offline.note')}</p>}
-      <header className="flex items-start justify-between gap-3 px-4 pb-2 pt-5">
-        <div>
-          <h1 className="font-display text-[2rem] font-bold leading-none text-maroon">{title}</h1>
-          <p className="mt-1 font-display text-[1.15rem] text-gold-dark">{lang === 'hi' ? brand : t('app.eventTitle')} · {t('header.dates')}</p>
-        </div>
-        <SizeToggle />
-      </header>
-      <div className="sticky top-0 z-30 space-y-1.5 border-b-2 border-gold/60 bg-cream/95 px-3 py-2 backdrop-blur">
-        <div className="flex gap-2"><SideToggle /><LangToggle /></div>
-        {onDay && <DayChips />}
+      <div className="sticky top-0 z-30 border-b border-line bg-ivory/90 backdrop-blur-md">
+        <header className="flex h-14 items-center justify-between gap-2 px-4">
+          <Link to={`/${keep()}`} className="font-display min-w-0 truncate text-[1.35rem] leading-none text-oxblood">{wordmark}</Link>
+          <div className="flex shrink-0 items-center gap-1.5"><SidePill /><LangToggle /></div>
+        </header>
+        {onDay && <div className="px-2"><DayChips /></div>}
       </div>
       <main className="px-4 pt-4"><Outlet /></main>
-      <footer className="px-4 pb-6 pt-8 text-center text-[0.85rem] text-muted">
+      <footer className={`px-4 pb-[calc(8rem+env(safe-area-inset-bottom))] pt-10 text-center text-[0.82rem] text-ink-2 ${infoActive ? 'sr-only' : ''}`}>
         <p>{t('footer.updated', { date: updated })}</p>
-        <button type="button" onClick={() => setSplash(true)} className="tap mt-1 font-semibold text-maroon underline">{t('footer.replay')}</button>
-        <span className="sr-only">{l(meta.couple.groom.name)}</span>
+        <button type="button" onClick={() => setSplash(true)} className="tap mt-1 underline decoration-line underline-offset-4">{t('footer.replay')}</button>
+        <span className="sr-only">{g}</span>
       </footer>
-      <HelpFab />
-      <nav aria-label={t('nav.main')} className="fixed inset-x-0 bottom-0 z-30 border-t-2 border-gold/60 bg-paper pb-[env(safe-area-inset-bottom)]">
-        <div className="mx-auto flex max-w-xl">
-          <Link to={`/${keep()}`} aria-current={onDay ? 'page' : undefined} className={navCls({ isActive: onDay })}><Icon name="cal" />{t('nav.itinerary')}</Link>
-          <NavLink to={`/info${keep()}`} className={navCls}><Icon name="pin" />{t('nav.info')}</NavLink>
-          <NavLink to={`/gallery${keep()}`} className={navCls}><Icon name="image" />{t('nav.gallery')}</NavLink>
-        </div>
+      <nav aria-label={t('shell.dockLabel')}
+        className="fixed left-1/2 z-40 flex h-16 -translate-x-1/2 items-center gap-1 rounded-full bg-ivory px-2 shadow-[0_10px_30px_-12px_rgb(30_20_22/.35)]"
+        style={{ bottom: 'calc(16px + env(safe-area-inset-bottom))' }}>
+        <Link to={`/${keep()}`} aria-current={itinActive ? 'page' : undefined} className={`${dockItem} ${itinActive ? 'text-oxblood' : 'text-ink-2'}`}>
+          <span className="flex h-8 items-center"><Icon name="cal" /></span>{t('nav.itinerary')}
+        </Link>
+        <NavLink to={`/info${keep()}`} className={`${dockItem} ${infoActive ? 'text-oxblood' : 'text-ink-2'}`}>
+          <span className="flex h-8 items-center"><Icon name="pin" /></span>{t('nav.info')}
+        </NavLink>
+        <HelpButton className={`${dockItem} text-ink-2`} />
       </nav>
     </div>
   );

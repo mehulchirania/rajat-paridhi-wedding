@@ -44,5 +44,4 @@ export interface Meta {
   couple: Record<'groom' | 'bride', { name: L10n; parents: L10n }>;
   hotel: { name: string; address: L10n; mapLink: string; parking: L10n; inRoom: L10n };
   teaCoffee: L10n;
-  gallery: { src: string; alt: L10n }[];
 }

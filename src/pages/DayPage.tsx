@@ -6,7 +6,8 @@ import { keep } from '../lib/nav';
 import { EventCard } from '../components/EventCard';
 import { EventSheet } from '../components/EventSheet';
 import { MealStrip } from '../components/MealStrip';
-import { Countdown, NowNext } from '../components/NowNext';
+import { NowNext } from '../components/NowNext';
+import { DayHero } from '../components/DayHero';
 import { Icon } from '../components/Icons';
 import { NotFound } from './NotFound';
 import { store } from '../lib/storage';
@@ -18,9 +19,9 @@ function Announcement() {
   const [gone, setGone] = useState(() => !a || store.get(`dismiss-${a.id}`) === '1');
   if (!a || gone) return null;
   return (
-    <div role="status" className="mb-4 flex items-start gap-3 rounded-2xl border-2 border-gold bg-amber-soft p-3 text-amber-ink">
-      <p className="flex-1 text-[0.95rem] font-semibold">{l(a.text)}</p>
-      <button type="button" aria-label={t('announce.dismiss')} onClick={() => { store.set(`dismiss-${a.id}`, '1'); setGone(true); }} className="tap -m-1 inline-flex items-center justify-center"><Icon name="x" size={20} /></button>
+    <div role="status" className="mt-4 flex items-start gap-2 border-l-2 border-champagne pl-3">
+      <p className="flex-1 py-1 text-[0.9rem] font-medium leading-snug text-champagne-ink">{l(a.text)}</p>
+      <button type="button" aria-label={t('announce.dismiss')} onClick={() => { store.set(`dismiss-${a.id}`, '1'); setGone(true); }} className="tap -my-1.5 inline-flex items-center justify-center text-champagne-ink"><Icon name="x" size={18} /></button>
     </div>
   );
 }
@@ -61,40 +62,38 @@ export function DayPage() {
 
   return (
     <div onTouchStart={onStart} onTouchEnd={onEnd} key={day.slug} style={{ animation: 'var(--animate-rise)' }}>
-      <Announcement />
-      <Countdown />
+      <DayHero date={day.date} dayIndex={idx} events={main} />
       <NowNext />
-      <div className="mb-3">
-        <h2 className="font-display text-[1.7rem] font-bold text-maroon">{dateLabel(day.date)}</h2>
-        <label className="tap inline-flex cursor-pointer items-center gap-2 text-[0.9rem] font-semibold text-maroon">
-          <input type="checkbox" className="h-5 w-5 accent-[#6B1A2F]" checked={showFamily} onChange={(e) => setShowFamily(e.target.checked)} />
-          {t('toggle.family')}
-        </label>
-      </div>
-      {hiddenFamily > 0 && <p className="mb-3 text-[0.88rem] text-muted">{t('day.familyHidden', { n: hiddenFamily })}</p>}
+      <Announcement />
+
+      {hiddenFamily > 0 && main.length > 0 && (
+        <button type="button" onClick={() => setShowFamily(true)} className="tap mt-2 inline-flex items-center text-left text-[0.9rem] leading-snug text-ink-2 underline underline-offset-4 decoration-line">
+          {t('day.hiddenShow', { n: hiddenFamily })}
+        </button>
+      )}
 
       {main.length > 0 ? (
-        <div className="relative">
-          <span aria-hidden="true" className="grad-thread absolute left-[11px] top-6 bottom-6 w-[4px] rounded-full opacity-80" />
-          <ol className="relative space-y-4">{main.map((e) => <EventCard key={e.id} ev={e} view={side} onOpen={openEvent} />)}</ol>
+        <div className="relative mt-2">
+          <span aria-hidden="true" className="grad-thread absolute left-[69px] top-[1.9rem] bottom-0 z-0 w-[2px] opacity-40" style={{ maskImage: 'linear-gradient(to bottom,#000 80%,transparent)', WebkitMaskImage: 'linear-gradient(to bottom,#000 80%,transparent)' }} />
+          <ol aria-label={t('nav.itinerary')} className="relative">{main.map((e) => <EventCard key={e.id} ev={e} view={side} onOpen={openEvent} />)}</ol>
         </div>
       ) : (
-        <div className="rounded-2xl border-2 border-dashed border-gold bg-paper p-5 text-center">
-          <h3 className="font-display text-[1.45rem] font-bold text-maroon">{t('day.empty.title', { side: t(`side.${side}.of`) })}</h3>
-          <p className="mt-1 text-muted">{t('day.empty.body')}</p>
-          <div className="mt-3 flex flex-wrap justify-center gap-2">
-            {otherSideCount > 0 && <button type="button" onClick={() => setSide('both')} className="tap rounded-xl border-2 border-maroon bg-maroon px-4 font-bold text-cream">{t('day.empty.showBoth')}</button>}
-            {hiddenFamily > 0 && <button type="button" onClick={() => setShowFamily(true)} className="tap rounded-xl border-2 border-maroon px-4 font-bold text-maroon">{t('day.empty.showFamily')}</button>}
+        <div className="px-2 py-14 text-center">
+          <h2 className="font-display text-[1.9rem] leading-tight text-ink">{t('day.empty.title', { side: t(`side.${side}.of`) })}</h2>
+          <p className="mx-auto mt-2 max-w-[28ch] text-ink-2">{t('day.empty.body')}</p>
+          <div className="mt-3 flex flex-col items-center">
+            {otherSideCount > 0 && <button type="button" onClick={() => setSide('both')} className="tap px-3 font-semibold text-oxblood underline underline-offset-4">{t('day.empty.showBoth')}</button>}
+            {hiddenFamily > 0 && <button type="button" onClick={() => setShowFamily(true)} className="tap px-3 font-semibold text-oxblood underline underline-offset-4">{t('day.empty.showFamily')}</button>}
           </div>
         </div>
       )}
 
       <MealStrip meals={meals} view={side} onOpen={openEvent} />
 
-      <div className="mt-6 flex justify-between gap-3">
-        {prev ? <Link to={`/day/${prev.slug}${keep()}`} className="tap inline-flex items-center gap-1 rounded-xl border-2 border-gold/60 bg-paper px-3 font-bold text-maroon"><Icon name="left" size={18} />{dateLabel(prev.date, false)}</Link> : <span />}
-        {next ? <Link to={`/day/${next.slug}${keep()}`} className="tap inline-flex items-center gap-1 rounded-xl border-2 border-gold/60 bg-paper px-3 font-bold text-maroon">{dateLabel(next.date, false)}<Icon name="right" size={18} /></Link> : <span />}
-      </div>
+      <nav aria-label={t('days.label')} className="mt-8 flex justify-between gap-3 border-t border-line pt-1">
+        {prev ? <Link to={`/day/${prev.slug}${keep()}`} aria-label={t('day.prev')} className="tap inline-flex items-center gap-1.5 text-[0.95rem] font-medium text-ink-2"><Icon name="left" size={16} />{dateLabel(prev.date, false)}</Link> : <span />}
+        {next ? <Link to={`/day/${next.slug}${keep()}`} aria-label={t('day.next')} className="tap inline-flex items-center gap-1.5 text-[0.95rem] font-medium text-ink-2">{dateLabel(next.date, false)}<Icon name="right" size={16} /></Link> : <span />}
+      </nav>
 
       {sheetEv && sheetEv.date === day.date && <EventSheet ev={sheetEv} view={side} onClose={closeSheet} />}
     </div>

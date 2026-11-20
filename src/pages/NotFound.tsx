@@ -5,10 +5,10 @@ import { keep } from '../lib/nav';
 export function NotFound() {
   const { t } = useApp();
   return (
-    <div className="rounded-2xl border-2 border-dashed border-gold bg-paper p-6 text-center">
-      <h2 className="font-display text-[1.7rem] font-bold text-maroon">{t('notfound.title')}</h2>
-      <p className="mt-1 text-muted">{t('notfound.body')}</p>
-      <Link to={`/${keep()}`} className="tap mt-4 inline-flex items-center rounded-xl bg-maroon px-5 font-bold text-cream">{t('notfound.home')}</Link>
+    <div className="px-2 py-20 text-center">
+      <h2 className="font-display text-[2.2rem] font-normal leading-tight text-ink">{t('notfound.title')}</h2>
+      <p className="mx-auto mt-3 max-w-xs text-ink-2">{t('notfound.body')}</p>
+      <Link to={`/${keep()}`} className="tap mt-7 inline-flex items-center rounded-xl bg-oxblood px-6 font-semibold text-ivory hover:bg-oxblood-2">{t('notfound.home')}</Link>
     </div>
   );
 }

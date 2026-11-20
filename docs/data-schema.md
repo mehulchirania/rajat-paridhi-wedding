@@ -21,12 +21,12 @@ Validated at build by `scripts/validate-data.mjs` (Ajv + extra checks). Errors f
 | `notes`, `transport` | `{en, hi?}` | transport shows in sheet and on Info page |
 | `mapLink` | `https://…` | hides "Open in Maps" if absent |
 | `audience` | `all` \| `family` | family hidden by default |
-| `status` | `confirmed` \| `tbd` | tbd → dashed card + "Timing being confirmed" |
+| `status` | `confirmed` \| `tbd` | tbd → italic grey title + "Timing being confirmed" |
 | `needsConfirmation` | bool | shows the badge |
 | `icon` | string | kumkum, mehendi, pooja, rakhi, carnival, mayra, ring, music, nikasi, meet, garland, phere, reception, meal, tea, info |
 | `hiDraft` | bool | Hindi awaiting proofreading |
 
-Days are derived from the distinct `date` values; adding an event on a new date adds a day chip and route automatically.
+Days are derived from the distinct `date` values; adding an event on a new date adds a day ribbon column and route automatically.
 
 ## contacts.json — array
 Family: `{id, kind:"family", side:"groom"|"bride", name, relation?{en,hi}, role:"stay-transport"|"timings", phone, city?, dateRange?{from,to}, placeholder?, primary?, active}`
@@ -38,7 +38,10 @@ Family: `{id, kind:"family", side:"groom"|"bride", name, relation?{en,hi}, role:
 Venue: `{id, kind:"venue", name{en,hi}, phones:[…], active}` → tap-to-call buttons (numbers are shown).
 
 ## meta.json
-`lastUpdated` (ISO with offset, shown in footer), `announcements[]` (`{id, active, text{en,hi}}`; first active is shown; guests can dismiss, change `id` to re-show), `couple`, `hotel` (address, mapLink, parking, inRoom), `teaCoffee`, `gallery[]` (`{src, alt{en,hi}}`).
+`lastUpdated` (ISO with offset, shown on the Info page), `announcements[]` (`{id, active, text{en,hi}}`; first active is shown; guests can dismiss, change `id` to re-show), `couple`, `hotel` (address, mapLink, parking, inRoom), `teaCoffee`. The "Last updated" stamp on the Info page is shown in IST in the active language.
 
 ## i18n
 `src/i18n/en.json`, `hi.json`: flat `key → string`, `{var}` placeholders. Missing Hindi falls back to English (build warns). `t('literal.key')` usages are checked against `en.json` at build.
+
+## photos.config.json (in `/images`) and photos.generated.json
+`images/photos.config.json`: `photos[]` of `{slug, source, focal, alt{en,hi}}` (`source` = file in `/images`, `focal` = CSS object-position), `days` (date -> slug), `splash` (slug), `info` (slug). `npm run photos` writes `public/images/photos/<slug>-{640,1280}.webp` and `src/data/photos.generated.json` (paths, focal, alt, aspect, 16px blur placeholder). Never edit the generated JSON by hand.

@@ -15,8 +15,7 @@ export function Photo({ p, priority = false, className = '', sizes = '100vw', st
         sizes={sizes}
         alt={l(p.alt)}
         loading={priority ? 'eager' : 'lazy'}
-        // @ts-expect-error fetchpriority is valid HTML, React 18 types lag
-        fetchpriority={priority ? 'high' : 'auto'}
+        fetchPriority={priority ? 'high' : 'auto'}
         decoding="async"
         onLoad={() => setLoaded(true)}
         className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"

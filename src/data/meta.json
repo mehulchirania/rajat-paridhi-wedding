@@ -21,13 +21,5 @@
     "parking": { "en": "Parking details will be shared soon.", "hi": "पार्किंग की जानकारी जल्द साझा की जाएगी।" },
     "inRoom": { "en": "Reception: dial 9. Housekeeping: dial 9. From your room phone only.", "hi": "रिसेप्शन: 9 डायल करें। हाउसकीपिंग: 9 डायल करें। केवल कमरे के फ़ोन से।" }
   },
-  "teaCoffee": { "en": "Tea / Coffee counter: Shed Area, Ground Floor", "hi": "चाय / कॉफी काउंटर: शेड एरिया, भू-तल" },
-  "gallery": [
-    { "src": "/images/gallery/gallery-01-REPLACE.svg", "alt": { "en": "Photo placeholder 1", "hi": "फ़ोटो प्लेसहोल्डर 1" } },
-    { "src": "/images/gallery/gallery-02-REPLACE.svg", "alt": { "en": "Photo placeholder 2", "hi": "फ़ोटो प्लेसहोल्डर 2" } },
-    { "src": "/images/gallery/gallery-03-REPLACE.svg", "alt": { "en": "Photo placeholder 3", "hi": "फ़ोटो प्लेसहोल्डर 3" } },
-    { "src": "/images/gallery/gallery-04-REPLACE.svg", "alt": { "en": "Photo placeholder 4", "hi": "फ़ोटो प्लेसहोल्डर 4" } },
-    { "src": "/images/gallery/gallery-05-REPLACE.svg", "alt": { "en": "Photo placeholder 5", "hi": "फ़ोटो प्लेसहोल्डर 5" } },
-    { "src": "/images/gallery/gallery-06-REPLACE.svg", "alt": { "en": "Photo placeholder 6", "hi": "फ़ोटो प्लेसहोल्डर 6" } }
-  ]
+  "teaCoffee": { "en": "Tea / Coffee counter: Shed Area, Ground Floor", "hi": "चाय / कॉफी काउंटर: शेड एरिया, भू-तल" }
 }

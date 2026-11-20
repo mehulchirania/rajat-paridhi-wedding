@@ -1,8 +1,7 @@
-import type { EventItem, GuestSide } from '../types';
+import type { EventItem, GuestSide, Lang, Side } from '../types';
 import { useApp } from '../lib/app';
 import { resolveTime } from '../lib/data';
-import { CityBadge, ConfirmBadge, DiffersBadge, SideBadge } from './Badges';
-import { Icon, eventIconName } from './Icons';
+import { ConfirmBadge, DiffersBadge, sideInk } from './Badges';
 import { Swatch } from './Swatch';
 
 export function whereText(ev: EventItem, l: (x: any) => string, venueTbd: string): string {
@@ -17,40 +16,60 @@ export function TimeText({ ev, view }: { ev: EventItem; view: GuestSide }) {
   return <>{time(rt)}{ev.openEnded ? ` ${t('event.onwards')}` : ''}</>;
 }
 
-const nodeCls = (side: EventItem['side']) => side === 'groom' ? 'bg-groom' : side === 'bride' ? 'bg-bride' : 'bg-gradient-to-br from-groom to-bride';
+/** Numeral + eyebrow word for the agenda gutter. English "10:00" / "AM"; Hindi "10:00" / "सुबह". */
+export function timeParts(time: string, lang: Lang): { num: string; per: string } {
+  const [h, m] = time.split(':').map(Number);
+  const num = `${h % 12 === 0 ? 12 : h % 12}:${String(m).padStart(2, '0')}`;
+  if (lang === 'hi') return { num, per: h < 4 ? 'रात' : h < 12 ? 'सुबह' : h < 16 ? 'दोपहर' : h < 19 ? 'शाम' : 'रात' };
+  return { num, per: h < 12 ? 'AM' : 'PM' };
+}
 
+const EYEBROW = 'text-[0.78rem] font-semibold uppercase tracking-[.14em] [html[lang=hi]_&]:tracking-normal [html[lang=hi]_&]:text-[0.85rem]';
+const dotCls = (side: Side) => side === 'groom' ? 'bg-groom' : side === 'bride' ? 'bg-bride' : 'bg-gradient-to-br from-groom to-bride';
+
+/** One agenda row. The vertical thread is drawn by the parent <ol> at x = 69px (see DayPage). */
 export function EventCard({ ev, view, onOpen }: { ev: EventItem; view: GuestSide; onOpen: (id: string) => void }) {
-  const { t, l } = useApp();
-  const accent = ev.side === 'groom' ? 'border-l-groom' : ev.side === 'bride' ? 'border-l-bride' : 'border-l-gold';
+  const { t, l, lang } = useApp();
+  const rt = resolveTime(ev, view);
+  const parts = rt ? timeParts(rt, lang) : null;
+  const tbd = ev.status === 'tbd';
+  const sideWord = ev.side === 'common' ? t('side.common.short') : t(`side.${ev.side}.of`);
+  const showDiffers = view === 'both' && !!ev.timeBySide;
   return (
-    <li className="relative pl-9" style={{ animation: 'var(--animate-rise)' }}>
-      <span aria-hidden="true" className={`absolute left-0 top-5 flex h-[26px] w-[26px] items-center justify-center rounded-full border-2 border-paper text-white shadow ${nodeCls(ev.side)}`}>
-        <Icon name={eventIconName(ev)} size={15} />
-      </span>
+    <li className="relative" style={{ animation: 'var(--animate-rise)' }}>
+      <span aria-hidden="true" className="absolute right-0 top-0 h-px bg-line [li:first-child>&]:hidden" style={{ left: 86 }} />
+      <span aria-hidden="true" className={`absolute left-[65px] top-[1.65rem] z-10 h-[10px] w-[10px] rounded-full ring-[3px] ring-ivory ${dotCls(ev.side)}`} />
       <button type="button" onClick={() => onOpen(ev.id)} aria-label={t('card.open', { title: l(ev.title) })}
-        className={`block w-full rounded-2xl border border-gold/50 border-l-[6px] ${accent} bg-paper p-4 text-left shadow-sm transition active:scale-[.99] ${ev.status === 'tbd' ? 'border-dashed' : ''}`}>
-        <div className="flex flex-wrap items-center gap-1.5">
-          <SideBadge side={ev.side} />
-          <CityBadge city={ev.city} />
-          {ev.audience === 'family' && <span className="inline-flex rounded-full border border-maroon/30 bg-cream px-2.5 py-0.5 text-[0.78rem] font-semibold text-maroon">{t('event.familyOnly')}</span>}
+        className="grid w-full grid-cols-[64px_1fr] py-5 text-left transition-opacity active:opacity-70">
+        <div className="pr-3 text-right">
+          {parts ? (
+            <>
+              <p className="font-display text-[1.7rem] leading-none text-ink" style={{ fontVariantNumeric: 'tabular-nums lining-nums' }}>{parts.num}</p>
+              <p className={`mt-1 text-ink-2 ${EYEBROW}`}>{parts.per}</p>
+              {ev.openEnded && <p className="text-[0.78rem] leading-tight text-ink-2">{t('event.onwards')}</p>}
+            </>
+          ) : (
+            <p className="pt-1 text-[0.95rem] font-medium leading-tight text-ink-2">{t('time.tba')}</p>
+          )}
         </div>
-        <p className="mt-2 font-display text-[1.05rem] font-bold text-gold-dark"><TimeText ev={ev} view={view} /></p>
-        <h3 className="font-display text-[1.55rem] font-bold leading-tight text-maroon">{l(ev.title)}</h3>
-        <p className="mt-1 flex items-start gap-1.5 text-[0.95rem] text-ink"><Icon name="pin" size={18} className="mt-0.5 shrink-0 text-muted" />
-          <span>{whereText(ev, l, t('event.venueTbd'))}</span></p>
-        {ev.dressCode && (
-          <p className="mt-2 flex items-center gap-2 text-[0.95rem]">
-            <Swatch kind={ev.dressCode.swatch} />
-            <span><span className="text-muted">{t('event.dress')}: </span><span className="font-semibold">{l(ev.dressCode)}</span></span>
+        <div className="min-w-0 pl-[22px]">
+          <p className={`${EYEBROW} leading-snug`}>
+            <span className={sideInk(ev.side)}>{sideWord}</span>
+            {ev.city !== 'TBD' && <span className="text-ink-2"> · {t(`city.${ev.city}`)}</span>}
+            {ev.audience === 'family' && <span className="text-ink-2"> · {t('event.familyOnly')}</span>}
           </p>
-        )}
-        {ev.notes && <p className="mt-2 text-[0.92rem] text-muted">{l(ev.notes)}</p>}
-        {(ev.needsConfirmation || ev.status === 'tbd' || (view === 'both' && ev.timeBySide)) && (
-          <div className="mt-2 flex flex-wrap items-center gap-2">
-            {(ev.needsConfirmation || ev.status === 'tbd') && <ConfirmBadge />}
-            {view === 'both' && <DiffersBadge ev={ev} />}
-          </div>
-        )}
+          <h3 className={`mt-1 font-display text-[1.6rem] leading-[1.1] ${tbd ? 'italic text-ink-2' : 'text-ink'}`}>{l(ev.title)}</h3>
+          <p className="mt-1.5 text-[0.9rem] leading-snug text-ink-2">{whereText(ev, l, t('event.venueTbd'))}</p>
+          {ev.dressCode && (
+            <p className="mt-2 flex items-center gap-2 text-[0.9rem] leading-snug text-ink">
+              <Swatch kind={ev.dressCode.swatch} />
+              <span>{t('row.dress', { d: l(ev.dressCode) })}</span>
+            </p>
+          )}
+          {ev.notes && <p className="mt-1.5 text-[0.9rem] leading-snug text-ink-2">{l(ev.notes)}</p>}
+          {(ev.needsConfirmation || tbd) && <p className="mt-2"><ConfirmBadge /></p>}
+          {showDiffers && <p className="mt-1.5"><DiffersBadge ev={ev} /></p>}
+        </div>
       </button>
     </li>
   );

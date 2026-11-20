@@ -1,21 +1,20 @@
-import { useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useApp } from '../lib/app';
 import { days } from '../lib/data';
-import { dayNum, monthIdx, weekday } from '../lib/time';
 import { keep } from '../lib/nav';
+import { dayNum, monthIdx, weekday } from '../lib/time';
 
+/** Day ribbon: four equal columns, no boxes. Active day = oxblood numeral + 2px underline. */
 export function DayChips() {
   const { t } = useApp();
-  const ref = useRef<HTMLElement>(null);
-  useEffect(() => { ref.current?.querySelector('[aria-current="page"]')?.scrollIntoView({ inline: 'center', block: 'nearest' }); });
   return (
-    <nav ref={ref} aria-label={t('days.label')} className="flex gap-1.5 overflow-x-auto pb-0.5">
+    <nav aria-label={t('days.label')} className="grid grid-cols-4">
       {days.map((d) => (
         <NavLink key={d.slug} to={`/day/${d.slug}${keep()}`}
-          className={({ isActive }) => `tap flex min-w-[76px] flex-1 flex-col items-center justify-center rounded-xl border-2 px-2 py-1 leading-tight ${isActive ? 'border-maroon bg-maroon text-cream' : 'border-gold/60 bg-paper text-maroon'}`}>
-          <span className="text-[1rem] font-bold">{dayNum(d.date)} {t(`mo.${monthIdx(d.date)}`)}</span>
-          <span className="text-[0.78rem] opacity-90">{t(`wd.${weekday(d.date)}`)}</span>
+          className={({ isActive }) => `tap flex flex-col items-center justify-center border-b-2 pb-1.5 pt-2 leading-none transition-colors duration-200 ${isActive ? 'border-oxblood text-oxblood' : 'border-transparent text-ink-2'}`}>
+          <span className="eyebrow">{t(`wd.${weekday(d.date)}`)}</span>
+          <span className="font-display tnum mt-1 text-[2rem] leading-none">{dayNum(d.date)}</span>
+          <span className="mt-1 text-[0.8rem] font-medium">{t(`mo.${monthIdx(d.date)}`)}</span>
         </NavLink>
       ))}
     </nav>
