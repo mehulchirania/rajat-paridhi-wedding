@@ -12,7 +12,7 @@ npm run preview
 npm run assets     # regenerate icons / OG image / placeholders (needs Google Chrome)
 npm run qr -- https://your-final-url.com   # writes public/qr.png + public/qr.svg
 ```
-Set `SITE_URL` (e.g. `https://rajat-paridhi.vercel.app`) in your host's environment settings: it is injected into the Open Graph tags (WhatsApp previews need an absolute URL).
+Live URL: https://rajat-paridhi-wedding.vercel.app (default `SITE_URL` in `vite.config.ts`; override with the env var if you add a custom domain). Set `SITE_URL` in your host's environment settings: it is injected into the Open Graph tags (WhatsApp previews need an absolute URL).
 
 ## Structure
 ```

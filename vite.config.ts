@@ -6,7 +6,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   // Absolute URL is required for WhatsApp/OG previews. Set SITE_URL in your host's env settings.
-  const siteUrl = (env.SITE_URL || 'https://example.com').replace(/\/$/, '');
+  const siteUrl = (env.SITE_URL || 'https://rajat-paridhi-wedding.vercel.app').replace(/\/$/, '');
   return {
     plugins: [
       react(),
