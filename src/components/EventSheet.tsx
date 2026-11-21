@@ -1,3 +1,5 @@
+import { EventBadge } from './Icons';
+import { glossOf } from '../lib/gloss';
 import type { ReactNode } from 'react';
 import { useApp } from '../lib/app';
 import type { EventItem, GuestSide } from '../types';
@@ -20,7 +22,7 @@ const Row = ({ label, children }: { label: string; children: ReactNode }) => (
 );
 
 export function EventSheet({ ev, view, onClose }: { ev: EventItem | undefined; view: GuestSide; onClose: () => void }) {
-  const { t, l, time, dateLabel } = useApp();
+  const { t, l, lang, time, dateLabel } = useApp();
   const wa = useWa();
   if (!ev) return null;
   const where = whereText(ev, l, t('event.venueTbd'));
@@ -41,7 +43,7 @@ export function EventSheet({ ev, view, onClose }: { ev: EventItem | undefined; v
   const bTime = ev.timeBySide?.bride ?? ev.time;
 
   return (
-    <Sheet open onClose={onClose} title={l(ev.title)} titleId="event-title" eyebrow={eyebrow}>
+    <Sheet open onClose={onClose} title={<span className="flex items-start gap-3"><EventBadge ev={ev} size={44} /><span className="min-w-0">{l(ev.title)}{glossOf(ev, lang) && <span className="mt-1 block font-body text-[0.95rem] leading-snug text-ink-2">{glossOf(ev, lang)}</span>}</span></span>} titleId="event-title" eyebrow={eyebrow}>
       <dl>
         <Row label={t('sheet.when')}>
           <span className="font-semibold">{dateLabel(ev.date)}</span>

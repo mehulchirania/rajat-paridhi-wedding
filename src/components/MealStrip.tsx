@@ -1,3 +1,4 @@
+import { EventBadge } from './Icons';
 import type { EventItem, GuestSide } from '../types';
 import { useApp } from '../lib/app';
 import { meta, resolveTime, sortEvents } from '../lib/data';
@@ -17,7 +18,7 @@ export function MealStrip({ meals, view, onOpen }: { meals: EventItem[]; view: G
           return (
             <li key={m.id} className="min-w-0 flex-1">
               <button type="button" onClick={() => onOpen(m.id)} className="flex min-h-[64px] w-full flex-col items-start justify-center px-3 py-1 text-left transition-opacity active:opacity-70">
-                <span className="font-display text-[1.2rem] leading-tight text-ink">{l(m.title)}</span>
+                <span className="flex items-center gap-2"><EventBadge ev={m} size={26} /><span className="font-display text-[1.2rem] leading-tight text-ink">{l(m.title)}</span></span>
                 <span className="mt-0.5 flex items-center gap-1.5 text-[0.9rem] text-ink-2" style={{ fontVariantNumeric: 'tabular-nums lining-nums' }}>
                   {p ? `${p.num} ${p.per}` : t('time.tba')}
                   {m.needsConfirmation && (

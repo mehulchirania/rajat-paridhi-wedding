@@ -3,7 +3,8 @@ import { useApp } from '../lib/app';
 import { resolveTime } from '../lib/data';
 import { ConfirmBadge, DiffersBadge, sideInk } from './Badges';
 import { Swatch } from './Swatch';
-import { Icon } from './Icons';
+import { Icon, EventBadge } from './Icons';
+import { glossOf } from '../lib/gloss';
 
 export function whereText(ev: EventItem, l: (x: any) => string, venueTbd: string): string {
   const parts = [ev.venueName, l(ev.area), l(ev.room)].filter(Boolean);
@@ -59,7 +60,13 @@ export function EventCard({ ev, view, onOpen }: { ev: EventItem; view: GuestSide
             {ev.city !== 'TBD' && <span className="text-ink-2"> · {t(`city.${ev.city}`)}</span>}
             {ev.audience === 'family' && <span className="text-ink-2"> · {t('event.familyOnly')}</span>}
           </p>
-          <h3 className={`mt-1 font-display text-[1.6rem] leading-[1.1] ${tbd ? 'italic text-ink-2' : 'text-ink'}`}>{l(ev.title)}</h3>
+          <div className="mt-1.5 flex items-start gap-3">
+            <EventBadge ev={ev} size={40} />
+            <div className="min-w-0">
+              <h3 className={`font-display text-[1.6rem] leading-[1.1] ${tbd ? 'italic text-ink-2' : 'text-ink'}`}>{l(ev.title)}</h3>
+              {glossOf(ev, lang) && <p className="mt-0.5 text-[0.9rem] leading-snug text-ink-2">{glossOf(ev, lang)}</p>}
+            </div>
+          </div>
           <p className="mt-1.5 text-[0.9rem] leading-snug text-ink-2">{whereText(ev, l, t('event.venueTbd'))}</p>
           {ev.dressCode && (
             <p className="mt-2 flex items-center gap-2 text-[0.9rem] leading-snug text-ink">

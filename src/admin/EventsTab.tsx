@@ -5,7 +5,7 @@ import type { Content } from '../lib/data';
 import type { EventItem } from '../types';
 import { Btn, Card, Check, Field, L10nInput, Select, Text, clean, dateLabel, slug, time12 } from './ui';
 
-const ICONS = ['kumkum', 'mehendi', 'pooja', 'rakhi', 'carnival', 'mayra', 'ring', 'music', 'nikasi', 'travel', 'meet', 'garland', 'phere', 'reception', 'meal', 'tea', 'info'];
+const ICONS = ['kumkum', 'mehendi', 'pooja', 'rakhi', 'haldi', 'carnival', 'mayra', 'ring', 'music', 'nikasi', 'travel', 'meet', 'garland', 'phere', 'reception', 'meal', 'tea', 'info'];
 const sideCls = { groom: 'bg-groom-soft text-groom-ink', bride: 'bg-bride-soft text-bride-ink', common: 'bg-sand text-ink-2' };
 
 interface P { draft: Content; setDraft: (f: (d: Content) => Content) => void; issues: Issue[] }

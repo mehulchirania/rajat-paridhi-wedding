@@ -6,6 +6,7 @@ const P: Record<string, ReactNode> = {
   kumkum: <><circle cx="12" cy="12" r="8.500" /><circle cx="12" cy="12" r="3" fill="currentColor" /></>,
   mehendi: <path d="M12 2.500c5.500 3.500 6.500 9.500 1.500 14.500-3 3-7.500 3-8.500 1 0-3 2-5 4.500-6-1.200-3.200-.2-6.500 2.500-9.500z" />,
   rakhi: <><circle cx="12" cy="9" r="6" strokeDasharray="2.200 2" /><path d="M12 15v6M9.500 15l-1.500 5.500M14.500 15l1.500 5.500" /></>,
+  haldi: <><circle cx="12" cy="12" r="2.600" /><path d="M12 9.400C10.500 6 10.800 3.500 12 2.500c1.200 1 1.500 3.500 0 6.900zM14.600 12c3.400-1.500 5.900-1.200 6.900 0-1 1.200-3.500 1.500-6.900 0zM12 14.600c1.500 3.400 1.200 5.900 0 6.900-1.200-1-1.500-3.500 0-6.900zM9.400 12C6 13.500 3.500 13.200 2.500 12c1-1.200 3.500-1.500 6.900 0z" /></>,
   carnival: <><ellipse cx="12" cy="9.500" rx="5.500" ry="6.500" /><path d="M12 16l-1.500 2h3zM12 18c-1.500 2 1.500 3 0 5" /></>,
   mayra: <><path d="M8 8h8l1.200 3c0 5-2 9-5.200 9S6.800 16 6.800 11z" /><path d="M9 8c0-2 1-3 3-3s3 1 3 3" /></>,
   ring: <><circle cx="12" cy="15" r="5.500" /><path d="M9 6.500 12 3l3 3.500-3 3z" /></>,
@@ -44,4 +45,36 @@ export function Icon({ name, size = 22, className = '', title }: { name: string;
 export function eventIconName(ev: EventItem): string {
   if (ev.icon && P[ev.icon]) return ev.icon;
   return ev.type === 'meal' ? 'meal' : ev.type === 'celebration' ? 'reception' : 'pooja';
+}
+
+/** Colour theme per icon: soft tint for the chip + a readable ink on that tint. */
+const THEME: Record<string, { bg: string; ink: string }> = {
+  mehendi: { bg: '#E1F0DF', ink: '#2C6A37' },   // green
+  haldi: { bg: '#FFF0B8', ink: '#80590A' },     // turmeric yellow
+  carnival: { bg: '#FFF0B8', ink: '#80590A' },
+  pooja: { bg: '#FDE7D2', ink: '#9A4509' },     // saffron
+  kumkum: { bg: '#FDE0DC', ink: '#A3261B' },
+  rakhi: { bg: '#FDE7D2', ink: '#9A4509' },
+  mayra: { bg: '#F6E4D6', ink: '#8A4A1F' },     // terracotta
+  ring: { bg: '#FBE8EF', ink: '#9A2552' },      // rose
+  garland: { bg: '#FBE8EF', ink: '#9A2552' },
+  music: { bg: '#EDE3F8', ink: '#5B2E8A' },     // purple
+  nikasi: { bg: '#F3E1E5', ink: '#5E1426' },    // oxblood
+  meet: { bg: '#DDF0EE', ink: '#1E6A66' },      // teal
+  phere: { bg: '#FDE2D9', ink: '#A3290F' },     // sacred-fire red
+  reception: { bg: '#F6ECD3', ink: '#7A5A22' }, // gold
+  travel: { bg: '#E7EEF9', ink: '#24498A' },    // blue
+  meal: { bg: '#EFE6D9', ink: '#5A4B47' },
+  tea: { bg: '#EFE6D9', ink: '#5A4B47' },
+};
+
+/** Round tinted chip with the event's icon. Decorative (the title carries the meaning). */
+export function EventBadge({ ev, size = 40 }: { ev: EventItem; size?: number }) {
+  const name = eventIconName(ev);
+  const th = THEME[name] ?? THEME.meal;
+  return (
+    <span aria-hidden="true" className="inline-flex shrink-0 items-center justify-center rounded-full" style={{ width: size, height: size, background: th.bg, color: th.ink }}>
+      <Icon name={name} size={Math.round(size * 0.55)} />
+    </span>
+  );
 }
