@@ -63,7 +63,7 @@ export function InfoPage() {
               {fam.map((c) => (
                 <li key={c.id} className="border-t border-line first:border-t-0">
                   <button type="button" onClick={() => openWa(c.phone, wa.pageMsg(pageLabel(loc.pathname, t, dateLabel)))} className="tap flex w-full items-center gap-3 py-3 text-left">
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-wa text-white"><Icon name="chat" /></span>
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-wa text-white"><Icon name="whatsapp" /></span>
                     <span className="min-w-0 flex-1">
                       <span className="block font-display text-[1.35rem] leading-tight text-ink">{t(`role.${c.role}`)}</span>
                       <span className="block truncate text-[0.92rem] text-ink-2">{c.name}</span>

@@ -17,6 +17,7 @@ export function Photo({ p, priority = false, className = '', sizes = '100vw', st
         loading={priority ? 'eager' : 'lazy'}
         fetchPriority={priority ? 'high' : 'auto'}
         decoding="async"
+        ref={(el) => { if (el && el.complete && el.naturalWidth > 0) setLoaded(true); }}
         onLoad={() => setLoaded(true)}
         className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
         style={{ objectPosition: p.focal, opacity: loaded ? 1 : 0 }}

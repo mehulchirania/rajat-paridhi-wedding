@@ -58,13 +58,13 @@
     "info-garden": {
       "src640": "/images/photos/info-garden-640.webp",
       "src1280": "/images/photos/info-garden-1280.webp",
-      "focal": "50% 45%",
+      "focal": "50% 18%",
       "alt": {
-        "en": "Rajat and Paridhi sitting together in a garden",
-        "hi": "बगीचे में साथ बैठे रजत और परिधि"
+        "en": "Rajat and Paridhi walking hand in hand down a lane",
+        "hi": "गली में हाथ थामे चलते रजत और परिधि"
       },
-      "aspect": 0.667,
-      "blur": "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAADQAwCdASoQABgAPu1iqU2ppaOiMAgBMB2JYwAASn6p7UkIYmYvUwAA/u6pDtmBAZNOjDD+Pw9N7Khp7Rh2ytkAeNo+CZsV5m9VmHY+awbbgrf8xaj4Mr3P5DZDjFApuh3QIrEG1uLuXFEZ8sMFAAAA"
+      "aspect": 1.334,
+      "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAAAQAgCdASoQAAwAA4BaJZwCdADjW9xPoxRYAPrzZlcXHWYq90F3mHnqs632Dec0PpS3nVCXnSij1eGdDesbY4lg+IQQBGRIf7zktuzAAAA="
     }
   },
   "days": {

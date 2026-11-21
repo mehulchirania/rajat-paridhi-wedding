@@ -81,7 +81,7 @@ export function EventSheet({ ev, view, onClose }: { ev: EventItem | undefined; v
         </div>
         {contacts.map((c) => (
           <button key={c.id} type="button" onClick={() => openWa(c.phone, wa.eventMsg(ev))} className={`${btn} bg-wa text-white`}>
-            <Icon name="chat" />
+            <Icon name="whatsapp" />
             {contacts.length > 1 ? t('sheet.whatsapp', { name: t(`side.${c.side}.short`) }) : t('sheet.whatsapp', { name: c.name })}
           </button>
         ))}

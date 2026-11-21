@@ -9,8 +9,8 @@
     "name": "Water Lily Hotel",
     "address": { "en": "Water Lily Hotel, Nipania Bypass, Indore", "hi": "वॉटर लिली होटल, निपानिया बायपास, इंदौर" },
     "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore",
-    "parking": { "en": "Parking details will be shared soon.", "hi": "पार्किंग की जानकारी जल्द साझा की जाएगी।" },
-    "inRoom": { "en": "Reception: dial 9. Housekeeping: dial 9. From your room phone only.", "hi": "रिसेप्शन: 9 डायल करें। हाउसकीपिंग: 9 डायल करें। केवल कमरे के फ़ोन से।" }
+    "parking": { "en": "Parking available on site.", "hi": "पार्किंग होटल परिसर में उपलब्ध है।" },
+    "inRoom": { "en": "From your room phone, dial 9 for Reception or Housekeeping.", "hi": "कमरे के फ़ोन से रिसेप्शन या हाउसकीपिंग के लिए 9 डायल करें।" }
   },
   "teaCoffee": { "en": "Tea / Coffee counter: Shed Area, Ground Floor", "hi": "चाय / कॉफी काउंटर: शेड एरिया, भू-तल" }
 }
