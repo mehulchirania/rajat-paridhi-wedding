@@ -21,7 +21,7 @@ export function HelpButton({ className = '' }: { className?: string }) {
   return (
     <>
       <button type="button" onClick={() => setOpen(true)} aria-label={t('fab.label')} aria-haspopup="dialog" className={className}>
-        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-wa text-white"><Icon name="chat" size={18} /></span>
+        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/25 text-white"><Icon name="chat" size={18} /></span>
         <span>{t('dock.help')}</span>
       </button>
       <HelpSheet open={open} onClose={() => setOpen(false)} page={pageLabel(loc.pathname, t, dateLabel)} />

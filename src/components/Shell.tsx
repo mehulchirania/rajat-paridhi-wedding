@@ -6,7 +6,7 @@ import { keep } from '../lib/nav';
 import { DayChips } from './DayChips';
 import { HelpButton } from './HelpFab';
 import { Icon } from './Icons';
-import { LangToggle, SidePill } from './Toggles';
+import { LangToggle, SidePill, TextSizeToggle } from './Toggles';
 
 function useOnline() {
   const [on, setOn] = useState(() => (typeof navigator === 'undefined' ? true : navigator.onLine));
@@ -18,7 +18,9 @@ function useOnline() {
   return on;
 }
 
-const dockItem = 'tap flex w-[84px] flex-col items-center justify-center gap-0.5 rounded-full text-[0.78rem] font-semibold leading-none transition-colors duration-200';
+const dockItem = 'tap flex min-w-[5.25rem] flex-col items-center justify-center gap-1 rounded-2xl border px-3 py-1.5 text-[0.8rem] font-semibold leading-none shadow-sm transition-colors duration-200 active:scale-[.97]';
+const dockOn = 'border-oxblood bg-oxblood text-ivory';
+const dockOff = 'border-line bg-sand text-ink hover:bg-line/60';
 
 export function Shell() {
   const { t, l, lang, side} = useApp();
@@ -40,9 +42,9 @@ export function Shell() {
     <div className="mx-auto min-h-dvh max-w-xl">
       {!online && <p role="status" className="bg-amber-soft px-4 py-2 text-center text-[0.9rem] font-semibold text-amber-ink">{t('offline.note')}</p>}
       <div className="sticky top-0 z-30 border-b border-line bg-ivory/90 backdrop-blur-md">
-        <header className="flex h-14 items-center justify-between gap-2 px-4">
-          <button type="button" onClick={() => goWelcome(`/welcome${keep()}`, { state: { from: loc.pathname + loc.search } })} aria-label={`${wordmark} — ${t('footer.replay')}`} className="tap -ml-1 min-w-0 truncate px-1 text-left font-display text-[1.15rem] leading-none text-oxblood">{wordmark}</button>
-          <div className="flex shrink-0 items-center gap-1.5"><SidePill /><LangToggle /></div>
+        <header className="flex min-h-14 flex-wrap items-center justify-between gap-x-2 gap-y-1 px-4 py-1">
+          <button type="button" onClick={() => goWelcome(`/welcome${keep()}`, { state: { from: loc.pathname + loc.search } })} aria-label={`${wordmark} — ${t('footer.replay')}`} className="tap -ml-1 min-w-[8rem] flex-1 truncate px-1 text-left font-display text-[1.15rem] leading-none text-oxblood">{wordmark}</button>
+          <div className="flex shrink-0 items-center gap-1.5"><SidePill /><TextSizeToggle /><LangToggle /></div>
         </header>
         {onDay && <div className="px-2"><DayChips /></div>}
       </div>
@@ -53,15 +55,15 @@ export function Shell() {
         <span className="sr-only">{g}</span>
       </footer>
       <nav aria-label={t('shell.dockLabel')}
-        className="fixed left-1/2 z-40 flex h-16 -translate-x-1/2 items-center gap-1 rounded-full bg-ivory px-2 shadow-[0_10px_30px_-12px_rgb(30_20_22/.35)]"
+        className="fixed left-1/2 z-40 flex -translate-x-1/2 items-center gap-1.5 rounded-3xl border border-line bg-ivory p-1.5 shadow-[0_10px_30px_-12px_rgb(30_20_22/.45)]"
         style={{ bottom: 'calc(16px + env(safe-area-inset-bottom))' }}>
-        <Link to={`/${keep()}`} aria-current={itinActive ? 'page' : undefined} className={`${dockItem} ${itinActive ? 'text-oxblood' : 'text-ink-2'}`}>
-          <span className="flex h-8 items-center"><Icon name="cal" /></span>{t('nav.itinerary')}
+        <Link to={`/${keep()}`} aria-current={itinActive ? 'page' : undefined} className={`${dockItem} ${itinActive ? dockOn : dockOff}`}>
+          <span className="flex h-7 items-center"><Icon name="cal" /></span>{t('nav.itinerary')}
         </Link>
-        <NavLink to={`/info${keep()}`} className={`${dockItem} ${infoActive ? 'text-oxblood' : 'text-ink-2'}`}>
-          <span className="flex h-8 items-center"><Icon name="pin" /></span>{t('nav.info')}
+        <NavLink to={`/info${keep()}`} className={`${dockItem} ${infoActive ? dockOn : dockOff}`}>
+          <span className="flex h-7 items-center"><Icon name="pin" /></span>{t('nav.info')}
         </NavLink>
-        <HelpButton className={`${dockItem} text-ink-2`} />
+        <HelpButton className={`${dockItem} border-wa bg-wa text-white`} />
       </nav>
     </div>
   );

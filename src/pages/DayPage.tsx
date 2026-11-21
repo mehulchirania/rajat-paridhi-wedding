@@ -79,7 +79,7 @@ export function DayPage() {
 
       {main.length > 0 ? (
         <div className="relative mt-2">
-          <span aria-hidden="true" className="grad-thread absolute left-[79px] top-[1.9rem] bottom-0 z-0 w-[2px] opacity-40" style={{ maskImage: 'linear-gradient(to bottom,#000 80%,transparent)', WebkitMaskImage: 'linear-gradient(to bottom,#000 80%,transparent)' }} />
+          <span aria-hidden="true" className="grad-thread absolute left-[4.65rem] top-[1.9rem] bottom-0 z-0 w-[2px] opacity-40" style={{ maskImage: 'linear-gradient(to bottom,#000 80%,transparent)', WebkitMaskImage: 'linear-gradient(to bottom,#000 80%,transparent)' }} />
           <ol aria-label={t('nav.itinerary')} className="relative">{main.map((e) => <EventCard key={e.id} ev={e} view={side} onOpen={openEvent} />)}</ol>
         </div>
       ) : (

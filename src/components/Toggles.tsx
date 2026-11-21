@@ -35,7 +35,7 @@ export function SidePill() {
   return (
     <>
       <button type="button" onClick={() => setOpen(true)} aria-haspopup="dialog" aria-label={`${t('side.toggle')}: ${label}`}
-        className="tap inline-flex items-center gap-2 rounded-full bg-sand px-3 text-[0.9rem] font-semibold text-ink">
+        className="tap inline-flex items-center gap-2 rounded-full border border-line bg-sand px-3 text-[0.9rem] font-semibold text-ink">
         <SideDot side={side} />
         <span className="whitespace-nowrap">{short}</span>
         <span aria-hidden="true" className="-ml-0.5 text-[0.7rem] text-ink-2">▾</span>
@@ -60,13 +60,27 @@ export function SidePill() {
   );
 }
 
+/** "Aa" button: toggles larger text. Works on every page (header + welcome page). */
+export function TextSizeToggle({ tone = 'dark' }: { tone?: 'dark' | 'light' }) {
+  const { bigText, setBigText, t } = useApp();
+  const light = tone === 'light';
+  const on = light ? 'border-white bg-white text-oxblood' : 'border-oxblood bg-oxblood text-ivory';
+  const off = light ? 'border-white/25 bg-white/12 text-white backdrop-blur-md' : 'border-line bg-sand text-ink';
+  return (
+    <button type="button" aria-pressed={bigText} aria-label={t('size.toggle')} title={t('size.toggle')} onClick={() => setBigText(!bigText)}
+      className={`tap inline-flex items-center justify-center rounded-full border px-2.5 font-display leading-none transition-colors ${bigText ? on : off}`}>
+      <span aria-hidden="true" className="text-[0.85rem]">A</span><span aria-hidden="true" className="text-[1.2rem]">A</span>
+    </button>
+  );
+}
+
 /** Text-only "EN | हिं" segmented pill. `tone="light"` is for use over photos. */
 export function LangToggle({ tone = 'dark' }: { tone?: 'dark' | 'light' }) {
   const { lang, setLang, t } = useApp();
   const light = tone === 'light';
   return (
     <div role="group" aria-label={t('lang.toggle')}
-      className={`inline-flex items-center rounded-full px-1 ${light ? 'border border-white/25 bg-white/12 text-white backdrop-blur-md' : 'bg-sand text-ink-2'}`}>
+      className={`inline-flex items-center rounded-full px-1 ${light ? 'border border-white/25 bg-white/12 text-white backdrop-blur-md' : 'border border-line bg-sand text-ink-2'}`}>
       {([['en', 'EN'], ['hi', 'हिं']] as const).map(([v, label], i) => (
         <span key={v} className="flex items-center">
           {i > 0 && <span aria-hidden="true" className={`h-4 w-px ${light ? 'bg-white/30' : 'bg-line'}`} />}
