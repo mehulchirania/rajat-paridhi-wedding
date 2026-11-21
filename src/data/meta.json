@@ -1,15 +1,6 @@
 {
   "lastUpdated": "2026-11-21T00:45:00+05:30",
-  "announcements": [
-    {
-      "id": "welcome",
-      "active": true,
-      "text": {
-        "en": "Welcome! Items marked “Timing being confirmed” may change — this page always shows the latest.",
-        "hi": "स्वागत है! “समय की पुष्टि होनी बाकी है” वाले कार्यक्रमों में बदलाव हो सकता है — यह पेज हमेशा ताज़ा जानकारी दिखाता है।"
-      }
-    }
-  ],
+  "announcements": [],
   "couple": {
     "groom": { "name": { "en": "Rajat Rajore", "hi": "रजत राजोरे" }, "parents": { "en": "S/o Shri Anup Rajore & Smt. Sapna Rajore", "hi": "सुपुत्र श्री अनूप राजोरे व श्रीमती सपना राजोरे" } },
     "bride": { "name": { "en": "Paridhi Garg", "hi": "परिधि गर्ग" }, "parents": { "en": "D/o Shri Ajay Garg & Smt. Sunita Garg", "hi": "सुपुत्री श्री अजय गर्ग व श्रीमती सुनीता गर्ग" } }

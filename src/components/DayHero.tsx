@@ -11,19 +11,9 @@ const CSS = `@keyframes hero-settle{from{transform:scale(1.04)}to{transform:none
 .hero-settle{animation:hero-settle .9s var(--ease-out) both}
 @media (prefers-reduced-motion:reduce){.hero-settle{animation:none}}`;
 
-/** Frosted chip: where this day sits relative to today (IST) — "Today", "Tomorrow", "In 9 days", "Completed". */
-function WhenChip({ date }: { date: string }) {
-  const { t } = useApp();
-  const now = useTick(60_000);
-  const today = istToday(now);
-  const days = Math.round((Date.parse(`${date}T00:00:00Z`) - Date.parse(`${today}T00:00:00Z`)) / 86_400_000);
-  const label = days === 0 ? t('dayhero.today') : days === 1 ? t('dayhero.tomorrow') : days > 1 ? t('dayhero.inDays', { n: days }) : t('dayhero.done');
-  return (
-    <span className={`absolute right-3 top-3 z-10 rounded-full px-3 py-1.5 text-[0.85rem] font-semibold leading-tight ring-1 backdrop-blur-md ${days === 0 ? 'bg-ivory text-oxblood ring-ivory' : 'bg-white/20 text-white ring-white/30'}`}>
-      {days === 0 && <span aria-hidden="true" className="mr-1.5 inline-block h-2 w-2 animate-pulse rounded-full bg-oxblood align-middle motion-reduce:animate-none" />}
-      {label}
-    </span>
-  );
+/** True when this day is today (IST); re-checks every minute. */
+function useIsToday(date: string) {
+  return istToday(useTick(60_000)) === date;
 }
 
 /** "10:00 AM – 8:00 PM" span of the visible timed events. */
@@ -75,6 +65,7 @@ export function DayHero({ date, dayIndex, events }: { date: string; dayIndex: nu
     : cities.filter((c) => c !== 'TBD').length > 1 ? cities.filter((c) => c !== 'TBD').map((c) => t(`city.${c}`)).join(' · ')
     : t('dayhero.venueTba');
   const span = useSpan(events);
+  const isToday = useIsToday(date);
   const meta = events.length === 0 ? t('dayhero.none') : t(events.length === 1 ? 'dayhero.meta.one' : 'dayhero.meta.other', { n: events.length, where });
   return (
     <header className="relative aspect-[16/10] w-full overflow-hidden rounded-[20px] bg-sand">
@@ -83,9 +74,9 @@ export function DayHero({ date, dayIndex, events }: { date: string; dayIndex: nu
         <Photo p={p} priority className="h-full w-full" />
       </div>
       <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-[72%] bg-gradient-to-t from-black/75 via-black/35 to-transparent" />
-      <WhenChip date={date} />
       <div className="absolute inset-x-0 bottom-0 z-10 p-4 text-white">
         <p className="text-[0.78rem] font-semibold uppercase tracking-[.14em] text-white/90 [html[lang=hi]_&]:tracking-normal [html[lang=hi]_&]:text-[0.85rem]">
+          {isToday && <><span aria-hidden="true" className="mr-1.5 inline-block h-2 w-2 animate-pulse rounded-full bg-champagne align-middle motion-reduce:animate-none" />{t('dayhero.today')} · </>}
           {t('dayhero.eyebrow', { n: dayIndex + 1, wd: t(`wdf.${weekday(date)}`) })}
         </p>
         <h1 className="mt-0.5 font-display text-[2.6rem] leading-[1.05]">{dayNum(date)} {t(`mof.${monthIdx(date)}`)}</h1>

@@ -1,10 +1,11 @@
 // Build-time validation. Fails (exit 1) on malformed data; warns on missing Hindi / placeholders.
+import { fileURLToPath } from 'node:url';
 import fs from 'node:fs';
 import path from 'node:path';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 
-const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
+const root = path.resolve(fileURLToPath(new URL('.', import.meta.url)), '..');
 const errors = [];
 const warns = [];
 const read = (rel) => {

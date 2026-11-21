@@ -40,7 +40,7 @@
     {
       "slug": "day-1dec-fountain",
       "source": "WhatsApp Image 2026-11-20 at 23.30.49.jpeg",
-      "focal": "50% 42%",
+      "focal": "50% 26%",
       "alt": {
         "en": "Rajat and Paridhi walking hand in hand with flowers",
         "hi": "फूलों के साथ हाथ थामे रजत और परिधि"
@@ -58,8 +58,8 @@
   ],
   "days": {
     "2026-11-29": "day-29nov-lake",
-    "2026-11-30": "day-30nov-stairs",
-    "2026-12-01": "day-1dec-fountain",
+    "2026-11-30": "day-1dec-fountain",
+    "2026-12-01": "day-30nov-stairs",
     "2026-12-02": "day-2dec-traditional"
   },
   "splash": "splash-pergola",

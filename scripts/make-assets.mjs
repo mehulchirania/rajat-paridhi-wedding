@@ -1,12 +1,13 @@
 // Generates icons, favicon and the OG image.
 // Dev-only helper (needs Google Chrome for OG/icon rendering). Outputs are committed in /public.
 // Re-run:  npm run assets
+import { fileURLToPath } from 'node:url';
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import sharp from 'sharp';
 
-const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
+const root = path.resolve(fileURLToPath(new URL('.', import.meta.url)), '..');
 const pub = (p) => path.join(root, 'public', p);
 
 const mono = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#5E1426"/><text x="32" y="43" text-anchor="middle" font-family="'Instrument Serif',Georgia,serif" font-size="34" fill="#FBF7F1">R<tspan fill="#B8955A" font-style="italic">&amp;</tspan>P</text></svg>`;

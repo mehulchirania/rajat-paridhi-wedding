@@ -43,7 +43,7 @@ export function Shell() {
       {!online && <p role="status" className="bg-amber-soft px-4 py-2 text-center text-[0.9rem] font-semibold text-amber-ink">{t('offline.note')}</p>}
       <div className="sticky top-0 z-30 border-b border-line bg-ivory/90 backdrop-blur-md">
         <header className="flex min-h-14 flex-wrap items-center justify-between gap-x-2 gap-y-1 px-4 py-1">
-          <button type="button" onClick={() => goWelcome(`/welcome${keep()}`, { state: { from: loc.pathname + loc.search } })} aria-label={`${wordmark} — ${t('footer.replay')}`} className="tap -ml-1 min-w-[8rem] flex-1 truncate px-1 text-left font-display text-[1.15rem] leading-none text-oxblood">{wordmark}</button>
+          <button type="button" onClick={() => goWelcome(`/welcome${keep()}`, { state: { from: loc.pathname + loc.search } })} aria-label={`${wordmark} — ${t('footer.replay')}`} className="tap -ml-1 min-w-[8rem] flex-1 truncate px-1 text-left font-display text-[1.15rem] leading-none text-oxblood">{wordmark.split(' & ')[0]} <span aria-hidden="true" className="text-[0.8em]">♥</span> {wordmark.split(' & ')[1]}</button>
           <div className="flex shrink-0 items-center gap-1.5"><SidePill /><TextSizeToggle /><LangToggle /></div>
         </header>
         {onDay && <div className="px-2"><DayChips /></div>}

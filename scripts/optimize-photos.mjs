@@ -1,10 +1,11 @@
 // Reads images/photos.config.json, writes optimized WebP (640/1280w) to public/images/photos/
 // and src/data/photos.generated.json (paths, focal, alt, tiny blur placeholder). Strips EXIF/GPS.
+import { fileURLToPath } from 'node:url';
 import fs from 'node:fs';
 import path from 'node:path';
 import sharp from 'sharp';
 
-const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
+const root = path.resolve(fileURLToPath(new URL('.', import.meta.url)), '..');
 const cfg = JSON.parse(fs.readFileSync(path.join(root, 'images/photos.config.json'), 'utf8'));
 const outDir = path.join(root, 'public/images/photos');
 fs.mkdirSync(outDir, { recursive: true });
