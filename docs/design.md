@@ -26,7 +26,7 @@ Rule of thumb: if an element has both a border **and** a background **and** a sh
 1. **Photo-first.** Splash and each day open with a real photo (see `images/photos.config.json`).
 2. **One accent per screen.** Oxblood is the brand; groom-blue/bride-pink appear only as small side markers (dot, thin rule, text colour), never fills larger than a pill.
 3. **Hairlines, not boxes.** Agenda is a list with 1px `line` separators, not a stack of cards.
-4. **Big, legible, elder-friendly.** Body 17px (20.5px in large-text mode), min label 13px, tap targets ≥ 44px, AA contrast everywhere (champagne is decorative only; use `champagne-ink` for text).
+4. **Big, legible, elder-friendly.** Body 17px (20.5px in large-text mode; all layout around text uses rem/min-height so it scales), min label 13px, tap targets ≥ 44px, AA contrast everywhere (champagne is decorative only; use `champagne-ink` for text).
 5. **Quiet motion.** 200–450ms, `--ease-out`, opacity/translate/scale only. All motion disabled under `prefers-reduced-motion`.
 
 ## Tokens
@@ -59,9 +59,9 @@ Bottom block on scrim (white text): eyebrow "29 Nov – 2 Dec 2026 · Indore"; n
 Photo fades in (blur placeholder → image), names rise. No knot SVG.
 
 ### App shell
-- **Compact sticky header (56px, ivory/90 + blur, bottom hairline):** left = brand wordmark in Fraunces (variable, optical sizing) 1.35rem, side-aware ("Paridhi & Rajat" on bride side, "Rajat & Paridhi" otherwise; Hindi: परिणय समारोह). Right = **side pill** (coloured dot + "Bride's side ▾") that opens a small sheet with the 3 options + "Show family-only events" switch + "Larger text" switch; then **lang pill** "EN | हिं" (text-only segmented, oxblood underline on active).
-- **Day ribbon** (sticky under header on day routes): 4 equal columns, each = weekday eyebrow + big serif numeral + month; active day = oxblood numeral with a 2px oxblood underline; inactive = ink-2. No boxes.
-- **Floating dock** replaces bottom nav + FAB: centred pill, 64px tall, ivory bg, shadow, 3 items: Itinerary (cal icon), Info (pin icon), WhatsApp (green circle chat icon, label "Help"). Respect safe-area. Page bottom padding ≥ 120px so nothing is hidden behind it.
+- **Compact sticky header (56px, ivory/90 + blur, bottom hairline):** left = brand wordmark in Fraunces (variable, optical sizing) 1.35rem, side-aware ("Paridhi & Rajat" on bride side, "Rajat & Paridhi" otherwise; Hindi: परिणय समारोह). Right = **side pill** (coloured dot + "Bride's side ▾") that opens a small sheet with the 3 options + "Show family-only events" switch + "Larger text" switch; then an **"Aa" button** (aria-pressed; filled oxblood when large text is on; also on the welcome page); then **lang pill** "EN | हिं" (text-only segmented, oxblood underline on active).
+- **Day ribbon** (sticky under header on day routes): 4 equal tiles, each = weekday eyebrow + big serif numeral + month; inactive = sand fill + `line` border + ink text; active = filled oxblood with ivory text. Tiles (not bare text) so they read as buttons.
+- **Floating dock** replaces bottom nav + FAB: centred rounded container (ivory, border, shadow) with 3 bordered button tiles: Itinerary (cal icon), Info (pin icon), Help (filled green, chat icon). See v2.2 below. Respect safe-area. Page bottom padding ≥ 120px so nothing is hidden behind it.
 - Remove: paisley body background, Gallery route/nav/data, A+ header button (moved into side sheet).
 
 ### Day page
@@ -84,3 +84,8 @@ Hero `info` photo (same style as day hero) titled "Water Lily Hotel". Sections s
 
 ## Images
 Originals live in `/images`. `npm run photos` reads `images/photos.config.json` and writes `public/images/photos/<slug>-{640,1280}.webp` + `src/data/photos.generated.json` (paths, focal, alt, aspect, 16px blur placeholder). Use `<img srcset="…640w, …1280w" sizes="100vw">`, explicit width/height or aspect-ratio, `loading="lazy"` except splash and current day hero (`fetchpriority="high"`), blur placeholder as CSS background until `onLoad`. Photos are runtime-cached by the service worker (CacheFirst), not precached.
+
+## v2.2 — nav affordance + large text
+- **Dock** is now a bordered container holding three button tiles (`min-w-[5.25rem]`, rounded-2xl, border, shadow-sm): inactive = sand fill + ink text; active = filled oxblood + ivory; Help = filled green with a white chat chip. Height is content-driven, not fixed.
+- **Header controls** (side pill, "Aa", EN/हिं) all carry a `line` border so they read as controls.
+- **Large text** fixes: agenda gutter, dot, thread and divider offsets converted from px to rem; header uses `min-h-14` + wrap; saved preference applied pre-paint; "Aa" toggle available on every route.

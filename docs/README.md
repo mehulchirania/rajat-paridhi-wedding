@@ -43,13 +43,14 @@ docs/                      you are here (design.md = visual spec)
 ## UI structure (v2 "Ivory & Oxblood")
 Full visual spec: [design.md](design.md). In short:
 - **Fonts:** Fraunces (variable, optical sizing) (display), Hanken Grotesk (body), Noto Sans Devanagari (Hindi body), Tiro Devanagari Hindi (Hindi display).
-- **Compact header** with brand wordmark, a **side pill** and an EN/हिं switch. The side pill opens a **side sheet** with the three side options plus the *Show family-only events* and *Larger text* switches.
-- **Day ribbon** (4 days) under the header, a photo **day hero**, a list-style agenda, and a **floating dock** with Itinerary, Info and Help (WhatsApp).
+- **Compact header** with brand wordmark, a **side pill**, an **"Aa" larger-text button** and an EN/हिं switch. The side pill opens a **side sheet** with the three side options plus the *Show family-only events* and *Larger text* switches. The header wraps onto two rows in large-text mode if it runs out of width.
+- **Day ribbon** (4 days, bordered tiles; active day filled oxblood) under the header, a photo **day hero**, a list-style agenda, and a **floating dock** of three bordered buttons: Itinerary, Info (active = filled oxblood) and Help (filled green, WhatsApp).
 - **Event sheet** (tap any event): when / where / dress / notes / getting there, Add to calendar, Maps, Share and WhatsApp buttons.
 - **Info page:** hotel photo hero, address, in-room, parking, tea & coffee, family contacts, on-site help desk, other venues, families, display settings.
 
 ## Behaviour summary
 - **Live content:** on load the app uses the cached last-published content (localStorage) or the built-in JSON, then fetches `/api/content` (no-cache). A newer revision is validated, cached, applied and the guest UI re-mounts in place (`ContentGate` in `main.tsx`; `lib/data.ts` exports live bindings, `lib/contacts.ts` exports functions). It re-checks when the app returns to the foreground, on `online`, and every 3 min. `/admin` renders outside that tree so a refresh can never wipe an edit in progress. If storage isn't configured the API returns `{rev:0, content:null}` and the site simply uses the built-in data.
+- **Larger text:** `html.big-text` raises the root size from 17px to 20.5px. It is toggled from the "Aa" header button (every page, including the welcome page), the side sheet and the Info page; the choice is stored in localStorage (`bigText`). An inline script in `index.html` applies it before first paint. Layout sizes (dock, agenda gutter, header) are in `rem`/`min-height` so they scale with it; do not reintroduce fixed-px widths around text.
 - **Welcome page is a real route: `/welcome`.** First-time visitors are sent there, then returned to the page they opened. Tapping the names in the header, or "Replay welcome", opens it; browser Back returns to where you were. Returning guests see "Continue as <side>" plus the side picker.
 - **Countdown** on the welcome page to the main celebrations (1 Dec 2026, 00:00 IST); it disappears at that moment. Test with `/welcome?now=2026-11-30T23:59`.
 - **Updates:** the service worker checks for a new deploy on load, whenever the app returns to the foreground, and hourly, then reloads to the new version.

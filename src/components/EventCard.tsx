@@ -28,7 +28,7 @@ export function timeParts(time: string, lang: Lang): { num: string; per: string 
 const EYEBROW = 'text-[0.78rem] font-semibold uppercase tracking-[.14em] [html[lang=hi]_&]:tracking-normal [html[lang=hi]_&]:text-[0.85rem]';
 const dotCls = (side: Side) => side === 'groom' ? 'bg-groom' : side === 'bride' ? 'bg-bride' : 'bg-gradient-to-br from-groom to-bride';
 
-/** One agenda row. The vertical thread is drawn by the parent <ol> at x = 79px (see DayPage). */
+/** One agenda row. The vertical thread is drawn by the parent <ol> at x = 4.65rem (see DayPage). */
 export function EventCard({ ev, view, onOpen }: { ev: EventItem; view: GuestSide; onOpen: (id: string) => void }) {
   const { t, l, lang } = useApp();
   const rt = resolveTime(ev, view);
@@ -38,10 +38,10 @@ export function EventCard({ ev, view, onOpen }: { ev: EventItem; view: GuestSide
   const showDiffers = view === 'both' && !!ev.timeBySide;
   return (
     <li className="relative" style={{ animation: 'var(--animate-rise)' }}>
-      <span aria-hidden="true" className="absolute right-0 top-0 h-px bg-line [li:first-child>&]:hidden" style={{ left: 96 }} />
-      <span aria-hidden="true" className={`absolute left-[75px] top-[1.65rem] z-10 h-[10px] w-[10px] rounded-full ring-[3px] ring-ivory ${dotCls(ev.side)}`} />
+      <span aria-hidden="true" className="absolute right-0 top-0 h-px bg-line [li:first-child>&]:hidden" style={{ left: '5.65rem' }} />
+      <span aria-hidden="true" className={`absolute left-[4.4rem] top-[1.65rem] z-10 h-[0.6rem] w-[0.6rem] rounded-full ring-[3px] ring-ivory ${dotCls(ev.side)}`} />
       <button type="button" onClick={() => onOpen(ev.id)} aria-label={t('card.open', { title: l(ev.title) })}
-        className="grid w-full grid-cols-[74px_1fr] pt-5 text-left transition-opacity active:opacity-70">
+        className="grid w-full grid-cols-[4.35rem_1fr] pt-5 text-left transition-opacity active:opacity-70">
         <div className="pr-3 text-right">
           {parts ? (
             <>
@@ -53,7 +53,7 @@ export function EventCard({ ev, view, onOpen }: { ev: EventItem; view: GuestSide
             <p className="pt-1 text-[0.95rem] font-medium leading-tight text-ink-2">{t('time.tba')}</p>
           )}
         </div>
-        <div className={`min-w-0 pl-[22px] ${ev.mapLink ? 'pb-3' : 'pb-5'}`}>
+        <div className={`min-w-0 pl-[1.3rem] ${ev.mapLink ? 'pb-3' : 'pb-5'}`}>
           <p className={`${EYEBROW} leading-snug `}>
             <span className={sideInk(ev.side)}>{sideWord}</span>
             {ev.city !== 'TBD' && <span className="text-ink-2"> · {t(`city.${ev.city}`)}</span>}
@@ -73,7 +73,7 @@ export function EventCard({ ev, view, onOpen }: { ev: EventItem; view: GuestSide
         </div>
       </button>
       {ev.mapLink && (
-        <div className="pb-5 pl-[96px]">
+        <div className="pb-5 pl-[5.65rem]">
           <a href={ev.mapLink} target="_blank" rel="noopener noreferrer" aria-label={`${t('sheet.maps')}: ${ev.venueName ?? l(ev.title)}`}
             className="tap inline-flex items-center gap-1.5 rounded-full border border-line bg-ivory px-4 text-[0.88rem] font-semibold text-oxblood transition-colors active:bg-sand">
             <Icon name="pin" size={16} />{t('sheet.maps')}

@@ -6,7 +6,7 @@ import { meta } from '../lib/data';
 import { splashPhoto } from '../lib/photos';
 import type { GuestSide } from '../types';
 import { Photo } from './Photo';
-import { LangToggle, SideDot } from './Toggles';
+import { LangToggle, SideDot, TextSizeToggle } from './Toggles';
 
 const first = (n: string) => n.split(' ')[0];
 
@@ -22,7 +22,7 @@ export function Splash() {
     <main className="relative flex min-h-dvh flex-col justify-between overflow-hidden bg-oxblood text-white">
       <div className="absolute inset-0"><Photo p={splashPhoto()} priority className="h-full w-full" sizes="100vw" /></div>
       <div aria-hidden="true" className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgb(20 8 12 / .7) 0%, rgb(20 8 12 / .15) 26%, rgb(20 8 12 / .55) 48%, rgb(20 8 12 / .9) 100%)' }} />
-      <div className="absolute right-4 top-4 z-10"><LangToggle tone="light" /></div>
+      <div className="absolute right-4 top-4 z-10 flex items-center gap-1.5"><TextSizeToggle tone="light" /><LangToggle tone="light" /></div>
 
       <header className="relative px-6 pt-8 text-center" style={rise(150)}>
         <p lang="hi" className="font-display text-[1.3rem] leading-snug text-champagne">॥ जय श्री कृष्ण ॥</p>
