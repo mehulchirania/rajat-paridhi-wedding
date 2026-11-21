@@ -33,7 +33,7 @@ export function Splash() {
         <p className="eyebrow text-white/85" style={rise(250)}>{t('splash.dates')}</p>
         <h1 className="mt-3 font-display text-[3.2rem] leading-[.95]" style={rise(350)}>
           <span className="block">{first(l(meta.couple.groom.name))}</span>
-          <span className="block italic text-champagne" aria-hidden="true">♥</span>
+          <span className="my-1 block text-[2.4rem] leading-none text-[#FF5C85] [text-shadow:0_2px_10px_rgb(0_0_0/.55)]" aria-hidden="true">♥</span>
           <span className="block">{first(l(meta.couple.bride.name))}</span>
         </h1>
         <p className="mt-3 font-display text-[1.4rem] text-white/90" style={rise(450)}>{t('app.eventTitle')}</p>
