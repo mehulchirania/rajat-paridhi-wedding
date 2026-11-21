@@ -67,7 +67,7 @@ export function EventCard({ ev, view, onOpen }: { ev: EventItem; view: GuestSide
               {glossOf(ev, lang) && <p className="mt-0.5 text-[0.9rem] leading-snug text-ink-2">{glossOf(ev, lang)}</p>}
             </div>
           </div>
-          <p className="mt-1.5 text-[0.9rem] leading-snug text-ink-2">{whereText(ev, l, t('event.venueTbd'))}</p>
+          <p className="mt-1.5 flex items-start gap-1.5 text-[0.9rem] leading-snug text-ink-2"><Icon name="pin" size={16} className="mt-[0.15rem] shrink-0" /><span>{whereText(ev, l, t('event.venueTbd'))}</span></p>
           {ev.dressCode && (
             <p className="mt-2 flex items-center gap-2 text-[0.9rem] leading-snug text-ink">
               <Swatch kind={ev.dressCode.swatch} />

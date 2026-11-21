@@ -61,7 +61,7 @@ export function EventSheet({ ev, view, onClose }: { ev: EventItem | undefined; v
             </span>
           )}
         </Row>
-        <Row label={t('sheet.where')}>{where}</Row>
+        <Row label={t('sheet.where')}><span className="flex items-start gap-1.5"><Icon name="pin" size={18} className="mt-[0.2rem] shrink-0" /><span>{where}</span></span></Row>
         {ev.dressCode && (
           <Row label={t('event.dress')}>
             <span className="flex items-center gap-2.5"><Swatch kind={ev.dressCode.swatch} size={20} /><span className="font-semibold">{l(ev.dressCode)}</span></span>

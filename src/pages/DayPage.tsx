@@ -16,7 +16,8 @@ import { useState } from 'react';
 
 function Announcement() {
   const { t, l } = useApp();
-  const a = meta.announcements.find((x) => x.active);
+  // The retired 'welcome' notice may still sit in previously published content; never show it.
+  const a = meta.announcements.find((x) => x.active && x.id !== 'welcome');
   const [gone, setGone] = useState(() => !a || store.get(`dismiss-${a.id}`) === '1');
   if (!a || gone) return null;
   return (
