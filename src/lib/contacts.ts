@@ -1,11 +1,12 @@
 import type { Contact, EventItem, FamilyContact, GuestSide, Lang, VenueContact } from '../types';
 import { contacts } from './data';
 
-export const familyContacts = contacts.filter((c): c is FamilyContact => c.kind === 'family' && c.active);
-export const venueContacts = contacts.filter((c): c is VenueContact => c.kind === 'venue' && c.active);
+// Functions (not constants) so they follow live content changes from the admin portal.
+export const familyContacts = (): FamilyContact[] => contacts.filter((c): c is FamilyContact => c.kind === 'family' && c.active);
+export const venueContacts = (): VenueContact[] => contacts.filter((c): c is VenueContact => c.kind === 'venue' && c.active);
 export type { Contact };
 
-const forSide = (side: 'groom' | 'bride') => familyContacts.filter((c) => c.side === side);
+const forSide = (side: 'groom' | 'bride') => familyContacts().filter((c) => c.side === side);
 const sides = (view: GuestSide): ('groom' | 'bride')[] => (view === 'both' ? ['groom', 'bride'] : [view]);
 
 /** All family contacts shown for the current view (FAB, Info page). */

@@ -44,11 +44,13 @@ export default defineConfig(({ mode }) => {
             },
           ],
           navigateFallback: '/index.html',
-          navigateFallbackDenylist: [/^\/_vercel\//],
+          navigateFallbackDenylist: [/^\/_vercel\//, /^\/api\//],
           cleanupOutdatedCaches: true,
         },
       }),
     ],
     build: { target: 'es2020', sourcemap: false },
+    // `npm run dev:api` serves /api locally (in-memory). On Vercel the real functions in /api are used.
+    server: { proxy: { '/api': 'http://localhost:3001' } },
   };
 });

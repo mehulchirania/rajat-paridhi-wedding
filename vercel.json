@@ -1,1 +1,1 @@
-{ "rewrites": [{ "source": "/((?!assets/|images/|_vercel/|.*\\..*).*)", "destination": "/index.html" }] }
+{ "rewrites": [{ "source": "/((?!api/|assets/|images/|_vercel/|.*\\..*).*)", "destination": "/index.html" }] }

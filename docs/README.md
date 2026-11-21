@@ -1,7 +1,7 @@
 # Rajat & Paridhi — Wedding Itinerary (परिणय समारोह)
 
-Mobile-first, bilingual (EN/हिं) static site. Vite + React + TypeScript + Tailwind v4. No backend.
-**All content lives in three JSON files + two i18n files. Editing them is enough to update the whole site.**
+Mobile-first, bilingual (EN/हिं) site. Vite + React + TypeScript + Tailwind v4, plus a small serverless API (Vercel Functions + Upstash Redis) that powers the **`/admin` portal**.
+**Content starts as three JSON files + two i18n files in the repo (built-in data). The admin portal can override the three JSON datasets live, without a redeploy — see [admin.md](admin.md).**
 
 ## Quick start
 Windows: double-click `start-dev.cmd` in the project folder (installs once, then opens http://localhost:5173).
@@ -14,12 +14,19 @@ npm run preview
 npm run photos     # optimise originals in /images -> public/images/photos + src/data/photos.generated.json
 npm run assets     # regenerate icons + OG image (needs Google Chrome)
 npm run qr -- https://your-final-url.com   # writes public/qr.png + public/qr.svg
+npm run dev:api    # local in-memory /api for trying /admin (login rajat / paridhi)
+npm run test:admin # API tests: auth, lockout, validation, publish/conflict/restore/reset
 ```
 Live URL: https://rajat-paridhi-wedding.vercel.app (default `SITE_URL` in `vite.config.ts`; override with the env var if you add a custom domain). Set `SITE_URL` in your host's environment settings: it is injected into the Open Graph tags (WhatsApp previews need an absolute URL).
 
 ## Structure
 ```
-src/data/events.json       all events (+ events.schema.json)
+api/                       Vercel Functions: public content, admin login/content/restore (api/_lib = redis, auth, store)
+shared/validate.ts         runtime validator used by the API, the admin forms and the guest app
+src/admin/                 /admin portal UI (code-split; AdminApp.tsx + one file per tab)
+src/lib/content.ts         fetch/cache/apply of published content on the guest site
+src/data/events.json       all events (+ events.schema.json) — built-in data
+
 src/data/contacts.json     family WhatsApp contacts + on-site help desk
 src/data/meta.json         last-updated stamp, announcements, hotel info, family names
 src/data/photos.generated.json  written by `npm run photos` (do not edit by hand)
@@ -28,6 +35,7 @@ src/i18n/en.json hi.json   UI strings
 src/lib/                   app context, time (IST), data resolution, contacts, ics
 src/components, src/pages  UI
 scripts/validate-data.mjs  build-time validation (fails on errors, warns on missing Hindi)
+scripts/test-admin.ts      API integration tests (fake Redis); scripts/dev-api.ts local API
 public/images/photos/      generated WebP photos (640w + 1280w)
 docs/                      you are here (design.md = visual spec)
 ```
@@ -41,6 +49,7 @@ Full visual spec: [design.md](design.md). In short:
 - **Info page:** hotel photo hero, address, in-room, parking, tea & coffee, family contacts, on-site help desk, other venues, families, display settings.
 
 ## Behaviour summary
+- **Live content:** on load the app uses the cached last-published content (localStorage) or the built-in JSON, then fetches `/api/content` (no-cache). A newer revision is validated, cached, applied and the guest UI re-mounts in place (`ContentGate` in `main.tsx`; `lib/data.ts` exports live bindings, `lib/contacts.ts` exports functions). It re-checks when the app returns to the foreground, on `online`, and every 3 min. `/admin` renders outside that tree so a refresh can never wipe an edit in progress. If storage isn't configured the API returns `{rev:0, content:null}` and the site simply uses the built-in data.
 - **Larger text:** `html.big-text` raises the root size from 17px to 20.5px. It is toggled from the "Aa" header button (every page, including the welcome page), the side sheet and the Info page; the choice is stored in localStorage (`bigText`). An inline script in `index.html` applies it before first paint. Layout sizes (dock, agenda gutter, header) are in `rem`/`min-height` so they scale with it; do not reintroduce fixed-px widths around text.
 - **Welcome page is a real route: `/welcome`.** First-time visitors are sent there, then returned to the page they opened. Tapping the names in the header, or "Replay welcome", opens it; browser Back returns to where you were. Returning guests see "Continue as <side>" plus the side picker.
 - **Countdown** on the welcome page to the main celebrations (1 Dec 2026, 00:00 IST); it disappears at that moment. Test with `/welcome?now=2026-11-30T23:59`.
@@ -53,7 +62,7 @@ Full visual spec: [design.md](design.md). In short:
 - **Language:** `?lang=hi|en`, else stored choice, else browser language. `<html lang>` updates dynamically.
 - **Family-only events** (`audience:"family"`) are hidden unless "Show family-only events" is ticked.
 - **PWA:** installable; app shell and data are precached (works offline). Photos are runtime-cached by the service worker (CacheFirst) after first view, not precached.
-- **Contacts:** WhatsApp links are built on click; family numbers never appear in the DOM or as `href`s. (They are still inside the JS bundle — this is a static site; it deters casual scraping only.)
+- **Contacts:** WhatsApp links are built on click; family numbers never appear in the DOM or as `href`s. (They are still inside the JS bundle and the public `/api/content` response — it deters casual scraping only.)
 
 ## Deviations from the brief (deliberate)
 1. `area` and `room` are bilingual `{en,hi}` objects (they contain translatable words like "Lawn", "2nd Floor").

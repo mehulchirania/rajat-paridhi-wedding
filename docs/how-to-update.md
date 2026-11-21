@@ -1,5 +1,10 @@
 # How to update details (no coding)
 
+## Easiest: the admin portal
+Open `/admin` on your phone, sign in, edit events / times / venues / notices / phone numbers, **Review & publish** — live in about a minute, no deploy. Full guide, one-time setup and security notes: [admin.md](admin.md). Once you've published from the portal it is the source of truth; the JSON-file method below then only applies after *History → Reset to built-in data*.
+
+## Alternative: edit the files
+
 You only ever edit text files in `src/data/` and `src/i18n/`, then save/commit. The website rebuilds itself on Vercel/Cloudflare (see deploy.md). If you make a typo that breaks the format, the build fails with a plain message and the **old site stays live**.
 
 ## Change a time or venue

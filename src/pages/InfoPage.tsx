@@ -80,9 +80,9 @@ export function InfoPage() {
           )}
         </Section>
 
-        {venueContacts.length > 0 && (
+        {venueContacts().length > 0 && (
           <Section title={t('info.helpdeskShort')}>
-            {venueContacts.map((v) => (
+            {venueContacts().map((v) => (
               <div key={v.id}>
                 <p className="text-ink-2">{l(v.name)}</p>
                 <div className="mt-3 flex flex-wrap gap-2">
