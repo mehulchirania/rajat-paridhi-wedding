@@ -1,0 +1,51 @@
+/* Quiet motion for the day page (agenda thread, dots, diya glow, day crossfade).
+   200-450ms, transform/opacity only. Everything is switched off in the reduced-motion block at the bottom. */
+
+/* 4. Day crossfade — --dx/--dy are set inline by DayPage (+/-10px sideways in swipe direction, or a 6px rise). */
+@keyframes day-in { from { opacity: 0; transform: translate(var(--dx, 0), var(--dy, 0)); } to { opacity: 1; transform: none; } }
+.day-enter { animation: day-in .28s var(--ease-out) backwards; }
+
+/* 1. Agenda thread: scaleY driven from JS (see AgendaThread in DayPage). */
+.thread-draw { transform-origin: top; transform: scaleY(0); transition: transform .6s var(--ease-out); will-change: transform; }
+.thread-draw[data-live] { transition-duration: .2s; transition-timing-function: linear; }
+
+/* 2. Rows + dots. data-reveal is set on the <li> by useReveal(): absent = plain, "hidden" = waiting,
+   "shown" = entered later (rise + dot pop), "now" = already on screen at load (dot pop only, content never hidden). */
+@keyframes row-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes dot-pop { from { opacity: .35; transform: scale(.7); } to { opacity: 1; transform: none; } }
+li[data-reveal="hidden"] .row-body { opacity: 0; transform: translateY(8px); }
+li[data-reveal="shown"] .row-body { animation: row-rise .3s var(--ease-out) both; }
+li[data-reveal="hidden"] .row-dot { opacity: .35; transform: scale(.7); }
+li[data-reveal="shown"] .row-dot, li[data-reveal="now"] .row-dot { animation: dot-pop .3s var(--ease-out) var(--d, 0ms) both; }
+
+/* 3. Diya glow: soft warm halo around the dot of the event happening now. Irregular keyframes, slow. */
+@keyframes diya-flicker {
+  0%   { opacity: .75; transform: scale(1); }
+  14%  { opacity: .55; transform: scale(.92); }
+  31%  { opacity: .95; transform: scale(1.08); }
+  47%  { opacity: .65; transform: scale(.96); }
+  62%  { opacity: .9;  transform: scale(1.12); }
+  79%  { opacity: .6;  transform: scale(.94); }
+  100% { opacity: .75; transform: scale(1); }
+}
+.diya-glow {
+  background: radial-gradient(circle, rgb(242 140 40 / .45) 0%, rgb(232 180 100 / .22) 45%, transparent 70%);
+  animation: diya-flicker 2.4s ease-in-out infinite;
+}
+/* Small flame dot before the "Now" label. */
+@keyframes flame-dot {
+  0%, 100% { opacity: .9; transform: scale(1); }
+  20% { opacity: .6; transform: scale(.85); }
+  45% { opacity: 1; transform: scale(1.15); }
+  70% { opacity: .7; transform: scale(.9); }
+}
+.flame-dot { background: #F2A04A; box-shadow: 0 0 6px 2px rgb(242 140 40 / .55); animation: flame-dot 2.4s ease-in-out infinite; }
+/* Shell toggles .page-hidden on <html> from visibilitychange so infinite animations stop in background tabs. */
+.page-hidden .diya-glow, .page-hidden .flame-dot { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .day-enter, li[data-reveal] .row-body, li[data-reveal] .row-dot, .diya-glow, .flame-dot { animation: none !important; }
+  .thread-draw { transform: none !important; transition: none !important; }
+  li[data-reveal] .row-body, li[data-reveal] .row-dot { opacity: 1 !important; transform: none !important; }
+  .diya-glow { opacity: .8; }
+}

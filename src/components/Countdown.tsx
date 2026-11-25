@@ -5,6 +5,19 @@ import { nowMs, toInstant } from '../lib/time';
 /** Main celebrations start 1 Dec 2026, 00:00 IST. The countdown disappears at that instant. */
 export const MAIN_START = toInstant('2026-12-01', '00:00');
 
+/** Two-digit value that rolls when it changes. Both digits share one grid cell, so width never jumps. */
+function Digit({ v }: { v: number }) {
+  const s = String(v).padStart(2, '0');
+  const [st, setSt] = useState<{ cur: string; old: string | null }>({ cur: s, old: null });
+  if (st.cur !== s) setSt({ cur: s, old: st.cur });
+  return (
+    <span className="grid overflow-hidden font-display text-[2rem] leading-[1.15] text-white" style={{ fontVariantNumeric: 'tabular-nums lining-nums' }}>
+      <span key={st.cur} className={st.old ? 'roll-in' : undefined} style={{ gridArea: '1 / 1' }}>{st.cur}</span>
+      {st.old && <span key={`o${st.old}`} className="roll-out" style={{ gridArea: '1 / 1' }} onAnimationEnd={() => setSt((x) => ({ ...x, old: null }))}>{st.old}</span>}
+    </span>
+  );
+}
+
 export function Countdown({ className = '' }: { className?: string }) {
   const { t } = useApp();
   const [now, setNow] = useState(nowMs);
@@ -25,7 +38,7 @@ export function Countdown({ className = '' }: { className?: string }) {
       <div aria-hidden="true" className="mt-2.5 grid grid-cols-4 divide-x divide-white/20 border-y border-white/20 py-2.5">
         {parts.map(([v, k]) => (
           <div key={k} className="flex flex-col items-center">
-            <span className="font-display text-[2rem] leading-none text-white" style={{ fontVariantNumeric: 'tabular-nums lining-nums' }}>{String(v).padStart(2, '0')}</span>
+            <Digit v={v} />
             <span className="mt-1 text-[0.7rem] font-semibold uppercase tracking-[.14em] text-champagne [html[lang=hi]_&]:tracking-normal [html[lang=hi]_&]:text-[0.8rem]">{t(k)}</span>
           </div>
         ))}

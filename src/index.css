@@ -51,9 +51,52 @@ html[lang='hi'] .eyebrow { letter-spacing: .04em; text-transform: none; }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes pop { from { transform: scale(.6); opacity: 0; } to { transform: none; opacity: 1; } }
 
+/* ---- Welcome page flourishes (all disabled in the reduced-motion block below) ---- */
+@keyframes toran-drop { from { transform: translateY(-100%); } to { transform: none; } }
+@keyframes toran-sway { from { transform: rotate(-2.6deg); } to { transform: rotate(2.6deg); } }
+@keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.08); } }
+@keyframes heartbeat { 0% { transform: scale(1); } 22% { transform: scale(1.18); } 44% { transform: scale(1); } 66% { transform: scale(1.12); } 100% { transform: scale(1); } }
+@keyframes feather-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes feather-eye { from { opacity: 0; } to { opacity: 1; } }
+@keyframes roll-in { from { transform: translateY(55%); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes roll-out { from { transform: none; opacity: 1; } to { transform: translateY(-55%); opacity: 0; } }
+@keyframes eq { 0%, 100% { transform: scaleY(.35); } 50% { transform: scaleY(1); } }
+@keyframes petal-fall {
+  0% { transform: translate3d(0, -12vh, 0) rotate(0); opacity: 0; }
+  8%, 90% { opacity: var(--op, .7); }
+  100% { transform: translate3d(var(--drift), 112vh, 0) rotate(var(--rot)); opacity: 0; }
+}
+@keyframes petal-burst {
+  0% { transform: translate3d(0, 0, 0) rotate(0) scale(.6); opacity: 1; animation-timing-function: cubic-bezier(.1, .7, .3, 1); }
+  45% { transform: translate3d(calc(var(--x) * .85), var(--y), 0) rotate(calc(var(--rot) * .5)) scale(1); opacity: 1; animation-timing-function: cubic-bezier(.5, 0, .9, .6); }
+  100% { transform: translate3d(var(--x), calc(var(--y) + 140px), 0) rotate(var(--rot)) scale(.9); opacity: 0; }
+}
+@keyframes petal-sway {
+  from { transform: translateX(calc(var(--sway) * -1)) rotate(-22deg); }
+  to { transform: translateX(var(--sway)) rotate(22deg); }
+}
+
+.toran-drop { animation: toran-drop .7s var(--ease-out) both; }
+.toran-sway { transform-box: fill-box; transform-origin: 50% 0; animation: toran-sway 5s ease-in-out infinite alternate; }
+.kenburns { animation: kenburns 20s ease-in-out forwards; will-change: transform; }
+.heartbeat { animation: heartbeat .9s ease-in-out .8s both; }
+.feather-line { stroke-dasharray: 1; animation: feather-draw 1.4s ease-in-out .7s both; }
+.feather-eye { animation: feather-eye .6s ease-out 1.9s both; }
+.roll-in { animation: roll-in .3s var(--ease-out) both; }
+.roll-out { animation: roll-out .3s var(--ease-out) both; }
+.eq-bar { transform-origin: 50% 100%; animation: eq 1s ease-in-out infinite; }
+.petal { position: absolute; left: var(--left); top: var(--top, 0); will-change: transform, opacity; animation-duration: var(--dur); animation-delay: var(--delay); animation-iteration-count: var(--iter, 1); animation-fill-mode: both; }
+.petal-drift, .petal-shower { animation-name: petal-fall; animation-timing-function: linear; }
+.petal-burst { animation-name: petal-burst; }
+.petal-drift .petal-sway, .petal-shower .petal-sway { animation: petal-sway var(--sway-dur) ease-in-out infinite alternate; }
+.petal-layer[data-paused="true"] .petal, .petal-layer[data-paused="true"] .petal-sway { animation-play-state: paused; }
+
 .grad-common { background: linear-gradient(90deg, var(--color-groom-soft), var(--color-bride-soft)); }
 .grad-thread { background: linear-gradient(180deg, var(--color-groom), var(--color-champagne) 50%, var(--color-bride)); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-delay: 0s !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+  /* Looping/decorative motion must switch off outright (a .001ms loop would flicker). Base styles are the final state. */
+  .toran-drop, .toran-sway, .kenburns, .heartbeat, .feather-line, .feather-eye, .roll-in, .eq-bar, .petal-layer, .petal-sway { animation: none !important; }
+  .roll-out { display: none; }
 }

@@ -11,6 +11,7 @@ import '@fontsource/noto-sans-devanagari/devanagari-400.css';
 import '@fontsource/noto-sans-devanagari/devanagari-600.css';
 import '@fontsource/tiro-devanagari-hindi/devanagari-400.css';
 import './index.css';
+import './styles/motion.css';
 import App from './App';
 import { AppProvider } from './lib/app';
 import { bootFromCache, getRev, startAutoRefresh, subscribeContent } from './lib/content';

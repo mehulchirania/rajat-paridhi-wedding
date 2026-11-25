@@ -177,5 +177,9 @@
   "dayhero.inDays": "In {n} days",
   "dayhero.done": "Completed",
   "dayhero.outfits": "What to wear",
-  "dayhero.from": "from {t}"
+  "dayhero.from": "from {t}",
+  "music.toggle": "Wedding music",
+  "music.on": "Music on",
+  "music.off": "Music off",
+  "splash.justMarried": "Just married ♥"
 }

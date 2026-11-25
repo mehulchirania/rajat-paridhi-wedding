@@ -177,5 +177,9 @@
   "dayhero.inDays": "{n} दिन में",
   "dayhero.done": "संपन्न",
   "dayhero.outfits": "क्या पहनें",
-  "dayhero.from": "{t} से"
+  "dayhero.from": "{t} से",
+  "music.toggle": "विवाह संगीत",
+  "music.on": "संगीत चालू",
+  "music.off": "संगीत बंद",
+  "splash.justMarried": "शुभ विवाह संपन्न ♥"
 }

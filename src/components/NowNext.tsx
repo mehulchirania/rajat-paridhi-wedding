@@ -18,12 +18,11 @@ export function useTick(ms = 30_000) {
 const fmtDur = (min: number, t: (k: string, v?: Record<string, string | number>) => string) =>
   min >= 60 ? t('time.hr', { n: Math.round(min / 6) / 10 }) : t('time.min', { n: Math.max(1, min) });
 
-export function NowNext() {
-  const { t, l, side, showFamily, dateLabel } = useApp();
-  const [help, setHelp] = useState(false);
-  const loc = useLocation();
+/** Shared "what's happening now" computation (IST; honours ?now=YYYY-MM-DDTHH:mm via nowMs). */
+export function useNowState() {
+  const { side, showFamily } = useApp();
   const now = useTick();
-  const { current, next, active } = useMemo(() => {
+  const state = useMemo(() => {
     const today = istToday(now);
     const pool = events.filter((e) => e.date === today || e.date === addDays(today, -1));
     const vis = sortEvents(visibleEvents(pool, { view: side, showFamily }), side).filter((e) => resolveTime(e, side));
@@ -35,6 +34,14 @@ export function NowNext() {
     }
     return { current: cur.slice(-1), next: nxt[0], active: events.some((e) => e.date === today) || cur.length > 0 };
   }, [now, side, showFamily]);
+  return { ...state, now };
+}
+
+export function NowNext() {
+  const { t, l, side, dateLabel } = useApp();
+  const [help, setHelp] = useState(false);
+  const loc = useLocation();
+  const { current, next, active, now } = useNowState();
 
   if (!active) return null;
   const canHelp = contactsForView(side).length > 0;
@@ -53,7 +60,7 @@ export function NowNext() {
         <div className={both ? 'grid grid-cols-2 gap-x-4 divide-x divide-ivory/20' : ''}>
           {current.length > 0 && (
             <div className="min-w-0">
-              <p className={`${EB} mb-1.5`}>{t('nownext.nowShort')}</p>
+              <p className={`${EB} mb-1.5`}><span aria-hidden="true" className="flame-dot mr-1.5 inline-block h-2 w-2 rounded-full align-middle" />{t('nownext.nowShort')}</p>
               {current.map((e) => <Item key={e.id} ev={e} />)}
             </div>
           )}

@@ -1,5 +1,5 @@
 import type { EventItem } from '../types';
-import { useRef, type TouchEvent } from 'react';
+import { useEffect, useRef, type ReactNode, type TouchEvent } from 'react';
 import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useApp } from '../lib/app';
 import { dayBySlug, days, eventById, events, meta, sortEvents, sideVisible, visibleEvents } from '../lib/data';
@@ -7,7 +7,9 @@ import { keep } from '../lib/nav';
 import { EventCard } from '../components/EventCard';
 import { EventSheet } from '../components/EventSheet';
 import { MealStrip } from '../components/MealStrip';
-import { NowNext } from '../components/NowNext';
+import { NowNext, useNowState } from '../components/NowNext';
+import { markWeddingDayShowerDone, useWeddingDayShower } from '../lib/weddingDay';
+import { Petals } from '../components/Petals';
 import { DayHero, OutfitStrip } from '../components/DayHero';
 import { Icon } from '../components/Icons';
 import { NotFound } from './NotFound';
@@ -31,6 +33,39 @@ function Announcement() {
 /** Common hotel meals go in the compact strip; side-specific meals (e.g. lunch at home) are normal agenda rows. */
 const isStripMeal = (e: EventItem) => e.type === 'meal' && e.side === 'common';
 
+/** Agenda wrapper + the 2px gradient thread, which draws itself top->bottom as the list scrolls into view.
+ *  Cheap: one passive scroll listener, rAF-throttled, writing a single transform (scaleY, origin top) on one element.
+ *  Progress only ever grows (never un-draws). What is already on screen at load is drawn by the CSS 600ms transition. */
+function AgendaThread({ children }: { children: ReactNode }) {
+  const wrap = useRef<HTMLDivElement>(null);
+  const thread = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    const w = wrap.current, th = thread.current;
+    if (!w || !th) return;
+    let max = 0, raf = 0, first = true;
+    const update = () => {
+      raf = 0;
+      const r = w.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, (window.innerHeight - r.top) / Math.max(1, r.height)));
+      if (p <= max && !first) return;
+      max = Math.max(max, p);
+      th.style.transform = `scaleY(${max})`;
+      if (first) { first = false; requestAnimationFrame(() => th.setAttribute('data-live', '')); } // later updates track the scroll quickly
+    };
+    const queue = () => { if (!raf) raf = requestAnimationFrame(update); };
+    raf = requestAnimationFrame(update);
+    window.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', queue, { passive: true });
+    return () => { window.removeEventListener('scroll', queue); window.removeEventListener('resize', queue); cancelAnimationFrame(raf); };
+  }, []);
+  return (
+    <div ref={wrap} className="relative mt-2">
+      <span ref={thread} aria-hidden="true" className="thread-draw grad-thread absolute left-[4.65rem] top-[1.9rem] bottom-0 z-0 w-[2px] opacity-40" style={{ maskImage: 'linear-gradient(to bottom,#000 80%,transparent)', WebkitMaskImage: 'linear-gradient(to bottom,#000 80%,transparent)' }} />
+      {children}
+    </div>
+  );
+}
+
 export function DayPage() {
   const { slug } = useParams();
   const day = dayBySlug(slug);
@@ -39,9 +74,16 @@ export function DayPage() {
   const loc = useLocation();
   const [sp] = useSearchParams();
   const touch = useRef<{ x: number; y: number } | null>(null);
+  const { current: nowCurrent } = useNowState();
+  const [showShower, setShowShower] = useState(useWeddingDayShower());
+  const idx = day ? days.findIndex((d) => d.date === day.date) : -1;
+  // Slide direction for the day crossfade: compare with the last committed day index (0 = first load / unknown).
+  const prevIdx = useRef(-1);
+  const dir = prevIdx.current < 0 || idx < 0 || prevIdx.current === idx ? 0 : idx > prevIdx.current ? 1 : -1;
+  useEffect(() => { if (idx >= 0) prevIdx.current = idx; }, [idx]);
   if (!day) return <NotFound />;
+  const liveIds = new Set(nowCurrent.map((e) => e.id));
 
-  const idx = days.findIndex((d) => d.date === day.date);
   const prev = days[idx - 1], next = days[idx + 1];
   const dayEvents = events.filter((e) => e.date === day.date);
   const filter = { view: side, showFamily };
@@ -66,7 +108,8 @@ export function DayPage() {
   };
 
   return (
-    <div onTouchStart={onStart} onTouchEnd={onEnd} key={day.slug} style={{ animation: 'var(--animate-rise)' }}>
+    <div onTouchStart={onStart} onTouchEnd={onEnd} key={day.slug} className="day-enter" style={{ '--dx': `${dir * 10}px`, '--dy': dir ? '0px' : '6px' } as React.CSSProperties}>
+      {showShower && <Petals mode="shower" onDone={() => { markWeddingDayShowerDone(); setShowShower(false); }} />}
       <DayHero date={day.date} dayIndex={idx} events={main} />
       <OutfitStrip events={main} />
       <NowNext />
@@ -79,10 +122,9 @@ export function DayPage() {
       )}
 
       {main.length > 0 ? (
-        <div className="relative mt-2">
-          <span aria-hidden="true" className="grad-thread absolute left-[4.65rem] top-[1.9rem] bottom-0 z-0 w-[2px] opacity-40" style={{ maskImage: 'linear-gradient(to bottom,#000 80%,transparent)', WebkitMaskImage: 'linear-gradient(to bottom,#000 80%,transparent)' }} />
-          <ol aria-label={t('nav.itinerary')} className="relative">{main.map((e) => <EventCard key={e.id} ev={e} view={side} onOpen={openEvent} />)}</ol>
-        </div>
+        <AgendaThread>
+          <ol aria-label={t('nav.itinerary')} className="relative">{main.map((e, i) => <EventCard key={e.id} ev={e} view={side} onOpen={openEvent} index={i} live={liveIds.has(e.id)} />)}</ol>
+        </AgendaThread>
       ) : (
         <div className="px-2 py-14 text-center">
           <h2 className="font-display text-[1.9rem] leading-tight text-ink">{t('day.empty.title', { side: t(`side.${side}.of`) })}</h2>

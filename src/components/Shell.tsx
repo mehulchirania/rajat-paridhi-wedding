@@ -33,6 +33,13 @@ export function Shell() {
   const g = first(l(meta.couple.groom.name)), b = first(l(meta.couple.bride.name));
   const wordmark = side === 'bride' ? `${b} & ${g}` : `${g} & ${b}`;
   const title = lang === 'hi' ? t('app.eventTitle') : brand;
+  // Pause infinite animations (diya glow, flame dot) while the tab is hidden: motion.css keys off html.page-hidden.
+  useEffect(() => {
+    const sync = () => document.documentElement.classList.toggle('page-hidden', document.visibilityState === 'hidden');
+    sync();
+    document.addEventListener('visibilitychange', sync);
+    return () => document.removeEventListener('visibilitychange', sync);
+  }, []);
   useEffect(() => { document.title = `${title} — ${lang === 'hi' ? brand : t('app.eventTitle')}`; }, [title, brand, lang, t]);
   const updated = new Intl.DateTimeFormat(lang === 'hi' ? 'hi-IN' : 'en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' }).format(new Date(meta.lastUpdated));
   const itinActive = onDay;
