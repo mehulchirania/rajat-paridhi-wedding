@@ -6,6 +6,11 @@ const SRC = '/audio/wedding-theme.mp3';
 const LEVEL = 0.6;
 const OFF_KEY = 'music-off'; // set when the guest explicitly turns music off
 
+let shared: HTMLAudioElement | null = null; // the one welcome-music element, so the app shell can always silence it
+
+/** Hard stop, used by the app shell: music belongs to the welcome page only and must never play elsewhere. */
+export function silenceMusic() { if (shared && !shared.paused) shared.pause(); }
+
 export interface MusicHandle {
   /** Fade out and stop (used when the guest leaves the welcome page). Safe if never started. */
   fadeOutAndStop: (ms?: number) => void;
@@ -48,12 +53,13 @@ export function MusicToggle({ ref }: { ref?: Ref<MusicHandle> }) {
       a.addEventListener('error', () => fail(a.error));
       a.src = SRC;
       audio.current = a;
+      shared = a;
     }
     const a = audio.current;
     a.volume = 0;
     want.current = true;
     setOn(true);
-    return a.play().then(() => { if (want.current) fade(LEVEL, 2000); return true; }).catch((e) => {
+    return a.play().then(() => { if (want.current) fade(LEVEL, 2000); else a.pause(); return true; }).catch((e) => {
       if (auto) { want.current = false; setOn(false); return false; } // autoplay blocked: wait for a gesture
       fail(e); return false;
     });

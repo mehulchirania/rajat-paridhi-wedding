@@ -97,7 +97,12 @@
     "status": "confirmed",
     "needsConfirmation": false,
     "icon": "travel",
-    "hiDraft": true
+    "hiDraft": true,
+    "dressCode": {
+      "en": "Your choice",
+      "hi": "अपनी पसंद का",
+      "swatch": "any"
+    }
   },
   {
     "type": "ritual",
@@ -119,7 +124,12 @@
       "en": "Family ritual at the residence.",
       "hi": "निवास पर पारिवारिक रस्म।"
     },
-    "hiDraft": true
+    "hiDraft": true,
+    "dressCode": {
+      "en": "Your choice",
+      "hi": "अपनी पसंद का",
+      "swatch": "any"
+    }
   },
   {
     "type": "celebration",
@@ -147,7 +157,12 @@
       "en": "Separate venue — not at the hotel.",
       "hi": "अलग स्थान — होटल में नहीं।"
     },
-    "hiDraft": true
+    "hiDraft": true,
+    "dressCode": {
+      "en": "Your choice",
+      "hi": "अपनी पसंद का",
+      "swatch": "any"
+    }
   },
   {
     "type": "ritual",
@@ -170,7 +185,12 @@
       "hi": "मिस्ट-2 · पूजा कक्ष, दूसरी मंज़िल"
     },
     "icon": "rakhi",
-    "hiDraft": true
+    "hiDraft": true,
+    "dressCode": {
+      "en": "Your choice",
+      "hi": "अपनी पसंद का",
+      "swatch": "any"
+    }
   },
   {
     "type": "ritual",
@@ -221,7 +241,12 @@
       "hi": "मिस्ट-2 · पूजा कक्ष, दूसरी मंज़िल"
     },
     "icon": "pooja",
-    "hiDraft": true
+    "hiDraft": true,
+    "dressCode": {
+      "en": "Your choice",
+      "hi": "अपनी पसंद का",
+      "swatch": "any"
+    }
   },
   {
     "type": "celebration",
@@ -418,7 +443,12 @@
       "en": "Follows Nikasi — the two families meet.",
       "hi": "निकासी के बाद — दोनों परिवारों का मिलन।"
     },
-    "hiDraft": true
+    "hiDraft": true,
+    "dressCode": {
+      "en": "Traditional",
+      "hi": "ट्रेडिशनल",
+      "swatch": "traditional"
+    }
   },
   {
     "type": "celebration",
@@ -441,7 +471,12 @@
       "hi": "लॉन"
     },
     "icon": "garland",
-    "hiDraft": true
+    "hiDraft": true,
+    "dressCode": {
+      "en": "Traditional",
+      "hi": "ट्रेडिशनल",
+      "swatch": "traditional"
+    }
   },
   {
     "type": "ritual",

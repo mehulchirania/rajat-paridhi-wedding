@@ -44,19 +44,19 @@ export function Splash() {
   return (
     <main className="relative flex min-h-dvh flex-col justify-between overflow-hidden bg-oxblood text-white">
       <div className="kenburns absolute inset-0"><Photo p={splashPhoto()} priority className="h-full w-full" sizes="100vw" /></div>
-      <div aria-hidden="true" className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgb(20 8 12 / .7) 0%, rgb(20 8 12 / .15) 26%, rgb(20 8 12 / .55) 48%, rgb(20 8 12 / .9) 100%)' }} />
+      <div aria-hidden="true" className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgb(20 8 12 / .82) 0%, rgb(20 8 12 / .55) 20%, rgb(20 8 12 / .45) 38%, rgb(20 8 12 / .76) 52%, rgb(20 8 12 / .9) 100%)' }} />
       <Petals mode="drift" />
       <Toran />
       <div className="absolute right-4 top-[1.6rem] z-10 flex items-center gap-1.5"><MusicToggle ref={music} /><TextSizeToggle tone="light" /><LangToggle tone="light" /></div>
 
       <header className="relative flex flex-col items-center px-6 pt-[5.75rem] text-center" style={rise(150)}>
-        <p lang="hi" className="font-display text-[1.3rem] leading-snug text-champagne">॥ जय श्री कृष्ण ॥</p>
-        {lang === 'en' && <p className="font-display text-[0.95rem] italic text-white/80">{t('splash.jsk')}</p>}
+        <p lang="hi" className="font-display text-[1.3rem] leading-snug text-champagne [text-shadow:0_1px_8px_rgb(0_0_0/.75)]">॥ जय श्री कृष्ण ॥</p>
+        {lang === 'en' && <p className="font-display text-[0.95rem] italic text-white [text-shadow:0_1px_8px_rgb(0_0_0/.75)]">{t('splash.jsk')}</p>}
         <PeacockFeather className="mt-2" />
       </header>
 
       <div className="relative mx-auto w-full max-w-md px-5 pb-[calc(1.5rem+env(safe-area-inset-bottom))] text-center">
-        <p className="eyebrow text-white/85" style={rise(250)}>{t('splash.dates')}</p>
+        <p className="eyebrow text-[0.85rem] text-white [text-shadow:0_1px_8px_rgb(0_0_0/.8),0_0_2px_rgb(0_0_0/.6)]" style={rise(250)}>{t('splash.dates')}</p>
         {married && <p className="mt-3 font-display text-[1.25rem] italic text-champagne" style={rise(300)}>{t('splash.justMarried')}</p>}
         <h1 className="mt-3 font-display text-[3.2rem] leading-[.95]" style={rise(350)}>
           <span className="block">{first(l(meta.couple.groom.name))}</span>

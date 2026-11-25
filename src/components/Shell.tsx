@@ -6,6 +6,7 @@ import { keep } from '../lib/nav';
 import { DayChips } from './DayChips';
 import { HelpButton } from './HelpFab';
 import { Icon } from './Icons';
+import { silenceMusic } from './MusicToggle';
 import { NowBanner } from './NowNext';
 import { LangToggle, SidePill, TextSizeToggle } from './Toggles';
 
@@ -41,6 +42,8 @@ export function Shell() {
     document.addEventListener('visibilitychange', sync);
     return () => document.removeEventListener('visibilitychange', sync);
   }, []);
+  // The welcome music must never carry over into the app (e.g. after tapping Itinerary).
+  useEffect(() => { silenceMusic(); }, [loc.pathname]);
   useEffect(() => { document.title = `${title} — ${lang === 'hi' ? brand : t('app.eventTitle')}`; }, [title, brand, lang, t]);
   const updated = new Intl.DateTimeFormat(lang === 'hi' ? 'hi-IN' : 'en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' }).format(new Date(meta.lastUpdated));
   const itinActive = onDay;
