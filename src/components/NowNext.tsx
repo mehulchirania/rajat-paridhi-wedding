@@ -47,7 +47,8 @@ export function NowNext() {
   const loc = useLocation();
   const { current, next, active, now } = useNowState();
 
-  if (!active) return null;
+  // The live event is shown by the site-wide NowBanner; this card only covers what's next (or the end of the day).
+  if (!active || (current.length > 0 && !next)) return null;
   const canHelp = contactsForView(side).length > 0;
   const EB = 'text-[0.78rem] font-semibold uppercase tracking-[.14em] text-[#E3C792] [html[lang=hi]_&]:tracking-normal [html[lang=hi]_&]:text-[0.85rem]';
   const Item = ({ ev }: { ev: EventItem }) => (
@@ -57,23 +58,12 @@ export function NowNext() {
     </div>
   );
   const mins = next ? Math.round((startMs(next, side)! - now) / 60_000) : 0;
-  const both = current.length > 0 && !!next;
   return (
     <section aria-label={t('nownext.now')} aria-live="polite" className="mt-4 rounded-[20px] bg-oxblood px-5 py-4 text-ivory">
-      {current.length > 0 || next ? (
-        <div className={both ? 'grid grid-cols-2 gap-x-4 divide-x divide-ivory/20' : ''}>
-          {current.length > 0 && (
-            <div className="min-w-0">
-              <p className={`${EB} mb-1.5`}><span aria-hidden="true" className="flame-dot mr-1.5 inline-block h-2 w-2 rounded-full align-middle" />{t('nownext.nowShort')}</p>
-              {current.map((e) => <Item key={e.id} ev={e} />)}
-            </div>
-          )}
-          {next && (
-            <div className={`min-w-0 ${both ? 'pl-4' : ''}`}>
-              <p className={`${EB} mb-1.5`}>{t('nownext.next')} <span className="font-medium normal-case tracking-normal">· {t('nownext.in', { t: fmtDur(mins, t) })}</span></p>
-              <Item ev={next} />
-            </div>
-          )}
+      {next ? (
+        <div className="min-w-0">
+          <p className={`${EB} mb-1.5`}>{t('nownext.next')} <span className="font-medium normal-case tracking-normal">· {t('nownext.in', { t: fmtDur(mins, t) })}</span></p>
+          <Item ev={next} />
         </div>
       ) : (
         <p className="font-display text-[1.25rem] leading-snug">{t('nownext.none')}</p>
