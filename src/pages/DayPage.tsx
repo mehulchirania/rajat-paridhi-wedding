@@ -1,8 +1,8 @@
-import type { EventItem } from '../types';
+import type { EventItem, GuestSide } from '../types';
 import { useEffect, useRef, type ReactNode, type TouchEvent } from 'react';
 import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useApp } from '../lib/app';
-import { dayBySlug, days, eventById, events, meta, sortEvents, sideVisible, visibleEvents } from '../lib/data';
+import { dayBySlug, days, eventById, events, meta, resolveTime, sortEvents, sideVisible, visibleEvents } from '../lib/data';
 import { keep } from '../lib/nav';
 import { EventCard } from '../components/EventCard';
 import { EventSheet } from '../components/EventSheet';
@@ -32,6 +32,23 @@ function Announcement() {
 
 /** Common hotel meals go in the compact strip; side-specific meals (e.g. lunch at home) are normal agenda rows. */
 const isStripMeal = (e: EventItem) => e.type === 'meal' && e.side === 'common';
+
+/** In "both" view, a groom event and a bride event at exactly the same time share one row (side by side, groom on the left).
+ *  Everything else stays one event per row, in time order. */
+function groupRows(list: EventItem[], view: GuestSide): EventItem[][] {
+  const rows: EventItem[][] = [];
+  const used = new Set<string>();
+  for (const e of list) {
+    if (used.has(e.id)) continue;
+    used.add(e.id);
+    const t = resolveTime(e, view);
+    const mate = view === 'both' && t && (e.side === 'groom' || e.side === 'bride')
+      ? list.find((x) => !used.has(x.id) && resolveTime(x, view) === t && (x.side === 'groom' || x.side === 'bride') && x.side !== e.side)
+      : undefined;
+    if (mate) { used.add(mate.id); rows.push(e.side === 'groom' ? [e, mate] : [mate, e]); } else rows.push([e]);
+  }
+  return rows;
+}
 
 /** Agenda wrapper + the 2px gradient thread, which draws itself top->bottom as the list scrolls into view.
  *  Cheap: one passive scroll listener, rAF-throttled, writing a single transform (scaleY, origin top) on one element.
@@ -89,6 +106,7 @@ export function DayPage() {
   const filter = { view: side, showFamily };
   const shown = visibleEvents(dayEvents, filter);
   const main = sortEvents(shown.filter((e) => !isStripMeal(e)), side);
+  const rows = groupRows(main, side);
   const meals = shown.filter(isStripMeal);
   const hiddenFamily = dayEvents.filter((e) => sideVisible(e.side, side) && e.audience === 'family' && !showFamily).length;
   const otherSideCount = side === 'both' ? 0 : dayEvents.filter((e) => !isStripMeal(e) && !sideVisible(e.side, side) && (showFamily || e.audience !== 'family')).length;
@@ -123,7 +141,7 @@ export function DayPage() {
 
       {main.length > 0 ? (
         <AgendaThread>
-          <ol aria-label={t('nav.itinerary')} className="relative">{main.map((e, i) => <EventCard key={e.id} ev={e} view={side} onOpen={openEvent} index={i} live={liveIds.has(e.id)} />)}</ol>
+          <ol aria-label={t('nav.itinerary')} className="relative">{rows.map(([e, ...peers], i) => <EventCard key={e.id} ev={e} peers={peers} view={side} onOpen={openEvent} index={i} live={[e, ...peers].some((x) => liveIds.has(x.id))} />)}</ol>
         </AgendaThread>
       ) : (
         <div className="px-2 py-14 text-center">

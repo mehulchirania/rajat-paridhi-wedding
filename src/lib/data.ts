@@ -21,10 +21,21 @@ export let meta: Meta = builtIn.meta;
 export let days: Day[] = [];
 export let nikasi: EventItem | undefined;
 
+/** Every non-meal event shows a dress line. Where none is set (in the repo data or in published content),
+ *  fall back to "Traditional" on the wedding day and "Your choice" otherwise. An explicit dressCode always wins. */
+const DRESS_ANY = { en: 'Your choice', hi: 'अपनी पसंद का', swatch: 'any' } as const;
+const DRESS_TRAD = { en: 'Traditional', hi: 'ट्रेडिशनल', swatch: 'traditional' } as const;
+const WEDDING_DATE = '2026-12-02';
+const withDress = (list: EventItem[]): EventItem[] =>
+  list.map((e) => {
+    const x = e.needsConfirmation ? { ...e, needsConfirmation: false } : e; // guests never see "timing being confirmed"
+    return x.dressCode || x.type === 'meal' ? x : { ...x, dressCode: { ...(x.date === WEDDING_DATE ? DRESS_TRAD : DRESS_ANY) } };
+  });
+
 /** Swap the active dataset. `null` restores the built-in data. Callers must have validated `c` first. */
 export function setContent(c: Content | null) {
   const src = c ?? builtIn;
-  events = src.events; contacts = src.contacts; meta = src.meta;
+  events = withDress(src.events); contacts = src.contacts; meta = src.meta;
   days = [...new Set(events.map((e) => e.date))].sort().map((date) => ({ date, slug: dateToSlug(date) }));
   nikasi = events.find((e) => e.id === 'nikasi-groom-2dec');
 }

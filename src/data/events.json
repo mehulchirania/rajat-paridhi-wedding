@@ -25,6 +25,30 @@
     "mapLink": "https://maps.app.goo.gl/6ozDdD9SCCbVJKxZ6"
   },
   {
+    "id": "lunch-groom-29nov",
+    "type": "meal",
+    "side": "groom",
+    "city": "Pune",
+    "venueName": "Rajat's home, Pune",
+    "title": {
+      "en": "Lunch at home",
+      "hi": "घर पर दोपहर का भोजन"
+    },
+    "time": "13:00",
+    "date": "2026-11-29",
+    "notes": {
+      "en": "Lunch at home, 1 PM onwards.",
+      "hi": "घर पर दोपहर का भोजन, दोपहर 1 बजे से।"
+    },
+    "mapLink": "https://maps.app.goo.gl/6ozDdD9SCCbVJKxZ6",
+    "audience": "all",
+    "status": "confirmed",
+    "needsConfirmation": false,
+    "icon": "meal",
+    "hiDraft": true,
+    "openEnded": true
+  },
+  {
     "id": "lunch-groom-30nov",
     "type": "meal",
     "side": "groom",
@@ -37,13 +61,13 @@
     "time": "13:00",
     "date": "2026-11-30",
     "notes": {
-      "en": "Afternoon lunch before the Baraat leaves for Indore. Exact time being confirmed.",
-      "hi": "इंदौर रवाना होने से पहले दोपहर का भोजन। सटीक समय तय हो रहा है।"
+      "en": "Afternoon lunch before the Baraat leaves for Indore.",
+      "hi": "इंदौर रवाना होने से पहले दोपहर का भोजन।"
     },
     "mapLink": "https://maps.app.goo.gl/6ozDdD9SCCbVJKxZ6",
     "audience": "all",
     "status": "confirmed",
-    "needsConfirmation": true,
+    "needsConfirmation": false,
     "icon": "meal",
     "hiDraft": true
   },
@@ -81,7 +105,7 @@
     "venueName": "Residence",
     "audience": "family",
     "status": "confirmed",
-    "needsConfirmation": true,
+    "needsConfirmation": false,
     "id": "mata-pujan-bride-30nov",
     "side": "bride",
     "date": "2026-11-30",
@@ -300,7 +324,7 @@
     "venueName": "Water Lily Hotel",
     "audience": "all",
     "status": "confirmed",
-    "needsConfirmation": true,
+    "needsConfirmation": false,
     "date": "2026-12-01",
     "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore",
     "id": "sagai-tilak-goad-1dec",
@@ -310,9 +334,6 @@
       "hi": "सगाई / गोद"
     },
     "time": "18:30",
-    "timeBySide": {
-      "groom": "19:00"
-    },
     "area": {
       "en": "Lawn Stage",
       "hi": "लॉन स्टेज"
@@ -330,7 +351,7 @@
     "venueName": "Water Lily Hotel",
     "audience": "all",
     "status": "confirmed",
-    "needsConfirmation": true,
+    "needsConfirmation": false,
     "date": "2026-12-01",
     "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore",
     "id": "sangeet-dj-1dec",
@@ -340,9 +361,6 @@
       "hi": "संगीत व डी.जे."
     },
     "time": "20:00",
-    "timeBySide": {
-      "groom": "19:00"
-    },
     "area": {
       "en": "Lawn Stage",
       "hi": "लॉन स्टेज"
@@ -353,10 +371,6 @@
       "swatch": "indo-western"
     },
     "icon": "music",
-    "notes": {
-      "en": "On the Groom's schedule this is part of the 19:00 evening block.",
-      "hi": "वर पक्ष के कार्यक्रम में यह 19:00 के सायंकालीन कार्यक्रम का हिस्सा है।"
-    },
     "hiDraft": true
   },
   {
@@ -448,10 +462,7 @@
       "en": "Mangal Phere",
       "hi": "मंगल फेरे"
     },
-    "time": "12:15",
-    "timeBySide": {
-      "groom": "12:00"
-    },
+    "time": "12:00",
     "area": {
       "en": "First Floor Terrace, Poolside",
       "hi": "प्रथम तल टैरेस, पूल साइड"
@@ -470,7 +481,7 @@
     "venueName": "Water Lily Hotel",
     "audience": "all",
     "status": "confirmed",
-    "needsConfirmation": true,
+    "needsConfirmation": false,
     "date": "2026-12-02",
     "mapLink": "https://www.google.com/maps/search/?api=1&query=Water+Lily+Hotel+Nipania+Bypass+Indore",
     "id": "reception-2dec",
@@ -480,9 +491,6 @@
       "hi": "रिसेप्शन"
     },
     "time": "20:00",
-    "timeBySide": {
-      "groom": "19:00"
-    },
     "area": {
       "en": "Lawn",
       "hi": "लॉन"
@@ -523,7 +531,7 @@
     "venueName": "Water Lily Hotel",
     "audience": "all",
     "status": "confirmed",
-    "needsConfirmation": true,
+    "needsConfirmation": false,
     "id": "meal-lunch-30nov",
     "side": "common",
     "date": "2026-11-30",
