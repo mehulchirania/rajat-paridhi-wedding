@@ -6,6 +6,7 @@ import { keep } from '../lib/nav';
 import { DayChips } from './DayChips';
 import { HelpButton } from './HelpFab';
 import { Icon } from './Icons';
+import { NowBanner } from './NowNext';
 import { LangToggle, SidePill, TextSizeToggle } from './Toggles';
 
 function useOnline() {
@@ -54,6 +55,7 @@ export function Shell() {
           <div className="flex shrink-0 items-center gap-1.5"><SidePill /><TextSizeToggle /><LangToggle /></div>
         </header>
         {onDay && <div className="px-2"><DayChips /></div>}
+        <NowBanner />
       </div>
       <main className="px-4 pt-4"><Outlet /></main>
       <footer className={`px-4 pb-[calc(8rem+env(safe-area-inset-bottom))] pt-10 text-center text-[0.82rem] text-ink-2 ${infoActive ? 'sr-only' : ''}`}>

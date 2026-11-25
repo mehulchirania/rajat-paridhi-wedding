@@ -2,12 +2,16 @@ import { useEffect, useMemo, useState } from 'react';
 import { useApp } from '../lib/app';
 import { addDays, istToday, nowMs, endInstant } from '../lib/time';
 import { durationOf, events, resolveTime, sortEvents, startMs, visibleEvents } from '../lib/data';
+import { Icon } from './Icons';
 import { HelpSheet } from './HelpSheet';
 import { contactsForView } from '../lib/contacts';
 import { useLocation } from 'react-router-dom';
 import { pageLabel } from './HelpFab';
 import { TimeText, whereText } from './EventCard';
 import type { EventItem } from '../types';
+import { Link } from 'react-router-dom';
+import { dateToSlug } from '../lib/time';
+import { keep } from '../lib/nav';
 
 export function useTick(ms = 30_000) {
   const [n, setN] = useState(nowMs());
@@ -81,5 +85,22 @@ export function NowNext() {
       )}
       <HelpSheet open={help} onClose={() => setHelp(false)} page={pageLabel(loc.pathname, t, dateLabel)} />
     </section>
+  );
+}
+
+/** Slim strip under the header on every page while an event is on: tap to open it. Hidden when nothing is live. */
+export function NowBanner() {
+  const { t, l, side } = useApp();
+  const { current } = useNowState();
+  const ev = current[0];
+  if (!ev) return null;
+  return (
+    <Link to={`/day/${dateToSlug(ev.date)}?e=${ev.id}${keep().replace('?', '&')}`} state={{ sheet: true }} aria-live="polite"
+      className="flex items-center gap-2 bg-oxblood px-4 py-2 text-ivory transition-opacity active:opacity-80">
+      <span aria-hidden="true" className="flame-dot inline-block h-2 w-2 shrink-0 rounded-full" />
+      <span className="shrink-0 text-[0.78rem] font-semibold uppercase tracking-[.14em] text-[#E3C792] [html[lang=hi]_&]:text-[0.85rem] [html[lang=hi]_&]:tracking-normal">{t('nownext.nowShort')}</span>
+      <span className="min-w-0 flex-1 truncate text-[0.95rem] font-semibold">{l(ev.title)}<span className="font-normal text-ivory/80"> · <TimeText ev={ev} view={side} /></span></span>
+      <Icon name="right" size={16} className="shrink-0" />
+    </Link>
   );
 }
