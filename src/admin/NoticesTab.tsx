@@ -7,18 +7,17 @@ interface P { draft: Content; setDraft: (f: (d: Content) => Content) => void; is
 export function NoticesTab({ draft, setDraft, issues }: P) {
   const list = draft.meta.announcements;
   const set = (f: (a: typeof list) => typeof list) => setDraft((d) => ({ ...d, meta: { ...d.meta, announcements: f(d.meta.announcements) } }));
-  const firstActive = list.findIndex((a) => a.active);
   const move = (i: number, by: number) => set((a) => { const n = [...a]; const j = i + by; if (j < 0 || j >= n.length) return a; [n[i], n[j]] = [n[j], n[i]]; return n; });
   return (
     <div className="space-y-4">
-      <p className="text-[0.92rem] text-ink-2">Guests see <b>one</b> banner on every day page: the <b>first active</b> notice in this list. Use it for “Baraat running 1 hour late”-type updates. Each guest can dismiss a notice; <b>Show again to everyone</b> makes it reappear for those who did.</p>
+      <p className="text-[0.92rem] text-ink-2">Guests see a rotating banner at the top of <b>every page</b>: the live event (while one is on) followed by <b>every active</b> notice below, in this order. Use it for “Baraat running 1 hour late”-type updates. Each guest can dismiss a notice; <b>Show again to everyone</b> makes it reappear for those who did.</p>
       <Btn kind="primary" small onClick={() => set((a) => [{ id: uid('notice'), active: true, text: { en: '' } }, ...a])}>+ New notice (goes to the top)</Btn>
       {list.map((a, i) => {
         const e = issues.find((x) => x.path.startsWith(`meta.announcements.${a.id}`))?.msg;
         return (
-          <Card key={a.id} className={a.active && i === firstActive ? 'border-champagne' : ''}>
+          <Card key={a.id} className={a.active ? 'border-champagne' : ''}>
             <div className="mb-3 flex items-center justify-between gap-2">
-              <span className="text-[0.8rem] font-semibold text-ink-2">{a.active ? (i === firstActive ? '● Showing to guests' : '○ Active, but hidden behind a notice above') : '○ Off'}</span>
+              <span className="text-[0.8rem] font-semibold text-ink-2">{a.active ? '● Showing to guests' : '○ Off'}</span>
               <span className="flex gap-1">
                 <Btn small aria-label="Move up" disabled={i === 0} onClick={() => move(i, -1)}>↑</Btn>
                 <Btn small aria-label="Move down" disabled={i === list.length - 1} onClick={() => move(i, 1)}>↓</Btn>

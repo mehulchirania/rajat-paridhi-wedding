@@ -2,7 +2,7 @@ import type { EventItem, GuestSide } from '../types';
 import { useEffect, useRef, type ReactNode, type TouchEvent } from 'react';
 import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useApp } from '../lib/app';
-import { dayBySlug, days, eventById, events, meta, resolveTime, sortEvents, sideVisible, visibleEvents } from '../lib/data';
+import { dayBySlug, days, eventById, events, resolveTime, sortEvents, sideVisible, visibleEvents } from '../lib/data';
 import { keep } from '../lib/nav';
 import { EventCard } from '../components/EventCard';
 import { EventSheet } from '../components/EventSheet';
@@ -13,22 +13,7 @@ import { Petals } from '../components/Petals';
 import { DayHero, OutfitStrip } from '../components/DayHero';
 import { Icon } from '../components/Icons';
 import { NotFound } from './NotFound';
-import { store } from '../lib/storage';
 import { useState } from 'react';
-
-function Announcement() {
-  const { t, l } = useApp();
-  // The retired 'welcome' notice may still sit in previously published content; never show it.
-  const a = meta.announcements.find((x) => x.active && x.id !== 'welcome');
-  const [gone, setGone] = useState(() => !a || store.get(`dismiss-${a.id}`) === '1');
-  if (!a || gone) return null;
-  return (
-    <div role="status" className="mt-4 flex items-start gap-2 border-l-2 border-champagne pl-3">
-      <p className="flex-1 py-1 text-[0.9rem] font-medium leading-snug text-champagne-ink">{l(a.text)}</p>
-      <button type="button" aria-label={t('announce.dismiss')} onClick={() => { store.set(`dismiss-${a.id}`, '1'); setGone(true); }} className="tap -my-1.5 inline-flex items-center justify-center text-champagne-ink"><Icon name="x" size={18} /></button>
-    </div>
-  );
-}
 
 /** Common hotel meals go in the compact strip; side-specific meals (e.g. lunch at home) are normal agenda rows. */
 const isStripMeal = (e: EventItem) => e.type === 'meal' && e.side === 'common';
@@ -131,7 +116,6 @@ export function DayPage() {
       <DayHero date={day.date} dayIndex={idx} events={main} />
       <OutfitStrip events={main} />
       <NowNext />
-      <Announcement />
 
       {hiddenFamily > 0 && main.length > 0 && (
         <button type="button" onClick={() => setShowFamily(true)} className="tap mt-2 inline-flex items-center text-left text-[0.9rem] leading-snug text-ink-2 underline underline-offset-4 decoration-line">

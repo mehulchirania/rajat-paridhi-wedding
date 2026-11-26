@@ -11,7 +11,7 @@ export function DayChips() {
     <nav aria-label={t('days.label')} className="grid grid-cols-4 gap-1.5 pb-2 pt-1">
       {days.map((d) => (
         <NavLink key={d.slug} to={`/day/${d.slug}${keep()}`}
-          className={({ isActive }) => `tap flex flex-col items-center justify-center rounded-xl border pb-1.5 pt-2 leading-none shadow-sm transition-colors duration-200 ${isActive ? 'border-oxblood bg-oxblood text-ivory' : 'border-line bg-sand text-ink hover:bg-line/60'}`}>
+          className={({ isActive }) => `tap flex flex-col items-center justify-center rounded-xl border pb-1.5 pt-2 leading-none shadow-sm transition-colors duration-200 ${isActive ? 'border-oxblood bg-oxblood text-on-wine' : 'border-line bg-sand text-ink hover:bg-line/60'}`}>
           <span className="eyebrow opacity-90">{t(`wd.${weekday(d.date)}`)}</span>
           <span className="font-display tnum mt-1 text-[2rem] leading-none">{dayNum(d.date)}</span>
           <span className="mt-1 text-[0.8rem] font-medium">{t(`mo.${monthIdx(d.date)}`)}</span>

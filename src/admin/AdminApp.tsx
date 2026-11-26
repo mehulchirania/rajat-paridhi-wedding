@@ -130,13 +130,13 @@ function Editor({ onLogout }: { onLogout: () => void }) {
           <h1 className="font-display text-[2rem] leading-tight">Admin</h1>
           <p className="text-[0.85rem] text-ink-2">{usingBuiltIn ? 'Nothing published from here yet' : `Live: version ${rev} · ${istStamp(at)} IST`}</p>
         </div>
-        <div className="flex gap-2"><a href="/" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 shrink-0 items-center whitespace-nowrap rounded-full border border-line bg-white px-4 text-[0.9rem] font-semibold">View site ↗</a><Btn small onClick={onLogout}>Sign out</Btn></div>
+        <div className="flex gap-2"><a href="/" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 shrink-0 items-center whitespace-nowrap rounded-full border border-line bg-paper px-4 text-[0.9rem] font-semibold">View site ↗</a><Btn small onClick={onLogout}>Sign out</Btn></div>
       </header>
 
       <nav aria-label="Sections" className="-mx-4 mb-5 flex gap-2 overflow-x-auto px-4 pb-1">
         {TABS.map(([k, label]) => (
           <button key={k} type="button" onClick={() => setTab(k)} aria-current={tab === k ? 'page' : undefined}
-            className={`min-h-10 shrink-0 rounded-full border px-4 text-[0.9rem] font-semibold ${tab === k ? 'border-oxblood bg-oxblood text-white' : 'border-line bg-white text-ink'}`}>{label}</button>
+            className={`min-h-10 shrink-0 rounded-full border px-4 text-[0.9rem] font-semibold ${tab === k ? 'border-oxblood bg-oxblood text-white' : 'border-line bg-paper text-ink'}`}>{label}</button>
         ))}
       </nav>
 
@@ -155,7 +155,7 @@ function Editor({ onLogout }: { onLogout: () => void }) {
       {tab === 'history' && <HistoryTab history={history} rev={rev} dirty={dirty} usingBuiltIn={usingBuiltIn} busy={busy} onRestore={restore} onReset={reset} onBackup={backup} />}
       {tab === 'json' && <JsonTab draft={draft} apply={(c) => { setDraftRaw(clone(c)); setToast('Applied to draft. Review and publish when ready.'); setTab('events'); }} />}
 
-      {toast && <p role="status" className="fixed inset-x-4 bottom-24 z-40 mx-auto max-w-md rounded-xl bg-ink p-3 text-[0.9rem] text-white shadow-lg">{toast}</p>}
+      {toast && <p role="status" className="fixed inset-x-4 bottom-24 z-40 mx-auto max-w-md rounded-xl bg-oxblood p-3 text-[0.9rem] text-white shadow-lg">{toast}</p>}
 
       <div className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-ivory/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur">
         <div className="mx-auto flex max-w-3xl items-center gap-3">

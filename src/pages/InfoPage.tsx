@@ -21,7 +21,7 @@ const sideDot = (s: 'groom' | 'bride') => (s === 'groom' ? 'bg-groom' : 'bg-brid
 const sideInk = (s: 'groom' | 'bride') => (s === 'groom' ? 'text-groom-ink' : 'text-bride-ink');
 
 export function InfoPage() {
-  const { t, l, lang, side, dateLabel, bigText, setBigText} = useApp();
+  const { t, l, lang, side, dateLabel, bigText, setBigText, dark, setDark } = useApp();
   const goWelcome = useNavigate();
   const wa = useWa();
   const loc = useLocation();
@@ -122,8 +122,15 @@ export function InfoPage() {
           <div className="flex min-h-[44px] items-center justify-between gap-4">
             <span id="bigtext-label" className="text-ink">{t('size.toggle')}</span>
             <button type="button" role="switch" aria-checked={bigText} aria-labelledby="bigtext-label" onClick={() => setBigText(!bigText)}
-              className={`relative h-8 w-14 shrink-0 rounded-full transition-colors ${bigText ? 'bg-oxblood' : 'bg-line'}`}>
-              <span aria-hidden="true" className={`absolute top-1 h-6 w-6 rounded-full bg-white shadow transition-transform ${bigText ? 'translate-x-7' : 'translate-x-1'}`} />
+              className={`relative h-8 w-14 shrink-0 rounded-full transition-colors duration-200 ease-(--ease-out) ${bigText ? 'bg-oxblood' : 'bg-line'}`}>
+              <span aria-hidden="true" className={`absolute top-1 h-6 w-6 rounded-full bg-white shadow transition-transform duration-200 ease-(--ease-out) ${bigText ? 'translate-x-7' : 'translate-x-1'}`} />
+            </button>
+          </div>
+          <div className="flex min-h-[44px] items-center justify-between gap-4">
+            <span id="dark-label" className="text-ink">{t('toggle.dark')}</span>
+            <button type="button" role="switch" aria-checked={dark} aria-labelledby="dark-label" onClick={() => setDark(!dark)}
+              className={`relative h-8 w-14 shrink-0 rounded-full transition-colors duration-200 ease-(--ease-out) ${dark ? 'bg-oxblood' : 'bg-line'}`}>
+              <span aria-hidden="true" className={`absolute top-1 h-6 w-6 rounded-full bg-white shadow transition-transform duration-200 ease-(--ease-out) ${dark ? 'translate-x-7' : 'translate-x-1'}`} />
             </button>
           </div>
           <button type="button" onClick={() => goWelcome(`/welcome${keep()}`, { state: { from: loc.pathname + loc.search } })} className="tap mt-2 inline-flex items-center font-semibold text-oxblood underline underline-offset-4">{t('footer.replay')}</button>

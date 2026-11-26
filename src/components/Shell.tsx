@@ -7,7 +7,7 @@ import { DayChips } from './DayChips';
 import { HelpButton } from './HelpFab';
 import { Icon } from './Icons';
 import { silenceMusic } from './MusicToggle';
-import { NowBanner } from './NowNext';
+import { UpdatesBanner } from './UpdatesBanner';
 import { LangToggle, SidePill, TextSizeToggle } from './Toggles';
 
 function useOnline() {
@@ -21,7 +21,7 @@ function useOnline() {
 }
 
 const dockItem = 'tap flex min-w-[5.25rem] flex-col items-center justify-center gap-1 rounded-2xl border px-3 py-1.5 text-[0.8rem] font-semibold leading-none shadow-sm transition-colors duration-200 active:scale-[.97]';
-const dockOn = 'border-oxblood bg-oxblood text-ivory';
+const dockOn = 'border-oxblood bg-oxblood text-on-wine';
 const dockOff = 'border-line bg-sand text-ink hover:bg-line/60';
 
 export function Shell() {
@@ -58,7 +58,7 @@ export function Shell() {
           <div className="flex shrink-0 items-center gap-1.5"><SidePill /><TextSizeToggle /><LangToggle /></div>
         </header>
         {onDay && <div className="px-2"><DayChips /></div>}
-        <NowBanner />
+        <UpdatesBanner />
       </div>
       <main className="px-4 pt-4"><Outlet /></main>
       <footer className={`px-4 pb-[calc(8rem+env(safe-area-inset-bottom))] pt-10 text-center text-[0.82rem] text-ink-2 ${infoActive ? 'sr-only' : ''}`}>

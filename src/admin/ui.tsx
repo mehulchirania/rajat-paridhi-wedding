@@ -1,7 +1,7 @@
 import { useEffect, type ReactNode } from 'react';
 import type { L10n } from '../types';
 
-export const inputCls = 'block w-full min-h-11 rounded-xl border border-line bg-white px-3 py-2 text-base text-ink placeholder:text-ink-2/50';
+export const inputCls = 'block w-full min-h-11 rounded-xl border border-line bg-paper px-3 py-2 text-base text-ink placeholder:text-ink-2/50';
 
 export function Field({ label, hint, error, children }: { label: string; hint?: string; error?: string; children: ReactNode }) {
   return (
@@ -30,7 +30,7 @@ export function Select<T extends string>({ value, onChange, options }: { value: 
 export function Check({ label, checked, onChange, hint }: { label: string; checked: boolean; onChange: (v: boolean) => void; hint?: string }) {
   return (
     <label className="flex min-h-11 cursor-pointer items-start gap-3 py-1.5">
-      <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} className="mt-1 size-5 accent-[#5E1426]" />
+      <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} className="mt-1 size-5 accent-oxblood" />
       <span><span className="block text-base text-ink">{label}</span>{hint && <span className="block text-[0.8rem] text-ink-2">{hint}</span>}</span>
     </label>
   );
@@ -40,7 +40,7 @@ type Kind = 'primary' | 'ghost' | 'danger';
 export function Btn({ kind = 'ghost', small, className = '', ...rest }: { kind?: Kind; small?: boolean } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   const base = 'inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full font-semibold disabled:opacity-40 disabled:cursor-not-allowed';
   const size = small ? 'min-h-10 px-4 text-[0.9rem]' : 'min-h-12 px-6 text-base';
-  const tone = kind === 'primary' ? 'bg-oxblood text-white' : kind === 'danger' ? 'border border-bride text-bride-ink bg-white' : 'border border-line bg-white text-ink';
+  const tone = kind === 'primary' ? 'bg-oxblood text-white' : kind === 'danger' ? 'border border-bride text-bride-ink bg-paper' : 'border border-line bg-paper text-ink';
   return <button type="button" {...rest} className={`${base} ${size} ${tone} ${className}`} />;
 }
 
@@ -72,7 +72,7 @@ export function Modal({ title, onClose, children }: { title: string; onClose: ()
   }, [onClose]);
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center">
-      <div className="absolute inset-0 bg-ink/50" onClick={onClose} aria-hidden="true" />
+      <div className="absolute inset-0 bg-black/50" onClick={onClose} aria-hidden="true" />
       <div role="dialog" aria-modal="true" aria-label={title} className="relative max-h-[90dvh] w-full max-w-lg overflow-y-auto rounded-t-[20px] bg-ivory p-5 sm:rounded-[20px]">
         <h2 className="mb-3 font-display text-[1.7rem] leading-tight">{title}</h2>
         {children}
@@ -82,7 +82,7 @@ export function Modal({ title, onClose, children }: { title: string; onClose: ()
 }
 
 export const Card = ({ children, className = '' }: { children: ReactNode; className?: string }) => (
-  <section className={`rounded-[20px] border border-line bg-white p-4 ${className}`}>{children}</section>
+  <section className={`rounded-[20px] border border-line bg-paper p-4 ${className}`}>{children}</section>
 );
 
 // ---- small helpers shared by the tabs ----

@@ -26,7 +26,7 @@ export function ConfirmBadge() {
   const { t } = useApp();
   return (
     <span className="inline-flex items-center gap-1.5 text-[0.9rem] font-medium leading-tight text-amber-ink">
-      <span aria-hidden="true" className="h-2 w-2 shrink-0 rounded-full bg-[#D9A21B]" />
+      <span aria-hidden="true" className="h-2 w-2 shrink-0 rounded-full bg-marigold" />
       {t('badge.confirming')}
     </span>
   );

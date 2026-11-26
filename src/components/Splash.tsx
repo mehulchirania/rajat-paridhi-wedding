@@ -29,11 +29,11 @@ export function Splash() {
   const [burst, setBurst] = useState<{ x: number; y: number } | null>(null);
   const [married] = useState(() => { const n = nowMs(); return n >= MARRIED_FROM && n < MARRIED_UNTIL; });
   useEffect(() => () => clearTimeout(timer.current), []);
-  const pick = (s: GuestSide, e: MouseEvent<HTMLElement>) => {
+  const pick = (s: GuestSide, e: MouseEvent<HTMLElement>, instant = false) => {
     if (timer.current) return; // already leaving
     const go = () => { setSide(s); nav(target, { replace: !from }); };
     music.current?.fadeOutAndStop(800);
-    if (prefersReducedMotion()) { go(); return; }
+    if (instant || prefersReducedMotion()) { go(); return; }
     const r = e.currentTarget.getBoundingClientRect();
     setBurst({ x: r.left + r.width / 2, y: r.top + r.height / 2 });
     try { navigator.vibrate?.(15); } catch { /* unsupported */ }
@@ -60,7 +60,7 @@ export function Splash() {
         {married && <p className="mt-3 font-display text-[1.25rem] italic text-champagne" style={rise(300)}>{t('splash.justMarried')}</p>}
         <h1 className="mt-3 font-display text-[3.2rem] leading-[.95]" style={rise(350)}>
           <span className="block">{first(l(meta.couple.groom.name))}</span>
-          <span className="heartbeat my-1 block text-[2.4rem] leading-none text-[#FF5C85] [text-shadow:0_2px_10px_rgb(0_0_0/.55)]" aria-hidden="true">♥</span>
+          <span className="heartbeat my-1 block text-[2.4rem] leading-none text-heart [text-shadow:0_2px_10px_rgb(0_0_0/.55)]" aria-hidden="true">♥</span>
           <span className="block">{first(l(meta.couple.bride.name))}</span>
         </h1>
         <p className="mt-3 font-display text-[1.4rem] text-white/90" style={rise(450)}>{t('app.eventTitle')}</p>
@@ -68,7 +68,7 @@ export function Splash() {
         <Countdown className="mx-auto mt-6 max-w-sm" />
 
         {hasSide && (
-          <button type="button" onClick={(e) => pick(side, e)} style={rise(550)}
+          <button type="button" onClick={(e) => pick(side, e, true)} style={rise(550)}
             className="tap mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-ivory px-5 py-3 text-[1rem] font-semibold text-oxblood shadow-lg transition-transform active:scale-[.98]">
             <SideDot side={side} size={10} />{side === 'both' ? t('splash.continueBoth') : t('splash.continue', { side: t(`side.${side}`) })} <span aria-hidden="true">→</span>
           </button>

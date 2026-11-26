@@ -39,7 +39,7 @@ li[data-reveal="shown"] .row-dot, li[data-reveal="now"] .row-dot { animation: do
   45% { opacity: 1; transform: scale(1.15); }
   70% { opacity: .7; transform: scale(.9); }
 }
-.flame-dot { background: #F2A04A; box-shadow: 0 0 6px 2px rgb(242 140 40 / .55); animation: flame-dot 2.4s ease-in-out infinite; }
+.flame-dot { background: var(--color-flame); box-shadow: 0 0 6px 2px rgb(242 140 40 / .55); animation: flame-dot 2.4s ease-in-out infinite; }
 /* Shell toggles .page-hidden on <html> from visibilitychange so infinite animations stop in background tabs. */
 .page-hidden .diya-glow, .page-hidden .flame-dot { animation-play-state: paused; }
 

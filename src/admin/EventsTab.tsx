@@ -37,7 +37,7 @@ export function EventsTab({ draft, setDraft, issues }: P) {
       <div className="flex flex-wrap items-center gap-2">
         {['all', ...dates].map((d) => (
           <button key={d} type="button" onClick={() => setDay(d)} aria-pressed={day === d}
-            className={`min-h-10 rounded-full border px-4 text-[0.9rem] font-semibold ${day === d ? 'border-oxblood bg-oxblood text-white' : 'border-line bg-white text-ink'}`}>
+            className={`min-h-10 rounded-full border px-4 text-[0.9rem] font-semibold ${day === d ? 'border-oxblood bg-oxblood text-white' : 'border-line bg-paper text-ink'}`}>
             {d === 'all' ? 'All days' : dateLabel(d)}
           </button>
         ))}

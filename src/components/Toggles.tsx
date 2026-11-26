@@ -18,8 +18,8 @@ function Switch({ checked, onChange, label }: { checked: boolean; onChange: (v: 
     <button type="button" role="switch" aria-checked={checked} onClick={() => onChange(!checked)}
       className="tap flex w-full items-center justify-between gap-4 border-t border-line py-3 text-left">
       <span className="text-[1rem] font-medium text-ink">{label}</span>
-      <span aria-hidden="true" className={`relative h-7 w-12 shrink-0 rounded-full transition-colors duration-200 ${checked ? 'bg-oxblood' : 'bg-ink-2/40'}`}>
-        <span className={`absolute left-0.5 top-0.5 h-6 w-6 rounded-full bg-white transition-transform duration-200 ${checked ? 'translate-x-5' : ''}`} />
+      <span aria-hidden="true" className={`relative h-7 w-12 shrink-0 rounded-full transition-colors duration-200 ease-(--ease-out) ${checked ? 'bg-oxblood' : 'bg-ink-2/40'}`}>
+        <span className={`absolute left-0.5 top-0.5 h-6 w-6 rounded-full bg-white transition-transform duration-200 ease-(--ease-out) ${checked ? 'translate-x-5' : ''}`} />
       </span>
     </button>
   );
@@ -27,7 +27,7 @@ function Switch({ checked, onChange, label }: { checked: boolean; onChange: (v: 
 
 /** Header pill showing the current side; opens a sheet with side options + display switches. */
 export function SidePill() {
-  const { side, setSide, t, showFamily, setShowFamily, bigText, setBigText } = useApp();
+  const { side, setSide, t, showFamily, setShowFamily, bigText, setBigText, dark, setDark } = useApp();
   const [open, setOpen] = useState(false);
   const label = t(`side.${side}.of`.replace('.of', side === 'both' ? '' : '.of'));
   const short = t(`side.${side}.short`);
@@ -55,6 +55,7 @@ export function SidePill() {
         </div>
         <Switch checked={showFamily} onChange={setShowFamily} label={t('toggle.family')} />
         <Switch checked={bigText} onChange={setBigText} label={t('size.toggle')} />
+        <Switch checked={dark} onChange={setDark} label={t('toggle.dark')} />
       </Sheet>
     </>
   );
@@ -64,7 +65,7 @@ export function SidePill() {
 export function TextSizeToggle({ tone = 'dark' }: { tone?: 'dark' | 'light' }) {
   const { bigText, setBigText, t } = useApp();
   const light = tone === 'light';
-  const on = light ? 'border-white bg-white text-oxblood' : 'border-oxblood bg-oxblood text-ivory';
+  const on = light ? 'border-white bg-white text-oxblood' : 'border-oxblood bg-oxblood text-on-wine';
   const off = light ? 'border-white/25 bg-white/12 text-white backdrop-blur-md' : 'border-line bg-sand text-ink';
   return (
     <button type="button" aria-pressed={bigText} aria-label={t('size.toggle')} title={t('size.toggle')} onClick={() => setBigText(!bigText)}

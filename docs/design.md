@@ -55,7 +55,7 @@ Radii: cards/sheets 20px (`--radius-card`), pills full. Shadows: only on the flo
 ### Splash
 Full-bleed `splash` photo (object-position = focal), dark gradient scrim bottom 60%.
 Top: `॥ जय श्री कृष्ण ॥` (Tiro, champagne, 1.3rem) centred, English transliteration small beneath in italic.
-Bottom block on scrim (white text): eyebrow "29 Nov – 2 Dec 2026 · Indore"; names in Fraunces (variable, optical sizing) ~3.6rem — "Rajat" / italic "&" in champagne / "Paridhi" (stacked); "परिणय समारोह" line; then side picker: three equal pill buttons in a row on a frosted pane (`backdrop-blur`, bg white/12, 1px white/25 border): "Groom's side" (small blue dot), "Bride's side" (pink dot), "Both". Hint text below. Lang toggle top-right as a small frosted pill.
+Bottom block on scrim (white text): eyebrow "1 – 2 Dec 2026 · Indore"; names in Fraunces (variable, optical sizing) ~3.6rem — "Rajat" / italic "&" in champagne / "Paridhi" (stacked); "परिणय समारोह" line; then side picker: three equal pill buttons in a row on a frosted pane (`backdrop-blur`, bg white/12, 1px white/25 border): "Groom's side" (small blue dot), "Bride's side" (pink dot), "Both". Hint text below. Lang toggle top-right as a small frosted pill.
 Photo fades in (blur placeholder → image), names rise. No knot SVG.
 
 ### App shell

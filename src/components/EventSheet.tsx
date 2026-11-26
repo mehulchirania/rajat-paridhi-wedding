@@ -73,7 +73,7 @@ export function EventSheet({ ev, view, onClose }: { ev: EventItem | undefined; v
 
       <div className="mt-5 space-y-2.5">
         {ics
-          ? <button type="button" onClick={() => downloadIcs(`${ev.id}.ics`, ics)} className={`${btn} bg-oxblood text-ivory hover:bg-oxblood-2`}><Icon name="cal" />{t('sheet.calendar')}</button>
+          ? <button type="button" onClick={() => downloadIcs(`${ev.id}.ics`, ics)} className={`${btn} bg-oxblood text-on-wine hover:bg-oxblood-2`}><Icon name="cal" />{t('sheet.calendar')}</button>
           : <p className="rounded-xl bg-sand p-3 text-[0.92rem] text-ink-2">{t('sheet.calendarTbd')}</p>}
         <div className="flex gap-2.5">
           {ev.mapLink && <a href={ev.mapLink} target="_blank" rel="noopener noreferrer" className={`${btn} flex-1 border border-oxblood text-oxblood hover:bg-sand`}><Icon name="pin" />{t('sheet.mapsShort')}</a>}

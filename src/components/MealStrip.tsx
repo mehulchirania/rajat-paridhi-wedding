@@ -25,7 +25,7 @@ export function MealStrip({ meals, view, onOpen }: { meals: EventItem[]; view: G
                   {p ? `${p.num} ${p.per}` : t('time.tba')}
                   {m.needsConfirmation && (
                     <>
-                      <span aria-hidden="true" className="h-2 w-2 rounded-full bg-[#D9A21B]" />
+                      <span aria-hidden="true" className="h-2 w-2 rounded-full bg-marigold" />
                       <span className="sr-only">{t('badge.confirming')}</span>
                     </>
                   )}
