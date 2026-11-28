@@ -1,7 +1,5 @@
 [
-  { "id": "groom-stay", "kind": "family", "side": "groom", "name": "Groom-side contact 1 (PLACEHOLDER)", "relation": { "en": "Family member", "hi": "परिवार के सदस्य" }, "role": "stay-transport", "phone": "910000000011", "placeholder": true, "primary": true, "active": true },
-  { "id": "groom-timings", "kind": "family", "side": "groom", "name": "Groom-side contact 2 (PLACEHOLDER)", "relation": { "en": "Family member", "hi": "परिवार के सदस्य" }, "role": "timings", "phone": "910000000012", "placeholder": true, "active": true },
-  { "id": "bride-stay", "kind": "family", "side": "bride", "name": "Bride-side contact 1 (PLACEHOLDER)", "relation": { "en": "Family member", "hi": "परिवार के सदस्य" }, "role": "stay-transport", "phone": "910000000021", "placeholder": true, "primary": true, "active": true },
-  { "id": "bride-timings", "kind": "family", "side": "bride", "name": "Bride-side contact 2 (PLACEHOLDER)", "relation": { "en": "Family member", "hi": "परिवार के सदस्य" }, "role": "timings", "phone": "910000000022", "placeholder": true, "active": true },
+  { "id": "groom-main", "kind": "family", "side": "groom", "name": "Groom contact", "role": "timings", "phone": "14048201871", "primary": true, "active": true },
+  { "id": "bride-main", "kind": "family", "side": "bride", "name": "Bride contact", "role": "timings", "phone": "18576938712", "primary": true, "active": true },
   { "id": "helpdesk-ndc", "kind": "venue", "name": { "en": "On-site event help desk (NDC Events)", "hi": "ऑन-साइट इवेंट हेल्प डेस्क (NDC Events)" }, "phones": ["917247267934", "917224800310"], "active": true }
 ]

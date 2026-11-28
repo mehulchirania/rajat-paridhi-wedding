@@ -85,6 +85,13 @@ export const Card = ({ children, className = '' }: { children: ReactNode; classN
   <section className={`rounded-[20px] border border-line bg-paper p-4 ${className}`}>{children}</section>
 );
 
+export const PageHead = ({ title, sub }: { title: string; sub?: string }) => (
+  <div>
+    <h2 className="font-display text-[1.75rem] leading-tight">{title}</h2>
+    {sub && <p className="mt-1 text-[0.92rem] text-ink-2">{sub}</p>}
+  </div>
+);
+
 // ---- small helpers shared by the tabs ----
 export const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40) || 'item';
 export const uid = (p: string) => `${p}-${Date.now().toString(36)}${Math.random().toString(36).slice(2, 5)}`;

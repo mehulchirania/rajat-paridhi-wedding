@@ -1,11 +1,11 @@
 import type { Issue } from '../../shared/validate';
 import type { Content } from '../lib/data';
 import type { L10n, Meta } from '../types';
-import { Card, Field, L10nInput, Text } from './ui';
+import { Card, Field, L10nInput, PageHead, Text } from './ui';
 
-interface P { draft: Content; setDraft: (f: (d: Content) => Content) => void; issues: Issue[] }
+interface P { part: 'venue' | 'couple'; draft: Content; setDraft: (f: (d: Content) => Content) => void; issues: Issue[] }
 
-export function InfoTab({ draft, setDraft, issues }: P) {
+export function InfoTab({ part, draft, setDraft, issues }: P) {
   const m = draft.meta;
   const patch = (f: (m: Meta) => Meta) => setDraft((d) => ({ ...d, meta: f(d.meta) }));
   const e = (path: string) => issues.find((i) => i.path === `meta.${path}`)?.msg;
@@ -13,7 +13,8 @@ export function InfoTab({ draft, setDraft, issues }: P) {
   const req = (v: L10n | undefined): L10n => v ?? { en: '' };
   return (
     <div className="space-y-5">
-      <h2 className="font-display text-[1.5rem]">Hotel & venue info</h2>
+      {part === 'venue' && <>
+      <PageHead title="Hotel & venue" sub="Shown on the Info page: address, map, parking and in-room help." />
       <Card className="space-y-4">
         <Field label="Hotel name" error={e('hotel.name')}><Text value={m.hotel.name} onChange={(v) => hotel('name', v)} /></Field>
         <L10nInput label="Address" required value={m.hotel.address} onChange={(v) => hotel('address', req(v))} error={e('hotel.address')} />
@@ -22,7 +23,9 @@ export function InfoTab({ draft, setDraft, issues }: P) {
         <L10nInput label="In-room help" multiline required value={m.hotel.inRoom} onChange={(v) => hotel('inRoom', req(v))} error={e('hotel.inRoom')} />
         <L10nInput label="Tea / coffee line" multiline required value={m.teaCoffee} onChange={(v) => patch((x) => ({ ...x, teaCoffee: req(v) }))} error={e('teaCoffee')} />
       </Card>
-      <h2 className="font-display text-[1.5rem]">Couple & families</h2>
+      </>}
+      {part === 'couple' && <>
+      <PageHead title="Couple & families" sub="Names and parents lines shown on the welcome page and the Info page." />
       {(['groom', 'bride'] as const).map((s) => (
         <Card key={s} className="space-y-4">
           <p className="eyebrow text-ink-2">{s}</p>
@@ -30,6 +33,7 @@ export function InfoTab({ draft, setDraft, issues }: P) {
           <L10nInput label="Parents line" required value={m.couple[s].parents} onChange={(v) => patch((x) => ({ ...x, couple: { ...x.couple, [s]: { ...x.couple[s], parents: req(v) } } }))} error={e(`couple.${s}.parents`)} />
         </Card>
       ))}
+      </>}
     </div>
   );
 }

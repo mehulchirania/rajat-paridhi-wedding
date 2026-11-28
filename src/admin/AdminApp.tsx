@@ -10,11 +10,20 @@ import { InfoTab } from './InfoTab';
 import { JsonTab } from './JsonTab';
 import { NoticesTab } from './NoticesTab';
 import { ToolsTab } from './ToolsTab';
-import { Btn, Card, Field, Modal, Text, istStamp } from './ui';
+import { Btn, Card, Field, Modal, PageHead, Text, istStamp } from './ui';
 
 const clone = <T,>(v: T): T => JSON.parse(JSON.stringify(v));
-const TABS = [['events', 'Events'], ['notices', 'Notices'], ['tools', 'Shift times'], ['contacts', 'Contacts'], ['info', 'Venue & names'], ['history', 'History'], ['json', 'Advanced']] as const;
-type Tab = (typeof TABS)[number][0];
+type Tab = 'home' | 'events' | 'tools' | 'notices' | 'contacts' | 'couple' | 'venue' | 'history' | 'json';
+/** Areas of the site, grouped by what the admin is trying to do. */
+const GROUPS: { key: string; label: string; tabs: readonly (readonly [Tab, string])[] }[] = [
+  { key: 'home', label: 'Home', tabs: [['home', 'Home']] },
+  { key: 'schedule', label: 'Schedule', tabs: [['events', 'Events'], ['tools', 'Running late?']] },
+  { key: 'guests', label: 'Guest updates', tabs: [['notices', 'Banner notices']] },
+  { key: 'people', label: 'People & phones', tabs: [['contacts', 'Phone numbers'], ['couple', 'Couple & families']] },
+  { key: 'venue', label: 'Venue', tabs: [['venue', 'Hotel & venue']] },
+  { key: 'manage', label: 'Manage', tabs: [['history', 'History & backup'], ['json', 'Advanced']] },
+];
+const groupOf = (t: Tab) => GROUPS.find((g) => g.tabs.some(([k]) => k === t)) ?? GROUPS[0];
 
 export default function AdminApp() {
   useEffect(() => {
@@ -51,7 +60,7 @@ function Login({ onDone }: { onDone: () => void }) {
 }
 
 function Editor({ onLogout }: { onLogout: () => void }) {
-  const [tab, setTab] = useState<Tab>('events');
+  const [tab, setTab] = useState<Tab>('home');
   const [loading, setLoading] = useState(true);
   const [loadErr, setLoadErr] = useState('');
   const [rev, setRev] = useState(0);
@@ -108,8 +117,8 @@ function Editor({ onLogout }: { onLogout: () => void }) {
     await load();
     setToast(`Published as version ${r.rev}. New visitors see it within about a minute; guests with the app open pick it up within ~3 minutes or the next time they open it.`);
   });
-  const restore = (r: number) => guarded(async () => { await api.restore(r); await load(); setToast(`Restored version ${r} as a new version.`); setTab('events'); });
-  const reset = () => guarded(async () => { await api.reset(rev); await load(); setToast('Reset to the built-in data.'); setTab('events'); });
+  const restore = (r: number) => guarded(async () => { await api.restore(r); await load(); setToast(`Restored version ${r} as a new version.`); setTab('home'); });
+  const reset = () => guarded(async () => { await api.reset(rev); await load(); setToast('Reset to the built-in data.'); setTab('home'); });
   const backup = () => {
     const blob = new Blob([JSON.stringify(base, null, 2)], { type: 'application/json' });
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `wedding-site-backup-v${rev}.json`; a.click(); URL.revokeObjectURL(a.href);
@@ -133,12 +142,23 @@ function Editor({ onLogout }: { onLogout: () => void }) {
         <div className="flex gap-2"><a href="/" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 shrink-0 items-center whitespace-nowrap rounded-full border border-line bg-paper px-4 text-[0.9rem] font-semibold">View site ↗</a><Btn small onClick={onLogout}>Sign out</Btn></div>
       </header>
 
-      <nav aria-label="Sections" className="-mx-4 mb-5 flex gap-2 overflow-x-auto px-4 pb-1">
-        {TABS.map(([k, label]) => (
-          <button key={k} type="button" onClick={() => setTab(k)} aria-current={tab === k ? 'page' : undefined}
-            className={`min-h-10 shrink-0 rounded-full border px-4 text-[0.9rem] font-semibold ${tab === k ? 'border-oxblood bg-oxblood text-white' : 'border-line bg-paper text-ink'}`}>{label}</button>
-        ))}
+      <nav aria-label="Areas" className="-mx-4 mb-2 flex gap-2 overflow-x-auto px-4 pb-1">
+        {GROUPS.map((g) => {
+          const on = groupOf(tab).key === g.key;
+          return (
+            <button key={g.key} type="button" onClick={() => setTab(g.tabs[0][0])} aria-current={on ? 'page' : undefined}
+              className={`min-h-10 shrink-0 rounded-full border px-4 text-[0.9rem] font-semibold ${on ? 'border-oxblood bg-oxblood text-white' : 'border-line bg-paper text-ink'}`}>{g.label}</button>
+          );
+        })}
       </nav>
+      {groupOf(tab).tabs.length > 1 ? (
+        <nav aria-label="Sections" className="mb-5 flex gap-1 border-b border-line">
+          {groupOf(tab).tabs.map(([k, label]) => (
+            <button key={k} type="button" onClick={() => setTab(k)} aria-current={tab === k ? 'page' : undefined}
+              className={`-mb-px min-h-10 border-b-2 px-3 text-[0.9rem] font-semibold ${tab === k ? 'border-oxblood text-oxblood' : 'border-transparent text-ink-2'}`}>{label}</button>
+          ))}
+        </nav>
+      ) : <div className="mb-3" />}
 
       {conflict && (
         <Card className="mb-4 border-bride">
@@ -147,13 +167,15 @@ function Editor({ onLogout }: { onLogout: () => void }) {
         </Card>
       )}
 
+      {tab === 'home' && <Home go={setTab} base={base} usingBuiltIn={usingBuiltIn} />}
       {tab === 'events' && <EventsTab draft={draft} setDraft={setDraft} issues={issues} />}
       {tab === 'notices' && <NoticesTab draft={draft} setDraft={setDraft} issues={issues} />}
-      {tab === 'tools' && <ToolsTab draft={draft} setDraft={setDraft} onDone={(m) => { setToast(m); setTab('events'); }} />}
+      {tab === 'tools' && <ToolsTab draft={draft} setDraft={setDraft} onDone={(m) => { setToast(m); setTab('home'); }} />}
       {tab === 'contacts' && <ContactsTab draft={draft} setDraft={setDraft} issues={issues} />}
-      {tab === 'info' && <InfoTab draft={draft} setDraft={setDraft} issues={issues} />}
+      {tab === 'venue' && <InfoTab part="venue" draft={draft} setDraft={setDraft} issues={issues} />}
+      {tab === 'couple' && <InfoTab part="couple" draft={draft} setDraft={setDraft} issues={issues} />}
       {tab === 'history' && <HistoryTab history={history} rev={rev} dirty={dirty} usingBuiltIn={usingBuiltIn} busy={busy} onRestore={restore} onReset={reset} onBackup={backup} />}
-      {tab === 'json' && <JsonTab draft={draft} apply={(c) => { setDraftRaw(clone(c)); setToast('Applied to draft. Review and publish when ready.'); setTab('events'); }} />}
+      {tab === 'json' && <JsonTab draft={draft} apply={(c) => { setDraftRaw(clone(c)); setToast('Applied to draft. Review and publish when ready.'); setTab('home'); }} />}
 
       {toast && <p role="status" className="fixed inset-x-4 bottom-24 z-40 mx-auto max-w-md rounded-xl bg-oxblood p-3 text-[0.9rem] text-white shadow-lg">{toast}</p>}
 
@@ -179,6 +201,34 @@ function Editor({ onLogout }: { onLogout: () => void }) {
           <div className="mt-4 flex gap-2"><Btn kind="primary" className="flex-1" disabled={busy} onClick={publish}>{busy ? 'Publishing…' : 'Publish to guests'}</Btn><Btn disabled={busy} onClick={() => setReview(false)}>Back</Btn></div>
         </Modal>
       )}
+    </div>
+  );
+}
+
+const QUICK: { tab: Tab; icon: string; title: string; sub: string }[] = [
+  { tab: 'notices', icon: '📣', title: 'Post an update', sub: 'Banner message every guest sees, e.g. “Baraat running 1 hour late”.' },
+  { tab: 'tools', icon: '⏱', title: 'Running late?', sub: 'Shift a whole day’s timings by some minutes in one step.' },
+  { tab: 'events', icon: '📅', title: 'Edit events', sub: 'Change time, venue, map link or details; add or remove events.' },
+  { tab: 'contacts', icon: '📞', title: 'Change phone numbers', sub: 'Groom-side and bride-side WhatsApp contacts and the help desk.' },
+  { tab: 'venue', icon: '🏨', title: 'Hotel & venue', sub: 'Address, map pin, parking and in-room help.' },
+  { tab: 'couple', icon: '💍', title: 'Names & families', sub: 'Couple names and parents lines.' },
+  { tab: 'history', icon: '🕘', title: 'History & backup', sub: 'Restore an earlier version or download a backup.' },
+];
+
+function Home({ go, base, usingBuiltIn }: { go: (t: Tab) => void; base: Content; usingBuiltIn: boolean }) {
+  const live = base.meta.announcements.filter((a) => a.active && a.id !== 'welcome').length;
+  return (
+    <div className="space-y-4">
+      <PageHead title="What would you like to update?" sub="Changes stay as a draft until you press Review & publish at the bottom." />
+      <p className="text-[0.88rem] text-ink-2">{base.events.length} events · {live} active notice{live === 1 ? '' : 's'}{usingBuiltIn ? ' · nothing published from here yet' : ''}</p>
+      <div className="grid gap-3 sm:grid-cols-2">
+        {QUICK.map((q) => (
+          <button key={q.tab} type="button" onClick={() => go(q.tab)} className="flex min-h-20 items-start gap-3 rounded-[20px] border border-line bg-paper p-4 text-left active:bg-sand">
+            <span aria-hidden="true" className="text-[1.6rem] leading-none">{q.icon}</span>
+            <span><span className="block font-display text-[1.25rem] leading-tight">{q.title}</span><span className="mt-0.5 block text-[0.88rem] text-ink-2">{q.sub}</span></span>
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
