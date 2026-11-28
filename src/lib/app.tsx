@@ -3,6 +3,7 @@ import en from '../i18n/en.json';
 import hi from '../i18n/hi.json';
 import type { GuestSide, L10n, Lang } from '../types';
 import { store } from './storage';
+import { applyTheme, isTheme, type Theme } from './themes';
 import { dayNum, formatTime, monthIdx, weekday } from './time';
 
 const dict: Record<Lang, Record<string, string>> = { en, hi };
@@ -13,7 +14,7 @@ interface Ctx {
   side: GuestSide; setSide: (s: GuestSide) => void; hasSide: boolean;
   showFamily: boolean; setShowFamily: (v: boolean) => void;
   bigText: boolean; setBigText: (v: boolean) => void;
-  dark: boolean; setDark: (v: boolean) => void;
+  theme: Theme; setTheme: (t: Theme) => void;
   t: (key: string, vars?: Vars) => string;
   l: (x?: L10n | { en: string; hi?: string } | null) => string;
   time: (t: string) => string;
@@ -38,18 +39,18 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [sideRaw, setSideS] = useState<GuestSide | null>(() => { const s = store.get('side'); return isSide(s) ? s : null; });
   const [showFamily, setFam] = useState(() => store.get('showFamily') === '1');
   const [bigText, setBig] = useState(() => store.get('bigText') === '1');
-  // Light is the default; dark mode is opt-in via the toggle and remembered.
-  const [dark, setDarkS] = useState(() => store.get('theme') === 'dark');
+  // Classic light is the default; any other theme is opt-in and remembered.
+  const [theme, setThemeS] = useState<Theme>(() => { const s = store.get('theme'); return isTheme(s) ? s : 'light'; });
 
   useEffect(() => { document.documentElement.lang = lang; }, [lang]);
   useEffect(() => { document.documentElement.classList.toggle('big-text', bigText); }, [bigText]);
-  useEffect(() => { document.documentElement.classList.toggle('dark', dark); }, [dark]);
+  useEffect(() => { applyTheme(theme); }, [theme]);
 
   const setLang = useCallback((l: Lang) => { store.set('lang', l); setLangS(l); }, []);
   const setSide = useCallback((s: GuestSide) => { store.set('side', s); setSideS(s); }, []);
   const setShowFamily = useCallback((v: boolean) => { store.set('showFamily', v ? '1' : '0'); setFam(v); }, []);
   const setBigText = useCallback((v: boolean) => { store.set('bigText', v ? '1' : '0'); setBig(v); }, []);
-  const setDark = useCallback((v: boolean) => { store.set('theme', v ? 'dark' : 'light'); setDarkS(v); }, []);
+  const setTheme = useCallback((v: Theme) => { store.set('theme', v); setThemeS(v); }, []);
 
   const value = useMemo<Ctx>(() => {
     const t = (key: string, vars?: Vars) => {
@@ -64,10 +65,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
         : `${dayNum(date)} ${t(`mo.${monthIdx(date)}`)}`;
     return {
       lang, setLang, side: sideRaw ?? 'both', setSide, hasSide: !!sideRaw,
-      showFamily, setShowFamily, bigText, setBigText, dark, setDark,
+      showFamily, setShowFamily, bigText, setBigText, theme, setTheme,
       t, l, time: (x) => formatTime(x, lang), dateLabel,
     };
-  }, [lang, sideRaw, showFamily, bigText, dark, setLang, setSide, setShowFamily, setBigText, setDark]);
+  }, [lang, sideRaw, showFamily, bigText, theme, setLang, setSide, setShowFamily, setBigText, setTheme]);
 
   return <AppCtx.Provider value={value}>{children}</AppCtx.Provider>;
 }

@@ -19,7 +19,7 @@
     <link rel="manifest" href="/manifest.webmanifest" />
   </head>
   <body>
-    <script>try{var d=document.documentElement,s=localStorage.getItem("theme");if(localStorage.getItem("bigText")==="1")d.classList.add("big-text");if(s==="dark")d.classList.add("dark")}catch(e){}</script>
+    <script>try{var d=document.documentElement,s=localStorage.getItem("theme");if(localStorage.getItem("bigText")==="1")d.classList.add("big-text");var T={rose:["#A32A52",0],haldi:["#9A4A0B",0],sage:["#1F5A44",0],peacock:["#0F5C6E",0],dark:["#7A2238",1],midnight:["#3B4FA3",1]};if(T[s]){if(s!=="dark")d.setAttribute("data-theme",s);else d.setAttribute("data-theme","dark");if(T[s][1])d.classList.add("dark");var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",T[s][0])}}catch(e){}</script>
     <div id="root"></div>
     <noscript>Please enable JavaScript to view the wedding itinerary.</noscript>
     <script type="module" src="/src/main.tsx"></script>

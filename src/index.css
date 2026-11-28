@@ -42,6 +42,36 @@ html.dark {
   --color-brand-ink: #F0A9BA;
 }
 
+/* ---- Extra colour themes: html[data-theme='…'] (set by applyTheme + the no-flash script). Classic = no attribute. ---- */
+html[data-theme='rose'] {
+  --color-ivory: #FFF8F8;  --color-sand: #FBEBEE;  --color-line: #EFD3D8;
+  --color-ink: #2A1519;    --color-ink-2: #5F4449;
+  --color-oxblood: #A32A52;  --color-oxblood-2: #BC3A64;  --color-brand-ink: #8E1F43;
+  --color-champagne: #C08A5A;  --color-champagne-ink: #7F5326;
+}
+html[data-theme='haldi'] {
+  --color-ivory: #FFFBEF;  --color-sand: #FBF1D2;  --color-line: #EEDDAE;
+  --color-ink: #231B0E;    --color-ink-2: #5A4B2E;
+  --color-oxblood: #9A4A0B;  --color-oxblood-2: #B35F12;  --color-brand-ink: #7C3D06;
+  --color-champagne: #C9972B;  --color-champagne-ink: #7A5A12;
+}
+html[data-theme='sage'] {
+  --color-ivory: #F6F8F2;  --color-sand: #E9EFE2;  --color-line: #D3DEC7;
+  --color-ink: #14201A;    --color-ink-2: #41534A;
+  --color-oxblood: #1F5A44;  --color-oxblood-2: #2B7258;  --color-brand-ink: #174735;
+}
+html[data-theme='peacock'] {
+  --color-ivory: #F3F8F9;  --color-sand: #E3EFF1;  --color-line: #C7DDE2;
+  --color-ink: #0F1E24;    --color-ink-2: #3F545B;
+  --color-oxblood: #0F5C6E;  --color-oxblood-2: #17788D;  --color-brand-ink: #0B4A59;
+}
+/* Midnight is a dark theme (html.dark is also set), so it layers over the shared dark tokens above. */
+html[data-theme='midnight'] {
+  --color-ivory: #0E1220;  --color-sand: #161B2E;  --color-line: #272E48;  --color-paper: #131828;
+  --color-ink: #E9ECF6;    --color-ink-2: #A5ADC6;
+  --color-oxblood: #3B4FA3;  --color-oxblood-2: #4A60B8;  --color-brand-ink: #A9BBF5;
+}
+
 @layer base {
 html { font-size: 17px; -webkit-text-size-adjust: 100%; }
 html.big-text { font-size: 20.5px; }
@@ -126,6 +156,6 @@ html[lang='hi'] .eyebrow { letter-spacing: .04em; text-transform: none; }
 
 /* Dark-mode touch-ups (unlayered so they beat utilities). Oxblood stays a wine FILL; as text/outline it becomes a light rose. */
 html.dark .text-oxblood { color: var(--color-brand-ink); }
-html.dark .bg-white.text-oxblood { color: #5E1426; }
+html.dark .bg-white.text-oxblood { color: var(--color-oxblood); }
 html.dark :focus-visible { outline-color: var(--color-brand-ink); }
 html.dark .photo-dim, html.dark img { filter: brightness(.92); }

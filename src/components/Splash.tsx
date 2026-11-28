@@ -11,6 +11,7 @@ import { MusicToggle, type MusicHandle } from './MusicToggle';
 import { PeacockFeather } from './PeacockFeather';
 import { Petals } from './Petals';
 import { Toran } from './Toran';
+import { UpdatesBanner } from './UpdatesBanner';
 import { prefersReducedMotion } from '../lib/motion';
 import { nowMs, toInstant } from '../lib/time';
 import { LangToggle, SideDot, TextSizeToggle } from './Toggles';
@@ -65,7 +66,9 @@ export function Splash() {
         </h1>
         <p className="mt-3 font-display text-[1.4rem] text-white/90" style={rise(450)}>{t('app.eventTitle')}</p>
 
-        <Countdown className="mx-auto mt-6 max-w-sm" />
+        <div className="mt-5 overflow-hidden rounded-2xl border border-white/25 text-left shadow-lg" style={rise(500)}><UpdatesBanner /></div>
+
+        <Countdown className="mx-auto mt-4 max-w-sm" />
 
         {hasSide && (
           <button type="button" onClick={(e) => pick(side, e, true)} style={rise(550)}

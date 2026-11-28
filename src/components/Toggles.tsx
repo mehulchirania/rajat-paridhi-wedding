@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useApp } from '../lib/app';
 import type { GuestSide } from '../types';
+import { THEMES } from '../lib/themes';
 import { Sheet } from './Sheet';
 
 const dotCls: Record<GuestSide, string> = {
@@ -25,9 +26,33 @@ function Switch({ checked, onChange, label }: { checked: boolean; onChange: (v: 
   );
 }
 
+/** Swatch grid for the colour themes. Each swatch previews its own background, accent and ink. */
+export function ThemePicker() {
+  const { theme, setTheme, t } = useApp();
+  return (
+    <div role="radiogroup" aria-label={t('theme.title')} className="grid grid-cols-4 gap-x-2 gap-y-3 border-t border-line py-3">
+      {THEMES.map((th) => {
+        const on = theme === th.id;
+        return (
+          <button key={th.id} type="button" role="radio" aria-checked={on} onClick={() => setTheme(th.id)}
+            className="tap flex flex-col items-center gap-1.5 text-center">
+            <span aria-hidden="true" style={{ background: th.bg, borderColor: on ? th.accent : 'transparent' }}
+              className="flex h-12 w-12 items-center justify-center rounded-full border-[3px] shadow-[0_0_0_1px_rgba(128,128,128,.35)] transition-transform duration-200 ease-(--ease-out)">
+              <span style={{ background: th.accent }} className="relative h-6 w-6 rounded-full">
+                <span style={{ background: th.ink }} className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full ring-2 ring-[inherit]" />
+              </span>
+            </span>
+            <span className={`text-[0.78rem] leading-tight ${on ? 'font-semibold text-brand-ink' : 'text-ink-2'}`}>{t(`theme.${th.id}`)}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 /** Header pill showing the current side; opens a sheet with side options + display switches. */
 export function SidePill() {
-  const { side, setSide, t, showFamily, setShowFamily, bigText, setBigText, dark, setDark } = useApp();
+  const { side, setSide, t, showFamily, setShowFamily, bigText, setBigText } = useApp();
   const [open, setOpen] = useState(false);
   const label = t(`side.${side}.of`.replace('.of', side === 'both' ? '' : '.of'));
   const short = t(`side.${side}.short`);
@@ -55,7 +80,7 @@ export function SidePill() {
         </div>
         <Switch checked={showFamily} onChange={setShowFamily} label={t('toggle.family')} />
         <Switch checked={bigText} onChange={setBigText} label={t('size.toggle')} />
-        <Switch checked={dark} onChange={setDark} label={t('toggle.dark')} />
+        <ThemePicker />
       </Sheet>
     </>
   );
